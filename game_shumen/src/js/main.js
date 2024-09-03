@@ -23,6 +23,23 @@
 
 function main() {
     //开始再这里编写代码了！！
+    EcRoot.getXy()
+    console.log("选择成功")
+    let toastExtra={
+        "x":100,
+        "y":1200,
+        "duration":1000,
+        "textColor":"#778899",
+        "width":200,
+        "height":200,
+        "draggable":true
+    }
+    for (var i = 0; i < 3; i++) {
+        sleep(500)
+        toast(time()+"ddd",toastExtra);
+    }
+    logd(time()+"  222");
+    return;
     toast("Hello World");
     var name = readConfigString("name");
     logd("姓名: " + name);
@@ -96,4 +113,12 @@ function autoServiceStart(time) {
     return isServiceOk();
 }
 
-main();
+// main();
+function start(){
+    rootInit()
+    loopExec();
+}
+function loopExec(){
+    isHasCloseView();
+}
+start();
