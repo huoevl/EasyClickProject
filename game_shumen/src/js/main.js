@@ -20,25 +20,24 @@
  *      例如: importPackage(java.util) 导入java.util下的类
  *
  */
-
 function main() {
     //开始再这里编写代码了！！
     EcRoot.getXy()
     console.log("选择成功")
-    let toastExtra={
-        "x":100,
-        "y":1200,
-        "duration":1000,
-        "textColor":"#778899",
-        "width":200,
-        "height":200,
-        "draggable":true
+    let toastExtra = {
+        "x": 100,
+        "y": 1200,
+        "duration": 1000,
+        "textColor": "#778899",
+        "width": 200,
+        "height": 200,
+        "draggable": true
     }
     for (var i = 0; i < 3; i++) {
-        sleep(500)
-        toast(time()+"ddd",toastExtra);
+        sleep(sleepTime500)
+        toast(time() + "ddd", toastExtra);
     }
-    logd(time()+"  222");
+    logd(time() + "  222");
     return;
     toast("Hello World");
     var name = readConfigString("name");
@@ -59,6 +58,7 @@ function main() {
     }
     home();
 }
+
 function netcardProcessor() {
     logd("开始进行卡密验证")
     // 官方自带的卡密系统
@@ -114,11 +114,15 @@ function autoServiceStart(time) {
 }
 
 // main();
-function start(){
-    rootInit()
+function start() {
+    if (!rootInit()) {
+        return
+    }
     loopExec();
 }
-function loopExec(){
+
+function loopExec() {
     isHasCloseView();
 }
+
 start();

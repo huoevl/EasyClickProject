@@ -6,22 +6,11 @@ const DebugImgPath = "/sdcard/001debug/";
  * @param y
  * @returns {{x, y}}
  */
-function getXy(x, y) {
+function getXy(x: number, y: number) {
     return {x: x, y: y};
 }
 
-/**
- * 获取随机点击坐标
- * @param x
- * @param y
- * @param width
- * @param height
- */
-function randXy(x, y, width, height) {
-
-}
-
-function saveToDebug(img, name) {
+function saveToDebug(img: any, name: string) {
     let url = DebugImgPath + name + ".png";
     let result = image.saveTo(img, url);
     if (result) {
@@ -31,10 +20,10 @@ function saveToDebug(img, name) {
     }
 }
 
-function loggerD(msg) {
+function loggerD(msg: string) {
     logd(msg);
 }
 
-function loggerE(msg) {
+function loggerE(msg: string) {
     loge(msg);
 }

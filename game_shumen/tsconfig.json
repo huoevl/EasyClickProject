@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "allowJs": true,
+    "emitDeclarationOnly": true,
+    "outFile": "tsSrc/_types/index.d.ts",
+    "module": "none"
+  },
+  "include": ["libs/**/*.js"],
+}
