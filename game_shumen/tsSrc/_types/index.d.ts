@@ -1845,7 +1845,7 @@ declare function isScriptPause(): boolean;
  * @return {boolean} true 代表脚本处于暂停中，false 代表继续运行中
  */
 declare function setScriptPause(pause: any, timeout: any): boolean;
-declare function toast(msg: any, extra: any): void;
+declare function toast(msg: any, extra?: any): void;
 declare function toast1(msg: any): void;
 declare function toast2(msg: any): void;
 declare function getHandler(): any;
@@ -3382,7 +3382,7 @@ declare namespace Point {
 }
 declare function Rect(javaRect: any): void;
 declare class Rect {
-    constructor(javaRect: any);
+    constructor(javaRect?: any);
     top: any;
     bottom: any;
     left: any;
