@@ -1,5 +1,4 @@
 declare function AcEventWrapper(): void;
-
 declare class AcEventWrapper {
     /**
      * 当前Sdk的版本号
@@ -11,7 +10,6 @@ declare class AcEventWrapper {
      * @return string 例如1.0.1
      */
     version(): string;
-
     /**
      * 将元素节点变成XML
      * <Br/>
@@ -22,7 +20,6 @@ declare class AcEventWrapper {
      * @return 字符串 所有节点的xml字符串
      */
     dumpXml(): string;
-
     /**
      * 打开通知栏
      * <Br/>
@@ -33,7 +30,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true if successful, else return false
      */
     openNotification(): any;
-
     /**
      * 打开快速设置
      * <Br/>
@@ -44,7 +40,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true if successful, else return false
      */
     openQuickSettings(): any;
-
     /**
      * 返回桌面
      * <Br/>
@@ -55,7 +50,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     home(): any;
-
     /**
      * 分割屏幕
      * <Br/>
@@ -66,7 +60,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     splitScreen(): any;
-
     /**
      * 模拟电源键
      * <Br/>
@@ -77,7 +70,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     power(): any;
-
     /**
      * 返回键
      * <Br/>
@@ -88,7 +80,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     back(): any;
-
     /**
      * 最近使用的APP
      * <Br/>
@@ -99,7 +90,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     recentApps(): any;
-
     /**
      * 通过选择器获取元素文本
      * <Br/>
@@ -111,18 +101,14 @@ declare class AcEventWrapper {
      * @return 字符串数组 文本字符串
      */
     getText(selectors: any): any;
-
     lockNode(): any;
-
     releaseNode(): any;
-
     /**
      * 设置无障碍模式下各种手势模式事件的操作类型，默认是异步
      * @param mode 1 代表异步，2代表同步
-     * @param bool true代表成功 false代表失败
+     * @return {boolean} true代表成功 false代表失败
      */
-    setAccActionMode(mode: any): any;
-
+    setAccActionMode(mode: any): boolean;
     /**
      * 通过选择器 获取节点信息
      * <Br/>
@@ -134,9 +120,7 @@ declare class AcEventWrapper {
      * @return 节点信息集合
      */
     getNodeInfo(selectors: any, timeout: any): NodeInfo[];
-
     getNodeInfoForNode(nid: any, selectors: any, timeout: any): NodeInfo[];
-
     /**
      * 长点击选择器选中的元素
      * <Br/>
@@ -148,7 +132,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     longClick(selectors: any): any;
-
     /**
      * <p>执行从一个坐标到另一个坐标的拖动</p>
      * </p>
@@ -165,7 +148,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 拖动成功, false 拖动失败
      */
     drag(startX: any, startY: any, endX: any, endY: any, duration: any): any;
-
     /**
      * 通过选择器拖动某个元素到目标元素
      * <Br/>
@@ -179,7 +161,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     dragTo(selectors: any, destObj: any, duration: any): any;
-
     /**
      * 通过选择器拖动某个元素到目标X Y 坐标
      * <Br/>
@@ -194,7 +175,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     dragToPoint(selectors: any, endX: any, endY: any, duration: any): any;
-
     /**
      * 点击某个坐标
      * <Br/>
@@ -207,7 +187,6 @@ declare class AcEventWrapper {
      * @return  布尔型 true 成功，false 失败
      */
     clickPoint(x: any, y: any): any;
-
     /**
      * 双击某个坐标
      * <Br/>
@@ -220,7 +199,6 @@ declare class AcEventWrapper {
      * @return  布尔型 true 成功，false 失败
      */
     doubleClickPoint(x: any, y: any): any;
-
     /**
      * 点击某个区域中心坐标点
      * <Br/>
@@ -232,7 +210,6 @@ declare class AcEventWrapper {
      * @return  布尔型 true 成功，false 失败
      */
     clickCenter(rect: any): any;
-
     /**
      * 长按点击某个坐标
      * <Br/>
@@ -245,7 +222,6 @@ declare class AcEventWrapper {
      * @return 布尔型  true 代表成功，false 代表失败
      */
     longClickPoint(x: any, y: any): any;
-
     /**
      * 通过选择器点击元素
      * <Br/>
@@ -257,15 +233,12 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     click(selectors: any): any;
-
     clickEx(selectors: any): any;
-
+    setFocus(selectors: any): any;
+    setFocusNodeInfo(uniqueId: any): any;
     longClickEx(selectors: any): any;
-
     clickExNodeInfo(uniqueId: any): any;
-
     longClickExNodeInfo(uniqueId: any): any;
-
     /**
      * 是否滚动到底部了，如果查不到元素也会返回false
      * 运行环境: 无障碍模式
@@ -276,7 +249,6 @@ declare class AcEventWrapper {
      * @return false 代表未滚动到位，true 代表滚动完成了
      */
     isScrollEnd(direction: any, selectors: any): any;
-
     /**
      * 通过选择器随机点击元素，有可能选中的是多个元素节点
      * <Br/>
@@ -288,9 +260,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     clickRandom(selectors: any): any;
-
     clickRandomEx(selectors: any): any;
-
     /**
      * 随机点击区域中的坐标
      * <Br/>
@@ -302,7 +272,6 @@ declare class AcEventWrapper {
      * @return 布尔型 成功或者失败
      */
     clickRandomRect(rect: any): any;
-
     /**
      * 随机长点击区域中的坐标
      * <Br/>
@@ -314,7 +283,6 @@ declare class AcEventWrapper {
      * @return 布尔型 成功或者失败
      */
     longClickRandomRect(rect: any): any;
-
     /**
      * 通过选择器输入数据
      * <Br/>
@@ -327,7 +295,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     inputText(selectors: any, content: any): any;
-
     /**
      * 通过选择器粘贴数据
      * <Br/>
@@ -340,14 +307,12 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     pasteText(selectors: any, content: any): any;
-
     /**
      * 当前是否是我们的输入法
      *
      * @return 布尔型 true代表是，false代表不是
      */
     currentIsOurIme(): any;
-
     /**
      * 使用输入法输入内容，前提是已经设置本程序的输入法为默认输入法
      * <Br/>
@@ -360,11 +325,8 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     imeInputText(selectors: any, content: any): any;
-
     imeInputViewShown(): any;
-
     imeInputKeyCode(selectors: any, content: any): any;
-
     /**
      * 通过选择器判断元素是否存在
      * <Br/>
@@ -376,7 +338,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     has(selectors: any): any;
-
     /**
      * 从一个坐标滑动到另一个坐标
      * <Br/>
@@ -392,7 +353,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 滑动成功, false 滑动失败
      */
     swipeToPoint(startX: any, startY: any, endX: any, endY: any, duration: any): any;
-
     /**
      * 通过选择器从上往下滑动
      * <Br/>
@@ -406,7 +366,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromUpToDown(selectors: any, distance: any, duration: any): any;
-
     /**
      * 通过选择器从下往上滑动
      * <Br/>
@@ -420,7 +379,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromDownToUp(selectors: any, distance: any, duration: any): any;
-
     /**
      * 通过选择器从右往左滑动
      * <Br/>
@@ -434,7 +392,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromRightToLeft(selectors: any, distance: any, duration: any): any;
-
     /**
      * 通过选择器从左往右滑动
      * <Br/>
@@ -448,7 +405,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromLeftToRight(selectors: any, distance: any, duration: any): any;
-
     /**
      * 通过选择器滑动到某个坐标
      * <Br/>
@@ -463,7 +419,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipe(selectors: any, endX: any, endY: any, duration: any): any;
-
     /**
      * 通过选择器清除文本数据
      * <Br/>
@@ -474,7 +429,6 @@ declare class AcEventWrapper {
      * @param selectors 节点选择器
      */
     clearTextField(selectors: any): any;
-
     /**
      * 向上滑动
      * <Br/>
@@ -487,7 +441,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromDownToUpInScreen(distance: any, duration: any): any;
-
     /**
      * 向下滑动
      * <Br/>
@@ -500,7 +453,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromUpToDownInScreen(distance: any, duration: any): any;
-
     /**
      * 向左滑动
      * <Br/>
@@ -513,7 +465,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromRightToLeftInScreen(distance: any, duration: any): any;
-
     /**
      * 向右滑动
      * <Br/>
@@ -526,7 +477,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false 代表失败
      */
     swipeFromLeftToRightInScreen(distance: any, duration: any): any;
-
     /**
      * 取得当前运行的Activity类名
      * <Br/>
@@ -537,7 +487,6 @@ declare class AcEventWrapper {
      * @return string 类名字符串
      */
     getRunningActivity(): string;
-
     /**
      * 取得当前运行的App包名
      * <Br/>
@@ -548,9 +497,7 @@ declare class AcEventWrapper {
      * @return string 包名字符串
      */
     getRunningPkg(): string;
-
     getCurrentRunningPkg(): string;
-
     /**
      * 将通知发射处理，相当于点击了通知栏
      * <Br/>
@@ -562,7 +509,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表发射通知成功
      */
     shotNotification(seqId: any): any;
-
     /**
      * 通知取消处理
      * <Br/>
@@ -574,9 +520,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表取消通知成功
      */
     cancelNotification(seqId: any): any;
-
     ignoreNotification(seqId: any): any;
-
     /**
      * 从缓存中清除所有的Toast消息数据
      * <Br/>
@@ -585,7 +529,6 @@ declare class AcEventWrapper {
      * 兼容版本: Android 7.0 以上
      */
     clearAllToast(): any;
-
     /**
      * 从缓存中清除所有的通知栏消息数据
      * <Br/>
@@ -594,7 +537,6 @@ declare class AcEventWrapper {
      * 兼容版本: Android 7.0 以上
      */
     clearAllNotification(): any;
-
     /**
      * 从通知栏取得多个消息
      * <Br/>
@@ -607,7 +549,6 @@ declare class AcEventWrapper {
      * @return null 代表没有, 返回的是一个数组
      */
     getLastNotification(pkg: any, size: any): NotificationInfo[];
-
     /**
      * 从Toast取得多个消息
      * 运行环境: 无障碍模式
@@ -619,7 +560,6 @@ declare class AcEventWrapper {
      * @return null 代表没有
      */
     getLastToast(pkg: any, size: any): ToastInfo[];
-
     /**
      * 请求监听状态栏的权限
      * <Br/>
@@ -630,7 +570,6 @@ declare class AcEventWrapper {
      * @return true 代表请求权限成功，false代表失败
      */
     requestNotificationPermission(timeout: any): any;
-
     /**
      * 检查是否含有状态栏监听权限
      * <Br/>
@@ -640,7 +579,6 @@ declare class AcEventWrapper {
      * @return true 有权限,false 代表无权限
      */
     hasNotificationPermission(): any;
-
     /**
      * 通过选择器 获取第一个节点信息
      * <Br/>
@@ -652,16 +590,13 @@ declare class AcEventWrapper {
      * @return NodeInfo 对象或者null
      */
     getOneNodeInfo(selectors: any, timeout: any): NodeInfo;
-
     getOneNodeInfoForNode(nid: any, selectors: any, timeout: any): NodeInfo;
-
     /**
      * 取得父级
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return NodeInfo {NodeInfo 对象|null}
      */
     getNodeInfoParent(uniqueId: any): NodeInfo;
-
     /**
      * 取得单个子节点
      * @param uniqueId NodeInfo 中的uniqueId属性
@@ -669,35 +604,30 @@ declare class AcEventWrapper {
      * @return NodeInfo {NodeInfo 对象|null}
      */
     getNodeInfoChild(uniqueId: any, index: any): NodeInfo;
-
     /**
      * 取得所有子节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return   NodeInfo 数组 选择到的节点集合
      */
     getNodeInfoAllChildren(uniqueId: any): NodeInfo[];
-
     /**
      * 当前节点的所有兄弟节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return {Array} NodeInfo 数组
      */
     getSiblingNodeInfo(uniqueId: any): any[];
-
     /**
      * 在当前节点前面的兄弟节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return   NodeInfo 数组 选择到的节点集合
      */
     getNextSiblingNodeInfo(uniqueId: any): NodeInfo[];
-
     /**
      * 在当前节点后面的兄弟节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return NodeInfo 数组 选择到的节点集合
      */
     getPreviousSiblingNodeInfo(uniqueId: any): NodeInfo[];
-
     /**
      * 对某个节点输入数据
      * <Br/>
@@ -710,9 +640,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     inputTextNodeInfo(uniqueId: any, content: any): any;
-
     pasteTextNodeInfo(uniqueId: any, content: any): any;
-
     /**
      * 使用输入法对某个节点输入数据
      * <Br/>
@@ -725,9 +653,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     imeInputTextNodeInfo(uniqueId: any, content: any): any;
-
     imeInputKeyCodeNodeInfo(uniqueId: any, content: any): any;
-
     /**
      * 清除节点文本数据
      * <Br/>
@@ -736,10 +662,9 @@ declare class AcEventWrapper {
      * 兼容版本: Android 7.0 以上
      *
      * @param uniqueId  NodeInfo 中的uniqueId属性
-     *  @return bool 布尔型| true代表成功
+     *  @return {boolean} 布尔型| true代表成功
      */
-    clearTextFieldNodeInfo(uniqueId: any): any;
-
+    clearTextFieldNodeInfo(uniqueId: any): boolean;
     /**
      * 刷新节点缓存
      * <Br/>
@@ -750,7 +675,6 @@ declare class AcEventWrapper {
      * @param uniqueId  NodeInfo 中的uniqueId属性
      */
     refreshNodeInfo(uniqueId: any): any;
-
     /**
      * 节点信息是否有效
      * <Br/>
@@ -759,10 +683,9 @@ declare class AcEventWrapper {
      * 兼容版本: Android 7.0 以上
      *
      * @param uniqueId  NodeInfo 中的uniqueId属性
-     * @return bool|布尔型 true代表有效
+     * @return {boolean}|布尔型 true代表有效
      */
-    isValidNodeInfo(uniqueId: any): any;
-
+    isValidNodeInfo(uniqueId: any): boolean;
     /**
      * 设置获取节点的模式
      * @param mode 1 是增强型， 2 是快速型，默认是增强型
@@ -772,9 +695,7 @@ declare class AcEventWrapper {
      * @return {boolean|*}
      */
     setFetchNodeMode(mode: any, fetchInvisibleNode: any, fetchNotImportantNode: any, algorithm: any): boolean | any;
-
     setNodeDumpParam(data: any): any;
-
     /**
      * 设置要屏蔽的节点
      * 设置后，系统不会抓取这些节点数据
@@ -782,11 +703,8 @@ declare class AcEventWrapper {
      * @return {boolean|*}
      */
     setBlockNode(blockNode: any): boolean | any;
-
     removeNodeFlag(flag: any): any;
-
     addNodeFlag(flag: any): any;
-
     /**
      * 多点触摸<br/>
      * 触摸参数: action :一般情况下 按下为0，弹起为1，移动为2<br/>
@@ -803,11 +721,8 @@ declare class AcEventWrapper {
      * @return boolean|布尔型
      */
     multiTouch(touch1: any, touch2: any, touch3: any, timeout: any): any;
-
     multiTouch2(pointArrays: any, timeout: any): any;
-
     multiTouchEx(pointArrays: any, timeout: any): any;
-
     /**
      * 向前滚动
      * <Br/>
@@ -819,9 +734,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollForward(selectors: any): any;
-
     scrollForwardNodeInfo(uniqueId: any): any;
-
     /**
      * 向后滚动
      * <Br/>
@@ -833,9 +746,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollBackward(selectors: any): any;
-
     scrollBackwardNodeInfo(uniqueId: any): any;
-
     /**
      * 向左滚动
      * <Br/>
@@ -847,9 +758,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollLeft(selectors: any): any;
-
     scrollLeftNodeInfo(uniqueId: any): any;
-
     /**
      * 向右滚动
      * <Br/>
@@ -861,9 +770,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollRight(selectors: any): any;
-
     scrollRightNodeInfo(uniqueId: any): any;
-
     /**
      * 向上滚动
      * <Br/>
@@ -875,9 +782,7 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollUp(selectors: any): any;
-
     scrollUpNodeInfo(uniqueId: any): any;
-
     /**
      * 向下滚动
      * <Br/>
@@ -889,20 +794,15 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollDown(selectors: any): any;
-
     scrollDownNodeInfo(uniqueId: any): any;
-
     readResAutoImage(fileName: any): any;
-
     /**
      * 获取最近的节点事件出发的时间
      *
-     * @return {long} 长整型时间，毫秒级别
+     * @return {number} 长整型时间，毫秒级别
      */
-    lastNodeEventTime(): long;
-
+    lastNodeEventTime(): number;
     press(x: any, y: any, delay: any): any;
-
     /**
      * 执行按下输入事件
      * @param x         x坐标
@@ -910,7 +810,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     touchDown(x: any, y: any): any;
-
     /**
      * 执行移动输入事件
      * @param x         x坐标
@@ -918,7 +817,6 @@ declare class AcEventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     touchMove(x: any, y: any): any;
-
     /**
      * 执行弹起输入事件
      * @param x         x坐标
@@ -927,11 +825,8 @@ declare class AcEventWrapper {
      */
     touchUp(x: any, y: any): any;
 }
-
 declare var acEvent: AcEventWrapper;
-
 declare function EventWrapper(): void;
-
 declare class EventWrapper {
     /**
      * 当前Sdk的版本号
@@ -943,7 +838,6 @@ declare class EventWrapper {
      * @return string ，例如1.0.1
      */
     version(): string;
-
     /**
      * 点击坐标点
      * <Br/>
@@ -956,7 +850,6 @@ declare class EventWrapper {
      * @return 布尔型 true 点击成功，false点击失败
      */
     clickPoint(x: any, y: any): any;
-
     /**
      * 双击某个坐标
      *
@@ -965,7 +858,6 @@ declare class EventWrapper {
      * @return  布尔型 true 成功，false 失败
      */
     doubleClickPoint(x: any, y: any): any;
-
     /**
      * 点击某个区域中心坐标点
      * <Br/>
@@ -977,14 +869,12 @@ declare class EventWrapper {
      * @return  布尔型 true 成功，false 失败
      */
     clickCenter(rect: any): any;
-
     /**
      * 当前是否是我们的输入法
      *
      * @return 布尔型 true代表是，false代表不是
      */
     currentIsOurIme(): any;
-
     /**
      * <p>从一个坐标到另一个坐标的拖动
      * </p>
@@ -1001,7 +891,6 @@ declare class EventWrapper {
      * @return 布尔型 true 拖动成功, false 拖动失败
      */
     drag(startX: any, startY: any, endX: any, endY: any, duration: any): any;
-
     /**
      * <p>
      * 从一个坐标到另一个坐标的滑动
@@ -1019,7 +908,6 @@ declare class EventWrapper {
      * @return 布尔型 true 滑动成功, false 滑动失败
      */
     swipeToPoint(startX: any, startY: any, endX: any, endY: any, duration: any): any;
-
     /**
      * 执行输入事件
      * <Br/>
@@ -1034,7 +922,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     inputEvent(action: any, x: any, y: any, metaState: any): any;
-
     /**
      * 执行按下输入事件
      * <Br/>
@@ -1047,7 +934,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     touchDown(x: any, y: any): any;
-
     /**
      * 执行移动输入事件
      * <Br/>
@@ -1060,7 +946,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     touchMove(x: any, y: any): any;
-
     /**
      * 执行弹起输入事件
      * <Br/>
@@ -1073,7 +958,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     touchUp(x: any, y: any): any;
-
     /**
      * <p>
      * 获取当前的视图为XML格式，并保存到文件中
@@ -1087,13 +971,11 @@ declare class EventWrapper {
      * @return string 文件路径
      */
     dumpWindowHierarchy(compressed: any): string;
-
     /**
      * 将元素节点变成XML
      * @return string xml数据
      */
     dumpXml(): string;
-
     /**
      * 取得一张屏幕的截图
      * <Br/>
@@ -1107,7 +989,6 @@ declare class EventWrapper {
      * @return string 截图的路径
      */
     takeScreenshotMore(filename: any, scale: any, quality: any): string;
-
     /**
      * 快速截屏幕的截图
      * <Br/>
@@ -1119,13 +1000,11 @@ declare class EventWrapper {
      * @return string 截图的路径
      */
     fastScreenshot(filename: any): string;
-
     /**
      * 截图为bitmap
      * @return bitmap null或者bitmap对象
      */
     fastScreenshotBitmap(): any;
-
     /**
      * 冻结设备旋转
      * <Br/>
@@ -1136,7 +1015,6 @@ declare class EventWrapper {
      * @param freeze true 禁止旋转，false 可以旋转
      */
     freezeRotation(freeze: any): void;
-
     /**
      * 模拟旋转设备
      * <Br/>
@@ -1147,14 +1025,12 @@ declare class EventWrapper {
      * @param dir Left 或者 l, Right 或者 r, Natural 或者 n
      */
     setOrientation(dir: any): void;
-
     /**
      * 打开通知栏
      *
      * @return 布尔型 true 成功, else 失败
      */
     openNotification(): any;
-
     /**
      * 打开快速设置
      * <Br/>
@@ -1165,7 +1041,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功, else 失败
      */
     openQuickSettings(): any;
-
     /**
      * 返回桌面
      * <Br/>
@@ -1176,7 +1051,6 @@ declare class EventWrapper {
      * @return boolean | true 成功 false 失败
      */
     home(): any;
-
     /**
      * 分割屏幕
      * <Br/>
@@ -1187,13 +1061,11 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     splitScreen(): any;
-
     /**
      * 模拟电源键
      * @return 布尔型 true 成功 false 失败
      */
     power(): any;
-
     /**
      * 返回键
      * <Br/>
@@ -1204,7 +1076,6 @@ declare class EventWrapper {
      * @return  布尔型 true 成功 false 失败
      */
     back(): any;
-
     /**
      * 打开菜单
      * <Br/>
@@ -1215,7 +1086,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     menu(): any;
-
     /**
      * Enter键
      * <Br/>
@@ -1226,14 +1096,12 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     enter(): any;
-
     /**
      * 删除键
      *
      * @return 布尔型 true 成功 false 失败
      */
     delete(): any;
-
     /**
      * 最近使用的APP
      * <Br/>
@@ -1244,14 +1112,12 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     recentApps(): any;
-
     /**
      * 搜索
      *
      * @return 布尔型 true 成功 false 失败
      */
     search(): any;
-
     /**
      * 获取屏幕截图并保存到文件中 ,(底层命令截图 速度大概1-2秒)
      *
@@ -1259,7 +1125,6 @@ declare class EventWrapper {
      * @return 布尔型 截图成功返回 true
      */
     takeScreenshot(fileName: any): any;
-
     /**
      * 截图返回autoimage对象 ,(底层命令截图 速度大概1-2秒)
      * <Br/>
@@ -1270,7 +1135,6 @@ declare class EventWrapper {
      * @return AutoImage 对象或者null
      */
     takeScreenshotImage(): any;
-
     /**
      * 模拟按键,例如home back等
      * <Br/>
@@ -1282,7 +1146,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功, false 失败
      */
     pressKey(key: any): any;
-
     /**
      * 模拟键盘输入
      *
@@ -1290,7 +1153,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     pressKeyCode(keyCode: any): any;
-
     /**
      * 模拟键盘输入
      * <Br/>
@@ -1303,7 +1165,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功，false 代表失败。
      */
     pressKeyCodeWithMetaState(keyCode: any, metaState: any): any;
-
     /**
      * 唤醒设备
      * <Br/>
@@ -1312,7 +1173,6 @@ declare class EventWrapper {
      * 兼容版本: Android 4.4 以上
      */
     wakeUp(): void;
-
     /**
      * 检查屏幕是否是点亮的
      * <Br/>
@@ -1323,7 +1183,6 @@ declare class EventWrapper {
      * @return 布尔型 true 是，false 否
      */
     isScreenOn(): any;
-
     /**
      * 熄灭屏幕
      * <Br/>
@@ -1334,7 +1193,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     sleepScreen(): any;
-
     /**
      * 通过选择器清除输入框的文字
      * <Br/>
@@ -1346,7 +1204,6 @@ declare class EventWrapper {
      * @return boolean 布尔型| true代表成功
      */
     clearTextField(selectors: any): any;
-
     /**
      * 通过选择器滑动元素到某个坐标点
      * <Br/>
@@ -1361,7 +1218,6 @@ declare class EventWrapper {
      * @return 布尔型 true 滑动成功，false 滑动失败
      */
     swipe(selectors: any, endX: any, endY: any, duration: any): any;
-
     /**
      * 通过选择器获取元素文本
      * <Br/>
@@ -1373,11 +1229,8 @@ declare class EventWrapper {
      * @return 字符串集合 文本字符串
      */
     getText(selectors: any): any;
-
     lockNode(): any;
-
     releaseNode(): any;
-
     /**
      * 通过选择器获取节点信息
      * <Br/>
@@ -1389,9 +1242,7 @@ declare class EventWrapper {
      * @return 节点信息集合 节点对象的信息
      */
     getNodeInfo(selectors: any, timeout: any): NodeInfo[];
-
     getNodeInfoForNode(nid: any, selectors: any, timeout: any): NodeInfo[];
-
     /**
      * 长点击选择器选中的元素
      * <Br/>
@@ -1403,9 +1254,7 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     longClick(selectors: any): any;
-
     longClickEx(selectors: any): any;
-
     /**
      * 长按某个坐标
      *
@@ -1414,14 +1263,12 @@ declare class EventWrapper {
      * @return 布尔型 true 成功，false 失败
      */
     longClickPoint(x: any, y: any): any;
-
     /**
      * 随机长点击区域中的坐标
      * @param rect 区域 {@link Rect}
      * @return 布尔型 成功或者失败
      */
     longClickRandomRect(rect: any): any;
-
     /**
      * 通过选择器拖动某个元素到目标元素
      * <Br/>
@@ -1435,7 +1282,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     dragTo(selectors: any, destObj: any, duration: any): any;
-
     /**
      * 通过选择器拖动某个元素到目标X Y 坐标
      * <Br/>
@@ -1450,7 +1296,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功 false 失败
      */
     dragToPoint(selectors: any, destX: any, destY: any, duration: any): any;
-
     /**
      * 通过选择器进行缩小手势
      * <Br/>
@@ -1463,7 +1308,6 @@ declare class EventWrapper {
      * @return 布尔型 true 此手势的所有触摸事件都成功注入 false 失败
      */
     pinchIn(selectors: any, percent: any): any;
-
     /**
      * 通过选择器进行放大手势
      * <Br/>
@@ -1476,7 +1320,6 @@ declare class EventWrapper {
      * @return 布尔型 true 此手势的所有触摸事件都成功注入 false 失败
      */
     pinchOut(selectors: any, percent: any): any;
-
     /**
      * 通过选择器点击元素
      * <Br/>
@@ -1488,13 +1331,11 @@ declare class EventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     click(selectors: any): any;
-
+    setFocus(selectors: any): any;
+    setFocusNodeInfo(uniqueId: any): any;
     clickEx(selectors: any): any;
-
     clickExNodeInfo(uniqueId: any): any;
-
     longClickExNodeInfo(uniqueId: any): any;
-
     /**
      * 是否滚动到底部了，如果查不到元素也会返回false
      * 运行环境: 代理模式
@@ -1505,7 +1346,6 @@ declare class EventWrapper {
      * @return false 代表未滚动到位，true 代表滚动完成了
      */
     isScrollEnd(direction: any, selectors: any): any;
-
     /**
      * 通过选择器随机点击元素，有可能选中的是多个元素节点
      * <Br/>
@@ -1517,9 +1357,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     clickRandom(selectors: any): any;
-
     clickRandomEx(selectors: any): any;
-
     /**
      * 通过选择器输入数据
      * <p>
@@ -1533,9 +1371,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     inputText(selectors: any, content: any): any;
-
     pasteText(selectors: any, content: any): any;
-
     /**
      * 使用输入法输入内容
      * <Br/>
@@ -1548,9 +1384,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     imeInputText(selectors: any, content: any): any;
-
     imeInputKeyCode(selectors: any, content: any): any;
-
     /**
      * 设置当前的输入法，用于输入数据
      * <Br/>
@@ -1561,7 +1395,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     setCurrentIme(): any;
-
     /**
      * 恢复到之前的输入法
      * <Br/>
@@ -1572,7 +1405,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     restoreIme(): any;
-
     /**
      * 通过选择器判断元素是否存在
      *
@@ -1580,7 +1412,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     has(selectors: any): any;
-
     /**
      * 通过选择器截取选中的元素截图,(底层命令截图 速度大概1-2秒)
      * <Br/>
@@ -1593,7 +1424,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     takeNodeScreenshot(selectors: any, filePath: any): any;
-
     /**
      * 执行shell命令
      * <Br/>
@@ -1605,7 +1435,6 @@ declare class EventWrapper {
      * @return 字符串 shell结果
      */
     execShellCommand(command: any): string;
-
     /**
      * 执行shell命令，包含正常和错误结果，返回的是JSON数组，自己判断正确还是错误
      * <Br/>
@@ -1617,7 +1446,6 @@ declare class EventWrapper {
      * @return JSON数组 shell结果
      */
     execShellCommandEx(command: any): any;
-
     /**
      * 取得当前运行的Activity类名
      * <Br/>
@@ -1628,7 +1456,6 @@ declare class EventWrapper {
      * @return string 类名字符串
      */
     getRunningActivity(): string;
-
     /**
      * 取得当前运行的App包名
      * <Br/>
@@ -1639,9 +1466,7 @@ declare class EventWrapper {
      * @return string 包名字符串
      */
     getRunningPkg(): string;
-
     getCurrentRunningPkg(): string;
-
     /**
      * 随机点击区域中的坐标
      * <Br/>
@@ -1653,7 +1478,6 @@ declare class EventWrapper {
      * @return 布尔型 成功或者失败
      */
     clickRandomRect(rect: any): any;
-
     /**
      * 将通知发射处理，相当于点击了通知栏
      * <Br/>
@@ -1665,7 +1489,6 @@ declare class EventWrapper {
      * @return 布尔型 true 代表发射通知成功
      */
     shotNotification(seqId: any): any;
-
     /**
      * 通知取消处理
      * <Br/>
@@ -1677,9 +1500,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表取消通知成功
      */
     cancelNotification(seqId: any): any;
-
     ignoreNotification(seqId: any): any;
-
     /**
      * 从缓存中清除所有的Toast消息数据
      * <Br/>
@@ -1688,7 +1509,6 @@ declare class EventWrapper {
      * 兼容版本: Android 4.4 以上
      */
     clearAllToast(): void;
-
     /**
      * 从缓存中清除所有的通知栏消息数据
      * <Br/>
@@ -1697,7 +1517,6 @@ declare class EventWrapper {
      * 兼容版本: Android 4.4 以上
      */
     clearAllNotification(): void;
-
     /**
      * 从通知栏取得多个消息
      * <Br/>
@@ -1709,7 +1528,6 @@ declare class EventWrapper {
      * @return null 代表没有
      */
     getLastNotification(pkg: any, size: any): NotificationInfo[];
-
     /**
      * 从Toast取得多个消息
      * 运行环境: 代理模式
@@ -1721,7 +1539,6 @@ declare class EventWrapper {
      * @return null 代表没有
      */
     getLastToast(pkg: any, size: any): ToastInfo[];
-
     /**
      * 关闭屏幕，屏幕不亮，但是依然可以自动点击，不同于sleepScreen
      * <Br/>
@@ -1732,7 +1549,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功，false 失败
      */
     closeScreen(): any;
-
     /**
      * 点亮屏幕，和closeScreen相反的动作
      * <Br/>
@@ -1743,7 +1559,6 @@ declare class EventWrapper {
      * @return 布尔型 true 成功，false 失败
      */
     lightScreen(): any;
-
     /**
      * 请求监听状态栏的权限
      * <Br/>
@@ -1754,7 +1569,6 @@ declare class EventWrapper {
      * @return true 代表请求权限成功，false代表失败
      */
     requestNotificationPermission(timeout: any): any;
-
     /**
      * 检查是否含有状态栏监听权限
      * <Br/>
@@ -1764,7 +1578,6 @@ declare class EventWrapper {
      * @return true 有权限,false 代表无权限
      */
     hasNotificationPermission(): any;
-
     /**
      * 通过选择器 获取第一个节点信息
      * <Br/>
@@ -1776,16 +1589,13 @@ declare class EventWrapper {
      * @return {@link NodeInfo} 对象或者null
      */
     getOneNodeInfo(selectors: any, timeout: any): any;
-
     getOneNodeInfoForNode(nid: any, selectors: any, timeout: any): NodeInfo;
-
     /**
      * 取得父级
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return NodeInfo {NodeInfo 对象|null}
      */
     getNodeInfoParent(uniqueId: any): NodeInfo;
-
     /**
      * 取得单个子节点
      * @param uniqueId NodeInfo 中的uniqueId属性
@@ -1793,35 +1603,30 @@ declare class EventWrapper {
      * @return NodeInfo {NodeInfo 对象|null}
      */
     getNodeInfoChild(uniqueId: any, index: any): NodeInfo;
-
     /**
      * 取得所有子节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return   NodeInfo 数组 选择到的节点集合
      */
     getNodeInfoAllChildren(uniqueId: any): NodeInfo[];
-
     /**
      * 当前节点的所有兄弟节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return NodeInfo 节点集合
      */
     getSiblingNodeInfo(uniqueId: any): NodeInfo[];
-
     /**
      * 在当前节点前面的兄弟节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return   NodeInfo 数组 选择到的节点集合
      */
     getNextSiblingNodeInfo(uniqueId: any): NodeInfo[];
-
     /**
      * 在当前节点后面的兄弟节点
      * @param uniqueId NodeInfo 中的uniqueId属性
      * @return NodeInfo 数组 选择到的节点集合
      */
     getPreviousSiblingNodeInfo(uniqueId: any): NodeInfo[];
-
     /**
      * 对某个节点输入数据
      * @param uniqueId NodeInfo 中的uniqueId属性
@@ -1829,9 +1634,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     inputTextNodeInfo(uniqueId: any, content: any): any;
-
     pasteTextNodeInfo(uniqueId: any, content: any): any;
-
     /**
      * 使用输入法对某个节点输入数据
      * @param uniqueId NodeInfo 中的uniqueId属性
@@ -1840,9 +1643,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     imeInputTextNodeInfo(uniqueId: any, rect: any, content: any): any;
-
     imeInputKeyCodeNodeInfo(uniqueId: any, rect: any, content: any): any;
-
     /**
      * 清除节点文本数据
      * <Br/>
@@ -1853,20 +1654,17 @@ declare class EventWrapper {
      * @param uniqueId  NodeInfo 中的uniqueId属性
      */
     clearTextFieldNodeInfo(uniqueId: any): any;
-
     /**
      * 刷新节点缓存
      * @param uniqueId  NodeInfo 中的uniqueId属性
      */
     refreshNodeInfo(uniqueId: any): any;
-
     /**
      * 节点信息是否有效
      * @param uniqueId  NodeInfo 中的uniqueId属性
-     * @return bool|布尔型 true代表有效
+     * @return {boolean}|布尔型 true代表有效
      */
-    isValidNodeInfo(uniqueId: any): any;
-
+    isValidNodeInfo(uniqueId: any): boolean;
     /**
      * 设置获取节点的模式
      * @param mode 1 是增强型， 2 是快速型，默认是增强型
@@ -1876,9 +1674,7 @@ declare class EventWrapper {
      * @return {boolean|*}
      */
     setFetchNodeMode(mode: any, fetchInvisibleNode: any, fetchNotImportantNode: any, algorithm: any): boolean | any;
-
     setNodeDumpParam(data: any): any;
-
     /**
      * 设置要屏蔽的节点
      * 设置后，系统不会抓取这些节点数据
@@ -1886,11 +1682,8 @@ declare class EventWrapper {
      * @return {boolean|*}
      */
     setBlockNode(blockNode: any): boolean | any;
-
     removeNodeFlag(flag: any): any;
-
     addNodeFlag(flag: any): any;
-
     /**
      * 多点触摸<br/>
      * 触摸参数: action :一般情况下 按下为0，弹起为1，移动为2<br/>
@@ -1905,9 +1698,7 @@ declare class EventWrapper {
      * @return boolean|布尔型
      */
     multiTouch(touch1: any, touch2: any, touch3: any, timeout: any): any;
-
     multiTouch2(pointArrays: any, timeout: any): any;
-
     /**
      * 向前滚动
      *
@@ -1915,9 +1706,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollForward(selectors: any): any;
-
     scrollForwardNodeInfo(uniqueId: any): any;
-
     /**
      * 向后滚动
      *
@@ -1925,27 +1714,21 @@ declare class EventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollBackward(selectors: any): any;
-
     scrollBackwardNodeInfo(uniqueId: any): any;
-
     /**
      * 向左滚动
      * @param selectors {@link S}数组
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollLeft(selectors: any): any;
-
     scrollLeftNodeInfo(uniqueId: any): any;
-
     /**
      * 向右滚动
      * @param selectors {@link S}数组
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollRight(selectors: any): any;
-
     scrollRightNodeInfo(uniqueId: any): any;
-
     /**
      * 向上滚动
      *
@@ -1953,9 +1736,7 @@ declare class EventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollUp(selectors: any): any;
-
     scrollUpNodeInfo(uniqueId: any): any;
-
     /**
      * 向下滚动
      *
@@ -1963,18 +1744,14 @@ declare class EventWrapper {
      * @return 布尔型 true 代表点击成功 false代表点击失败
      */
     scrollDown(selectors: any): any;
-
     scrollDownNodeInfo(uniqueId: any): any;
-
     readResAutoImage(fileName: any): any;
-
     /**
      * 获取最近的节点事件出发的时间
      *
-     * @return {long} 长整型时间，毫秒级别
+     * @return {number} 长整型时间，毫秒级别
      */
-    lastNodeEventTime(): long;
-
+    lastNodeEventTime(): number;
     /**
      * 长按住事件
      * @param x x坐标
@@ -1983,7 +1760,6 @@ declare class EventWrapper {
      * @return {boolean} true 成功 false 失败
      */
     press(x: any, y: any, delay: any): boolean;
-
     /**
      * 设置代理模式参数
      * @param data 参数表
@@ -1993,48 +1769,37 @@ declare class EventWrapper {
      */
     setAgentCallParam(data: any): boolean;
 }
-
 declare var agentEvent: EventWrapper;
-
 declare function Console(): void;
-
 declare class Console {
     timerMap: {};
-
     log(msg: any, ...args: any[]): void;
-
     logLine(line: any, msg: any, ...args: any[]): void;
-
     /**
      * 计时开始
      * @param label 标签
-     * @return  {long} 当前时间
+     * @return  {number} 当前时间
      */
-    time(label: any): long;
-
+    time(label: any): number;
     /**
      * 计时结束
      * @param label 标签
-     * @return {long} 与计时开始的差值
+     * @return {number} 与计时开始的差值
      */
-    timeEnd(label: any): long;
+    timeEnd(label: any): number;
 }
-
 declare function HotUpdateWrapper(): void;
-
 declare class HotUpdateWrapper {
     /**
      * 获取热更新得请求结果
      * @return {string} 字符串
      */
     getUpdateResp(): string;
-
     /**
      * 获取热更新重新的错误
      * @return {string} 字符串
      */
     getErrorMsg(): string;
-
     /**
      * 请求热更新接口，如果是false，也有可能是无需更新，可以使用getErrorMsg查看具体得信息
      * @param updateUrl 更新地址 不写，就使用update.json配置的数据
@@ -2044,14 +1809,12 @@ declare class HotUpdateWrapper {
      * @return {boolean} true 代表需要更新 false代表无需更新
      */
     updateReq(updateUrl: any, version: any, appendDeviceInfo: any, timeout: any): boolean;
-
     /**
      * 下载热更新请求到得IEC文件
      * @return {string} 下载后热更新文件得路径，如果为空，也有可能是无需更新
      */
     updateDownload(): string;
 }
-
 /**
  * 发送钉钉消息
  * 适合EC 9.11.0+
@@ -2063,20 +1826,17 @@ declare class HotUpdateWrapper {
  * @return {string} 调用钉钉返回的json字符串结果,格式 {"errcode":0,"errmsg":"ok"}，errcode=0代表成功其他都是错误
  */
 declare function sendDingDingMsg(url: any, secret: any, msg: any, atMobile: any, atAll: any): string;
-
 /**
  * 休眠
  * @param miSecond 毫秒
  */
 declare function sleep(miSecond: any): void;
-
 /**
  * 脚本是否处于暂停中
  * 适配 EC 10.0.0+
  * @return {boolean} true 代表脚本处于暂停中
  */
 declare function isScriptPause(): boolean;
-
 /**
  * 设置脚本暂停或者继续
  * 适配 EC 10.0.0+
@@ -2085,17 +1845,11 @@ declare function isScriptPause(): boolean;
  * @return {boolean} true 代表脚本处于暂停中，false 代表继续运行中
  */
 declare function setScriptPause(pause: any, timeout: any): boolean;
-
 declare function toast(msg: any, extra: any): void;
-
 declare function toast1(msg: any): void;
-
 declare function toast2(msg: any): void;
-
 declare function getHandler(): any;
-
 declare function formatlog(obj: any): any;
-
 /**
  * 设置日志等级,可用于关闭或开启日志
  * @param level 日志等级，值分别是 debug,info,warn,error,off，排序分别是debug<info<warn<error<off，
@@ -2104,39 +1858,30 @@ declare function formatlog(obj: any): any;
  * @return {boolean} 布尔型 true代表成功 false代表失败
  */
 declare function setLogLevel(level: any, displayToast: any): boolean;
-
 /**
  * 调试日志
  * @param msg
  */
 declare function logd(msg: any, ...args: any[]): void;
-
 declare function logdLine(line: any, msg: any, ...args: any[]): void;
-
 /**
  * 信息日志
  * @param msg
  */
 declare function logi(msg: any, ...args: any[]): void;
-
 declare function logiLine(line: any, msg: any, ...args: any[]): void;
-
 /**
  * 错误日志
  * @param msg
  */
 declare function loge(msg: any, ...args: any[]): void;
-
 declare function logeLine(line: any, msg: any, ...args: any[]): void;
-
 /**
  * 警告日志
  * @param msg
  */
 declare function logw(msg: any, ...args: any[]): void;
-
 declare function logwLine(line: any, msg: any, ...args: any[]): void;
-
 /**
  * 设置保存日志信息到文件中
  * @param save 是否保存
@@ -2145,33 +1890,27 @@ declare function logwLine(line: any, msg: any, ...args: any[]): void;
  * @return 保存日志文件的目录
  */
 declare function setSaveLogEx(save: any, path: any, size: any, fileName: any): any;
-
 declare function setSaveLog(save: any, path: any, size: any): any;
-
 /**
  * 打印日志的时候，悬浮窗是否展示行号，正式发布，可以不展示行号，不影响调试和保存在文件的日志
  * @param ds  true 代表显示， false 不显示
  */
 declare function setFloatDisplayLineNumber(ds: any): any;
-
 /**
  * 清除日志
  * @param lines 整型，要清除的行数，-1 代表全部清除
  */
 declare function clearLog(lines: any): void;
-
 /**
  * 打开EC系统设置页面
  * @return true 成功 false 失败
  */
 declare function openECSystemSetting(): any;
-
 /**
  * 打开EC云控设置
  * @return true 成功 false 失败
  */
 declare function openECloudSetting(): any;
-
 /**
  * 设置EC的系统参数
  * @param params  map形式例如 {"running_mode":"无障碍"},<br/>
@@ -2198,21 +1937,18 @@ declare function openECloudSetting(): any;
  * @return 布尔型 true 是 false 否
  */
 declare function setECSystemConfig(params: any): any;
-
 /**
  * 载入dex文件
  * @param path 路径，加载顺序分别是插件目录(例如 ab.apk)或者是文件路径(例如 /sdcard/ab.apk)加载
  * @return true 载入成功， false载入失败
  */
 declare function loadDex(path: any): any;
-
 /**
  * 设置重复加载dex，apk，防止插件过大导致加载时间过长
  * @param r 是否重复加载，true 可以重复加载，false 不可以重复加载
  * @return true 载入成功， false载入失败
  */
 declare function setRepeatLoadDex(r: any): any;
-
 /**
  * 执行JS文件或者内容
  * @param type 1=文件，2=直接是JS内容
@@ -2220,35 +1956,30 @@ declare function setRepeatLoadDex(r: any): any;
  * @return 布尔型，true代表执行成功， false代表失败
  */
 declare function execScript(type: any, content: any): boolean;
-
 /**
  * 载入jar文件
  * @param path 路径，加载顺序分别是插件目录(例如 ab.jar)或者是文件路径(例如 /sdcard/ab.jar)加载
  * @return true 载入成功， false载入失败
  */
 declare function loadJar(path: any): any;
-
 /**
  * 退出脚本执行
  */
 declare function exit(): void;
-
 /**
  * 判断EC运行的当前线程是否处于退出状态，可用判断脚本是否退出，或者子线程是否退出
  * @return true 已退出
  */
 declare function isScriptExit(): any;
-
 /**
  * 重启脚本，适合无限循环，或者有异常的情况可以下载最新的iec再次执行，避免进入UI才能热更新,
  * 注意: 该方法威力巨大，请自行控制好是否自动重启，否则只能强杀进程才能停止
  * @param path 新的IEC路径，如果不需要可以填写null
  * @param stopCurrent 是否停止当前的脚本
  * @param delay 延迟多少秒后执行
- * @return bool true 代表成功 false 代表失败
+ * @return {boolean} true 代表成功 false 代表失败
  */
-declare function restartScript(path: any, stopCurrent: any, delay: any): any;
-
+declare function restartScript(path: any, stopCurrent: any, delay: any): boolean;
 /**
  * 保存res文件夹中的资源文件到指定的路径
  * @param fileName 文件名称，不要加res前缀
@@ -2256,14 +1987,12 @@ declare function restartScript(path: any, stopCurrent: any, delay: any): any;
  * @return boolean|布尔型 true代表保存成功
  */
 declare function saveResToFile(fileName: any, path: any): any;
-
 /**
  * 读取res文件夹中的资源文件，并返回字符串
  * @param fileName 文件名称，不要加res前缀
  * @return {string} 如果是null代表没内容
  */
 declare function readResString(fileName: any): string;
-
 /**
  * 查找IEC的文件
  * 适合版本 EC 8.0.0+
@@ -2274,34 +2003,29 @@ declare function readResString(fileName: any): string;
  * @return {array} 文件名称JSON数组
  */
 declare function findIECFile(dir: any, names: any, ext: any, recursion: any): any[];
-
 /**
  * 读取IEC文件中的资源文件，并返回字符串
  * @param fileName 文件名称，如果放在某个文件夹下 需要加上文件名称
  * @return {string} 如果是null代表没内容
  */
 declare function readIECFileAsString(fileName: any): string;
-
 /**
  * 读取IEC文件中的资源文件，并返回java的直接数组
  * @param fileName 文件名称，如果放在某个文件夹下 需要加上文件名称
  * @return {字节数组} 如果是null代表没内容
  */
-declare function readIECFileAsByte(fileName: any): 字节数组;
-
+declare function readIECFileAsByte(fileName: any): any;
 /**
  * 读取res文件夹中的资源文件，并返Bitmap图片对象
  * @param fileName 文件名称，不要加res前缀
  * @return {Bitmap} 如果是null代表没内容
  */
-declare function readResBitmap(fileName: any): Bitmap;
-
+declare function readResBitmap(fileName: any): any;
 /**
  * 启动自动化环境
  * @return 布尔型  true代表启动成功，false代表启动失败
  */
 declare function startEnv(): any;
-
 /**
  * 守护自动化环境,
  * 如果是激活或者无障碍保活的情况下，尽量保证自动服务不掉线
@@ -2309,51 +2033,41 @@ declare function startEnv(): any;
  * @return 布尔型  true代表启动成功，false代表启动失败
  */
 declare function daemonEnv(daemon: any): any;
-
 /**
  * 关闭自动化环境
  * @param skinAccPage 无障碍模式停止失败 是否跳转到开启无障碍页面
  * @return 布尔型  true代表启动成功，false代表启动失败
  */
 declare function closeEnv(skinAccPage: any): any;
-
 /**
  * 设置壁纸服务函数
  * @return 布尔型  true代表启动成功，false代表启动失败
  */
 declare function setWallpaperService(): any;
-
 /**
  * 是否设置壁纸成功
  * @return 布尔型  true代表成功，false代表失败
  */
 declare function isWallpaperServiceSet(): any;
-
 /**
  * 自动化服务是否正常
  * @return 布尔型  true代表正常，false代表不正常
  */
 declare function isServiceOk(): any;
-
 /**
  * 设置要执行的IEC文件路径
  * @param path 文件路径
  * @return 布尔型，true代表成功  false代表失败
  */
 declare function setIECPath(path: any): any;
-
 /**
  * 获取要执行的IEC文件路径
  * @return {string}，null代表无。ts.iec 代表是包内iec文件，其他代代表存储路径中的文件
  */
 declare function getIECPath(): string;
-
 declare function javaString2string(x: any): string;
-
 declare function setStopCallback(callback: any): void;
-
 declare function setExceptionCallback(callback: any): void;
-
 /**
  * 对事件进行监听
  * @param event 事件类型 类型有:
@@ -2372,20 +2086,17 @@ declare function setExceptionCallback(callback: any): void;
  * @return {boolean}  | true 成功，false失败
  */
 declare function observeEvent(event: any, callback: any): boolean;
-
 /**
  * 取消事件监听
  * @param event 事件类型
  * @return {boolean} | true 成功，false失败
  */
 declare function cancelObserveEvent(event: any): boolean;
-
 /**
  * 时间函数
- * @return {long} 毫秒级别的long时间
+ * @return {number} 毫秒级别的long时间
  */
-declare function time(): long;
-
+declare function time(): number;
 /**
  * 申请动态权限
  * 适合版本 EC 7.9.0+
@@ -2394,15 +2105,12 @@ declare function time(): long;
  * @return {boolean} true 代表有权限  false代表无权限或申请失败
  */
 declare function requestRuntimePermission(permissionArray: any, timeout: any): boolean;
-
 /**
  * 格式化时间函数例如：yyyy-MM-dd HH:mm:ss
  * @return {string} 格式话之后的当前时间
  */
 declare function timeFormat(format: any): string;
-
 declare function object2JsonString(o: any): any;
-
 /**
  * 激活自己
  * @param activeType 激活类型，0 自动，1 模式1 2 模式2
@@ -2410,7 +2118,6 @@ declare function object2JsonString(o: any): any;
  * @return {string} 激活成功：代表成功，其他都是错误消息
  */
 declare function activeSelf(activeType: any, timeout: any): string;
-
 /**
  * 通过IP激活其他设备
  * @param ip 设备的IP
@@ -2419,14 +2126,12 @@ declare function activeSelf(activeType: any, timeout: any): string;
  * @return {string} 激活成功：代表成功，其他都是错误消息
  */
 declare function activeDevice(ip: any, activeType: any, timeout: any): string;
-
 /**
  * 是否同步日志到中控
  * 适合版本 EC 安卓 9.27.0+
  * @param logSyncToCenter true代表同步  false代表不同步
  */
 declare function commonLogToCenter(logSyncToCenter: any): void;
-
 /**
  * 取得中控发过来的任务参数信息
  * 中控启动脚本，可以配置参数，在这里使用本函数获取参数，给脚本使用
@@ -2436,13 +2141,10 @@ declare function commonLogToCenter(logSyncToCenter: any): void;
  * @return {JSON} 对象
  **/
 declare function getCenterTaskInfo(): JSON;
-
 declare var modules: {};
 declare var console: Console;
 declare var hotupdater: HotUpdateWrapper;
-
 declare function CenterApiWrapper(): void;
-
 declare class CenterApiWrapper {
     /**
      * 取得中控发过来的任务参数信息
@@ -2453,7 +2155,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      **/
     getCenterTaskInfo(): JSON;
-
     /**
      * 读取数据文件的内容
      * 适配EC 9.29.0+
@@ -2461,7 +2162,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      */
     getFileData(name: any): JSON;
-
     /**
      * 新增数据文件
      * 适配EC 9.29.0+
@@ -2473,7 +2173,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      */
     addFileData(name: any, content: any, rewrite: any, append: any): JSON;
-
     /**
      * 删除数据文件
      * 适配EC 9.29.0+
@@ -2481,7 +2180,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      */
     deleteFile(name: any): JSON;
-
     /**
      * 插入数据
      * 适配EC 9.29.0+
@@ -2492,7 +2190,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      */
     insertFileData(name: any, content: any, create: any, append: any): JSON;
-
     /**
      * 弹出数据
      * 适配EC 9.29.0+
@@ -2501,7 +2198,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      */
     popFileData(name: any, popType: any): JSON;
-
     /**
      * 删除一行数据
      * 适配EC 9.29.0+
@@ -2510,7 +2206,6 @@ declare class CenterApiWrapper {
      * @return {JSON} JSON对象
      */
     removeOneLineData(name: any, content: any): JSON;
-
     /**
      * 追加一行数据
      * 适配EC 9.29.0+
@@ -2522,11 +2217,8 @@ declare class CenterApiWrapper {
      */
     appendOneLineData(name: any, content: any, appendType: any): JSON;
 }
-
 declare let centerApi: CenterApiWrapper;
-
 declare function DeviceWrapper(): void;
-
 declare class DeviceWrapper {
     /**
      * 取得屏幕宽度
@@ -2538,7 +2230,6 @@ declare class DeviceWrapper {
      * @return 整型
      */
     getScreenWidth(): any;
-
     /**
      * 取得屏幕高度
      * <Br/>
@@ -2549,7 +2240,6 @@ declare class DeviceWrapper {
      * @return 整型
      */
     getScreenHeight(): any;
-
     /**
      * 获取imei号
      * <Br/>
@@ -2560,7 +2250,6 @@ declare class DeviceWrapper {
      * @return string
      */
     getIMEI(): string;
-
     /**
      * 取得手机品牌
      * <Br/>
@@ -2571,7 +2260,6 @@ declare class DeviceWrapper {
      * @return string
      */
     getBrand(): string;
-
     /**
      * 取得手机机型
      * <Br/>
@@ -2582,7 +2270,6 @@ declare class DeviceWrapper {
      * @return 字符串
      */
     getModel(): string;
-
     /**
      * 取得手机卡号
      * <Br/>
@@ -2593,7 +2280,6 @@ declare class DeviceWrapper {
      * @return 字符串
      */
     getImsi(): string;
-
     /**
      * 取得手机ROM序列号
      * <Br/>
@@ -2604,7 +2290,6 @@ declare class DeviceWrapper {
      * @return 字符串
      */
     getSerial(): string;
-
     /**
      * 取得手机SDK版本号，例如 23
      * <Br/>
@@ -2615,7 +2300,6 @@ declare class DeviceWrapper {
      * @return 整型
      */
     getSdkInt(): any;
-
     /**
      * 取得手机版本号,例如 6.0等字符串
      * <Br/>
@@ -2626,7 +2310,6 @@ declare class DeviceWrapper {
      * @return 字符串
      */
     getOSVersion(): string;
-
     /**
      * 取得Android ID
      * <Br/>
@@ -2637,7 +2320,6 @@ declare class DeviceWrapper {
      * @return 字符串
      */
     getAndroidId(): string;
-
     /**
      * 取得屏幕的亮度
      * <Br/>
@@ -2648,14 +2330,12 @@ declare class DeviceWrapper {
      * @return 整型
      */
     getBrightness(): any;
-
     /**
      * 设置屏幕的亮度
      *
      * @param b 整型
      */
     setBrightness(b: any): void;
-
     /**
      * 取得屏幕亮度模式
      * <Br/>
@@ -2666,7 +2346,6 @@ declare class DeviceWrapper {
      * @return 整型， 0 手动调节，1 自动调节
      */
     getBrightnessMode(): any;
-
     /**
      * 设置屏幕亮度调节模式
      * <Br/>
@@ -2677,155 +2356,127 @@ declare class DeviceWrapper {
      * @param b 0 手动调节，1 自动调节
      */
     setBrightnessMode(b: any): void;
-
     /**
      * 取得音乐的音量
      * @return {undefined}
      */
     getMusicVolume(): undefined;
-
     /**
      * 设置音乐的音量
      * @param b 整型
      */
     setMusicVolume(b: any): void;
-
     /**
      * 获取通知的音量
      * @return {undefined}
      */
     getNotificationVolume(): undefined;
-
     /**
      * 设置通知的音量
      * @param b 整型
      */
     setNotificationVolume(b: any): void;
-
     /**
      * 获取闹钟的音量
      * @return {undefined}
      */
     getAlarmVolume(): undefined;
-
     /**
      * 设置闹钟的音量
      * @param b 整型
      */
     setAlarmVolume(b: any): void;
-
     /**
      * 获取音乐最大音量
      * @return {undefined}
      */
     getMusicMaxVolume(): undefined;
-
     /**
      * 获取通知最大音量
      * @return {undefined}
      */
     getNotificationMaxVolume(): undefined;
-
     /**
      * 获取闹钟最大音量
      * @return {undefined}
      */
     getAlarmMaxVolume(): undefined;
-
     /**
      * 取得电量
      * @return {undefined}
      */
     getBattery(): undefined;
-
     /**
      * 取得总内存
      * @return {undefined}
      */
     getTotalMem(): undefined;
-
     /**
      * 取得可用内存
      * @return {undefined}
      */
     getAvailMem(): undefined;
-
     /**
      * 是否正在充电
      * @return {undefined}
      */
     isCharging(): undefined;
-
     /**
      * 发出震动 单位是毫秒
      * @param millis
      */
     vibrate(millis: any): void;
-
     /**
      * 取消震动
      */
     cancelVibration(): void;
-
     /**
      * 获取mac地址
      * @return 字符串或者null
      */
     getMacAddress(): string;
-
     /**
      * 保持屏幕唤醒状态
      */
     keepScreenOn(): void;
-
     /**
      * 保持设备唤醒
      * @param flag 参考安卓PowerManager中的唤醒标准
      */
     keepAwake(flag: any): void;
-
     /**
      * 保持设备昏暗状态
      */
     keepScreenDim(): void;
-
     /**
      * 取消保持唤醒状态
      */
     cancelKeepingAwake(): void;
-
     /**
      * 取得talkingdata三方统计定义的唯一设备标识
      * @return {字符串}
      */
-    tcDeviceId(): 字符串;
+    tcDeviceId(): string;
 }
-
 declare var device: DeviceWrapper;
-
 declare function ECloudWrapper(): void;
-
 declare class ECloudWrapper {
     log(msg: any, ...args: any[]): void;
-
     /**
      * 普通的打印的日志(logd,logi,logw,loge)是否同步到云控，默认是同步的，可以不使用ecloud.log的时候,云控也可以看到日志
      * @param logSyncToCloud true 代表同步 false 代表不同步
      */
     commonLogToCloud(logSyncToCloud: any): void;
-
     /**
      * 取得当前任务的信息
      * @return {JSON} 对象
      */
     getTaskInfo(): JSON;
-
     /**
      * 获取机器编号
      * @return {string} 机器编码或者null
      */
     getDeviceNo(): string;
-
     /**
      * 通过资源组取得一组资源
      * 注意: EC 6.4.0+ 已废弃，云控 2.0.0+ 无法使用，该项只做保留
@@ -2839,7 +2490,6 @@ declare class ECloudWrapper {
      * @return {JSON} 资源JSON对象
      */
     getResources(map: any): JSON;
-
     /**
      * 上传要存储的数据
      * 注意: EC 6.4.0+ 已废弃，云控 2.0.0+ 无法使用，该项只做保留
@@ -2847,7 +2497,7 @@ declare class ECloudWrapper {
      *   例如
      * {
      *   "groupName":"123",
-     *    "dataKey": "11111",
+     *	"dataKey": "11111",
      *  "content":"123"
      * }
      *   key定义：
@@ -2857,7 +2507,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false 代表失败
      */
     uploadStorageData(map: any): boolean;
-
     /**
      * 通过数据组名取得一组数据
      * 注意: EC 6.4.0+ 已废弃，云控 2.0.0+ 无法使用，该项只做保留
@@ -2871,7 +2520,6 @@ declare class ECloudWrapper {
      * @return {JSON} JSON对象
      */
     getStorageDatas(map: any): JSON;
-
     /**
      * 子任务失败
      * 注意: EC 6.4.0+ 已废弃，云控 2.0.0+ 无法使用，该项只做保留
@@ -2879,12 +2527,11 @@ declare class ECloudWrapper {
      *   例如
      * {
      *   "subTaskId":123,
-     *     "msg": "因为找不到XXX失败"
+     *	 "msg": "因为找不到XXX失败"
      * }
      * @return {boolean} true代表成功 false 代表失败
      */
     subTaskFail(map: any): boolean;
-
     /**
      * 子任务成功
      * 注意: EC 6.4.0+ 已废弃，云控 2.0.0+ 无法使用，该项只做保留
@@ -2892,12 +2539,11 @@ declare class ECloudWrapper {
      *   例如
      * {
      *   "subTaskId":123,
-     *    "msg": "任务成功"
+     *	"msg": "任务成功"
      * }
      * @return {boolean} true代表成功 false 代表失败
      */
     subTaskOk(map: any): boolean;
-
     /**
      * 通过数据组名或者数据名称取得数据, 前提是要中云控中存在这个数据
      * @param map 可扩展参数表
@@ -2907,7 +2553,6 @@ declare class ECloudWrapper {
      * @return {null|any}
      */
     getData(map: any): null | any;
-
     /**
      * 通过数据组名或者数据名称取得数据,获取后云控自动删除, 前提是要中云控中存在这个数据
      * @param map 可扩展参数表
@@ -2918,8 +2563,7 @@ declare class ECloudWrapper {
      * size = 需要获取的数据条数
      * @return {null|json数组} 空或者JSON数组
      */
-    getDataPop(map: any): null | json数组;
-
+    getDataPop(map: any): null | Object[];
     /**
      * 新增一组数据，如果组名存在了，会自动最近数据
      * @param map 可扩展参数表
@@ -2931,7 +2575,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     addData(map: any): boolean;
-
     /**
      * 修改某个组下面的数据，组名和数据名必填
      * @param map 可扩展参数表
@@ -2944,7 +2587,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     updateData(map: any): boolean;
-
     /**
      * 删除某个组下面的数据，如果只填写组名，该组下面全部被删除，如果组名和数据名都有，就删除该组下数据名相同的数据
      * @param map 可扩展参数表
@@ -2955,7 +2597,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     removeData(map: any): boolean;
-
     /**
      * 查询该组下面的数据名的内容，并向内容尾追加一条数据
      * @param map 可扩展参数表
@@ -2967,7 +2608,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     appendOneLineData(map: any): boolean;
-
     /**
      * 查询该组下面的数据名的内容，并删除其中一条与content相等的数据
      * @param map 可扩展参数表
@@ -2979,19 +2619,16 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     removeOneLineData(map: any): boolean;
-
     /**
      * 获取云控的URL地址
      * @return {string} 云控的URL地址或者null
      */
     getCloudUrl(): string;
-
     /**
      * 删除脚本文件保证安全
      * @return {boolean} true代表成功 false ，代表失败
      */
     removeScriptFile(): boolean;
-
     /**
      * 创建或者更新动态数据表结构<br/>
      * 如果columns有增加新的，就自动创建字段，如果少了某个字段，就自动从表中移出字段<br/>
@@ -2999,24 +2636,24 @@ declare class ECloudWrapper {
      * 适合版本EC 6.16.0+
      * @param param 参数<Br/>
      * {
-     *    "tableName": "我是牛逼的表",
-     *    "tableNameEn": "niubi_table",
-     *    "columns": [{
-     *            "columnInfo": "姓名",
-     *            "columnName": "name",
-     *            "columnSize": 500
-     *        },
-     *        {
-     *            "columnInfo": "年龄",
-     *            "columnName": "age",
-     *            "columnSize": 500
-     *        },
-     *        {
-     *            "columnInfo": "性别",
-     *            "columnName": "sex",
-     *            "columnSize": 500
-     *        }
-     *    ]
+     * 	"tableName": "我是牛逼的表",
+     * 	"tableNameEn": "niubi_table",
+     * 	"columns": [{
+     * 			"columnInfo": "姓名",
+     * 			"columnName": "name",
+     * 			"columnSize": 500
+     * 		},
+     * 		{
+     * 			"columnInfo": "年龄",
+     * 			"columnName": "age",
+     * 			"columnSize": 500
+     * 		},
+     * 		{
+     * 			"columnInfo": "性别",
+     * 			"columnName": "sex",
+     * 			"columnSize": 500
+     * 		}
+     * 	]
      * }<br/>
      * 解释: <br/>
      * tableName: 中文表名，相当于名称，但是不是实际表名<br/>
@@ -3030,21 +2667,20 @@ declare class ECloudWrapper {
      * <br/>失败返回示例：{"result":{"msg":"我是错误信息"}}
      */
     dynamicCreateTable(param: any): string;
-
     /**
      * 动态查询数据<Br/>
      * 适合版本EC 6.16.0+
      * @param param 参数<Br/>
      * {
-     *    "pageNumber": 1,
-     *    "pageSize": 4,
-     *    "fields": "id,name",
-     *    "query": "and name like '%我是%'",
-     *    "tableNameEn": "niubi_table",
-     *    "search": {
-     *        "id": "1",
-     *        "name": "我是name"
-     *    }
+     * 	"pageNumber": 1,
+     * 	"pageSize": 4,
+     * 	"fields": "id,name",
+     * 	"query": "and name like '%我是%'",
+     * 	"tableNameEn": "niubi_table",
+     * 	"search": {
+     * 		"id": "1",
+     * 		"name": "我是name"
+     * 	}
      * }
      * <br/>
      * 解释: <br/>
@@ -3060,17 +2696,16 @@ declare class ECloudWrapper {
      * <br/>失败返回示例：{"result":{"msg":"我是错误信息"}}
      */
     dynamicQuery(param: any): string;
-
     /**
      * 动态增加数据<Br/>
      * 适合版本EC 6.16.0+<Br/>
      * {
-     *    "tableNameEn": "niubi_table",<Br/>
-     *    "columns": {<Br/>
-     *        "name": "我是牛逼",<Br/>
-     *        "age": "niubi_table2",<Br/>
-     *        "sex": "niubi_table2"<Br/>
-     *    }<Br/>
+     * 	"tableNameEn": "niubi_table",<Br/>
+     * 	"columns": {<Br/>
+     * 		"name": "我是牛逼",<Br/>
+     * 		"age": "niubi_table2",<Br/>
+     * 		"sex": "niubi_table2"<Br/>
+     * 	}<Br/>
      * }<Br/>
      * @param param 参数<Br/>
      * 解释: <br/>
@@ -3082,22 +2717,21 @@ declare class ECloudWrapper {
      * <br/>失败返回示例：{"result":{"msg":"我是错误信息"}}
      */
     dynamicAdd(param: any): string;
-
     /**
      * 动态更新数据<Br/>
      * 适合版本EC 6.16.0+
      * @param param 参数<Br/>
      * {
-     *    "tableNameEn": "niubi_table",
-     *    "columns": {
-     *        "name": "我x是牛逼xxxx的表",
-     *        "age": "niubi_table2",
-     *        "sex": "niubi_table2"
-     *    },
-     *    "query": "and id=1",
-     *    "search": {
-     *        "id": "7"
-     *    }
+     * 	"tableNameEn": "niubi_table",
+     * 	"columns": {
+     * 		"name": "我x是牛逼xxxx的表",
+     * 		"age": "niubi_table2",
+     * 		"sex": "niubi_table2"
+     * 	},
+     * 	"query": "and id=1",
+     * 	"search": {
+     * 		"id": "7"
+     * 	}
      * }
      * query: 自定义的查询条件，遵循sql的写法<br/>
      * tableNameEn: 英文的表名<br/>
@@ -3110,16 +2744,15 @@ declare class ECloudWrapper {
      * <br/>失败返回示例：{"result":{"msg":"我是错误信息"}}
      */
     dynamicUpdate(param: any): string;
-
     /**
      * 动态删除数据<Br/>
      * 适合版本EC 6.16.0+<Br/>
      * {
-     *    "tableNameEn": "niubi_table",<Br/>
-     *    "query":"and name like '%我%'",<Br/>
-     *    "search": {<Br/>
-     *        "id": "1"
-     *    }<Br/>
+     * 	"tableNameEn": "niubi_table",<Br/>
+     * 	"query":"and name like '%我%'",<Br/>
+     * 	"search": {<Br/>
+     * 		"id": "1"
+     * 	}<Br/>
      * }<Br/>
      * @param param 参数<Br/>
      * 解释: <br/>
@@ -3132,7 +2765,6 @@ declare class ECloudWrapper {
      * <br/>失败返回示例：{"result":{"msg":"我是错误信息"}}
      */
     dynamicRemove(param: any): string;
-
     /**
      * 新增一个存放在redis的缓存
      * 适合版本 EC 7.5.0+
@@ -3146,7 +2778,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     addCache(map: any): boolean;
-
     /**
      * 更新一个redis的缓存
      * 适合版本 EC 7.5.0+
@@ -3160,7 +2791,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     updateCache(map: any): boolean;
-
     /**
      * 更新一个redis的缓存过期时间
      * 适合版本 EC 7.5.0+
@@ -3172,7 +2802,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     updateCacheExpire(map: any): boolean;
-
     /**
      * 删除一个redis的缓存
      * 适合版本 EC 7.5.0+
@@ -3183,7 +2812,6 @@ declare class ECloudWrapper {
      * @return {boolean} true代表成功 false ，代表失败
      */
     removeCache(map: any): boolean;
-
     /**
      * 获取一个缓存，如果缓存失效了 无数据返回
      * 适合版本 EC 7.5.0+
@@ -3194,7 +2822,6 @@ declare class ECloudWrapper {
      * @return {string} 服务端返回的JSON字符串，解析result节点即可
      */
     getCache(map: any): string;
-
     /**
      * 追加一个redis set的缓存
      * 适合版本 EC 7.5.0+
@@ -3206,7 +2833,6 @@ declare class ECloudWrapper {
      * @return {string} 服务端返回的JSON字符串，解析result节点即可
      */
     appendOneLineCache(map: any): string;
-
     /**
      * 删除一个redis set的缓存元素
      * 适合版本 EC 7.5.0+
@@ -3218,7 +2844,6 @@ declare class ECloudWrapper {
      * @return {string} 服务端返回的JSON字符串，解析result节点即可
      */
     removeOneLineCache(map: any): string;
-
     /**
      * redis的自增长计数功能，每次调用这个key的值都会+1
      * 适合版本 EC 7.5.0+
@@ -3226,10 +2851,9 @@ declare class ECloudWrapper {
      * 例如 {"cacheKey":"缓存key"}
      * key定义：
      * cacheKey = 缓存key
-     * @return {long} 返回redis自增后的值
+     * @return {number} 返回redis自增后的值
      */
-    incrementCache(map: any): long;
-
+    incrementCache(map: any): number;
     /**
      * redis push或者pop命令
      * 适合版本 EC 7.8.0+
@@ -3242,7 +2866,6 @@ declare class ECloudWrapper {
      * @return {string} 服务端返回的JSON字符串，解析result节点即可
      */
     popPushCache(map: any): string;
-
     /**
      * redis的自减计数功能，每次调用这个key的值都会-1
      * 适合版本 EC 7.5.0+
@@ -3250,10 +2873,9 @@ declare class ECloudWrapper {
      * 例如 {"cacheKey":"缓存key"}
      * key定义：
      * cacheKey = 缓存key
-     * @return {long} 返回redis自减的值
+     * @return {number} 返回redis自减的值
      */
-    decrementCache(map: any): long;
-
+    decrementCache(map: any): number;
     /**
      * 获取一个redis的key剩余的过期时间
      * 适合版本 EC 7.5.0+
@@ -3261,19 +2883,16 @@ declare class ECloudWrapper {
      * 例如 {"cacheKey":"缓存key"}
      * key定义：
      * cacheKey = 缓存key
-     * @return {long} 返回redis剩余的过期时间，负数代表永不过期
+     * @return {number} 返回redis剩余的过期时间，负数代表永不过期
      */
-    getCacheExpire(map: any): long;
+    getCacheExpire(map: any): number;
 }
-
 declare var ecloud: ECloudWrapper;
-
 /**
  * 文件api封装
  * @constructor
  */
 declare function FileWrapper(): void;
-
 declare class FileWrapper {
     /**
      *
@@ -3288,7 +2907,6 @@ declare class FileWrapper {
      * @return string 文件内容字符串
      */
     readFile(path: any): string;
-
     /**
      *
      * 删除文件某一行或者根据包含条件删除
@@ -3304,14 +2922,12 @@ declare class FileWrapper {
      * @return {boolean} true 成功 false 失败
      */
     deleteLine(path: any, line: any, contains: any): boolean;
-
     /**
      * 列出文件下的所有文件
      * @param path 路径
      * @return 路径字符串数组
      */
     listDir(path: any): string[];
-
     /**
      * 将字符串存储到文件中
      * <Br/>
@@ -3323,7 +2939,6 @@ declare class FileWrapper {
      * @param path 文件
      */
     writeFile(data: any, path: any): any;
-
     /**
      * 创建一个文件或者文件夹
      *
@@ -3331,7 +2946,6 @@ declare class FileWrapper {
      * @return 布尔型 true 代表创建成功
      */
     create(path: any): any;
-
     /**
      * 从APK的assets文件夹中读取数据为字符串
      * <Br/>
@@ -3343,7 +2957,6 @@ declare class FileWrapper {
      * @return string 文件的内容
      */
     readAssets(path: any): string;
-
     /**
      * 删除所有文件或者文件夹
      * <Br/>
@@ -3354,7 +2967,6 @@ declare class FileWrapper {
      * @param path 文件或者文件路径
      */
     deleteAllFile(path: any): any;
-
     /**
      * 写入一行到文件中,追加模式
      * <Br/>
@@ -3367,7 +2979,6 @@ declare class FileWrapper {
      * @return 布尔型 true代表成功 false代表失败
      */
     appendLine(data: any, path: any): any;
-
     /**
      * 读取一行数据，如果行号不对，返回的是空
      * <Br/>
@@ -3380,7 +2991,6 @@ declare class FileWrapper {
      * @return string 返回一行字符串
      */
     readLine(path: any, lineNo: any): string;
-
     /**
      * 读取所有数据
      * <Br/>
@@ -3392,7 +3002,6 @@ declare class FileWrapper {
      * @return 字符串 返回字符串
      */
     readAllLines(path: any): any;
-
     /**
      * 创建文件夹
      * <Br/>
@@ -3404,7 +3013,6 @@ declare class FileWrapper {
      * @return 布尔型 true 代表成功，false代表失败
      */
     mkdirs(path: any): any;
-
     /**
      * 文件或者文件夹是否存在
      *
@@ -3412,7 +3020,6 @@ declare class FileWrapper {
      * @return 布尔型 true 代表存在，false代表不存在
      */
     exists(path: any): any;
-
     /**
      * 复制文件
      *
@@ -3422,23 +3029,19 @@ declare class FileWrapper {
      */
     copy(src: any, dest: any): any;
 }
-
 declare var file: FileWrapper;
-
 /**
  * 检查apk主版本是否是8，如果不是会有异常发生
  * 该函数可以在程序中调用，防止iec和apk版本不一致
  * 适合版本 EC 8.2.0+
  */
 declare function checkApkVersion8(): any;
-
 /**
  * 检查apk主版本是否是9，如果不是会有异常发生
  * 该函数可以在程序中调用，防止iec和apk版本不一致
  * 适合版本 EC 9.1.0+
  */
 declare function checkApkVersion9(): any;
-
 /**
  * 读取JSON中的整型数据
  * <Br/>
@@ -3449,17 +3052,13 @@ declare function checkApkVersion9(): any;
  * @return 整型 JSON中key对应的整型数据
  */
 declare function readConfigInt(key: any): any;
-
 /**
  * 取得配置的JSON
  * @return {any} JSON数据
  */
 declare function getConfigJSON(): any;
-
 declare function readConfigDouble(key: any): any;
-
 declare function readConfigBoolean(key: any): any;
-
 /**
  * 更新配置
  * @param key 键
@@ -3467,9 +3066,7 @@ declare function readConfigBoolean(key: any): any;
  * @return {boolean} true 成功，false失败
  */
 declare function updateConfig(key: any, value: any): boolean;
-
 declare function readConfigLong(key: any): any;
-
 /**
  * 读取JSON中的字符串数据
  * <Br/>
@@ -3481,7 +3078,6 @@ declare function readConfigLong(key: any): any;
  * @return string JSON中key对应的字符串数据
  */
 declare function readConfigString(key: any): string;
-
 /**
  * 删除UI配置
  *
@@ -3489,65 +3085,48 @@ declare function readConfigString(key: any): string;
  * @return {boolean} true 代表成功 false 代表失败
  */
 declare function deleteConfig(key: any): boolean;
-
 /**
  * 是否是agent模式
  */
 declare function isAgentMode(): any;
-
 /**
  * 是否是无障碍模式
  */
 declare function isAccMode(): any;
-
 declare function isFastJs(): boolean;
-
 declare function isStableJs(): boolean;
-
 /**
  * 节点选择器集合
  * @constructor
  */
 declare function S(): void;
-
 declare class S {
     selectors: any[];
     attr: {};
-
     createSelector(): void;
-
     /**
      * 获取节点信息
      * @param timeout 超时时间
      * @return {Array} 节点信息集合
      */
     getNodeInfo(timeout: any): any[];
-
     /**
      * 通过选择器 获取第一个节点信息
      * @param timeout 等待时间，单位是毫秒
      * @return {NodeInfo} 对象或者null
      */
     getOneNodeInfo(timeout: any): NodeInfo;
-
     /**
      * 创建一个子节点选择器
      * @return {S} 选择器对象
      */
     child(): S;
-
     row(row: any): this;
-
     column(column: any): this;
-
     rowSpan(rowSpan: any): this;
-
     columnSpan(columnSpan: any): this;
-
     rowCount(rowCount: any): this;
-
     columnCount(columnCount: any): this;
-
     /**
      * 按照属性 selected 进行选择
      *
@@ -3555,7 +3134,6 @@ declare class S {
      * @return {S}  节点选择器
      */
     selected(selected: any): S;
-
     /**
      * 按照属性 visible 进行选择
      *
@@ -3563,9 +3141,7 @@ declare class S {
      * @return {S}  节点选择器
      */
     visible(visible: any): S;
-
     nid(nid: any): this;
-
     /**
      * 按照属性 focused 进行选择
      *
@@ -3573,7 +3149,6 @@ declare class S {
      * @return {S}  节点选择器
      */
     focused(focused: any): S;
-
     /**
      * 按照属性 enabled 进行选择
      *
@@ -3581,7 +3156,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     enabled(enabled: any): S;
-
     /**
      * 按照属性 focusable 进行选择
      *
@@ -3589,7 +3163,6 @@ declare class S {
      * @return  {S} 节点选择器
      */
     focusable(focusable: any): S;
-
     /**
      * 按照属性 scrollable 进行选择
      *
@@ -3597,15 +3170,13 @@ declare class S {
      * @return  {S} 节点选择器
      */
     scrollable(scrollable: any): S;
-
     /**
-     * 按照属性 long-clickable 进行选择
+     * 按照属性 number-clickable 进行选择
      *
      * @param longClickable true 或者 false
      * @return {S} 节点选择器
      */
     longClickable(longClickable: any): S;
-
     /**
      * 按照属性 clickable 进行选择
      *
@@ -3613,7 +3184,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     clickable(clickable: any): S;
-
     /**
      * 按照属性 checked 进行选择
      *
@@ -3621,7 +3191,6 @@ declare class S {
      * @return  {S} 节点选择器
      */
     checked(checked: any): S;
-
     /**
      * 按照属性 checkable 进行选择
      *
@@ -3629,7 +3198,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     checkable(checkable: any): S;
-
     /**
      * 按照属性 id 进行匹配
      *
@@ -3637,7 +3205,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     id(id: any): S;
-
     /**
      * 按照属性 id 进行匹配, 支持正则
      *
@@ -3645,7 +3212,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     idMatch(id: any): S;
-
     /**
      * 按照属性 pkg 进行匹配
      *
@@ -3653,7 +3219,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     pkg(pkg: any): S;
-
     /**
      * 按照属性 pkg 进行匹配，支持正则
      *
@@ -3661,7 +3226,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     pkgMatch(pkg: any): S;
-
     /**
      * 按照属性 desc 进行匹配
      *
@@ -3669,7 +3233,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     desc(value: any): S;
-
     /**
      * 按照属性 desc 进行匹配,支持正则
      *
@@ -3677,7 +3240,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     descMatch(value: any): S;
-
     /**
      * 按照属性 bounds 进行范围
      *
@@ -3688,7 +3250,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     bounds(left: any, top: any, right: any, bottom: any): S;
-
     /**
      * 按照属性 text 进行匹配
      *
@@ -3696,7 +3257,7 @@ declare class S {
      * @return {S} 节点选择器
      */
     text(value: any): S;
-
+    xpath(value: any): this;
     /**
      * 按照属性 text 进行匹配,支持正则
      *
@@ -3704,7 +3265,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     textMatch(value: any): S;
-
     /**
      * 按照属性 clz 进行匹配
      *
@@ -3712,7 +3272,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     clz(value: any): S;
-
     /**
      * 按照属性 clz 进行匹配，支持正则
      *
@@ -3720,7 +3279,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     clzMatch(value: any): S;
-
     /**
      * 按照属性 depth 进行匹配
      *
@@ -3728,7 +3286,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     depth(value: any): S;
-
     /**
      * 按照属性 index 进行匹配
      *
@@ -3736,7 +3293,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     index(value: any): S;
-
     /**
      * 按照属性 drawingOrder 进行匹配
      *
@@ -3744,7 +3300,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     drawingOrder(value: any): S;
-
     /**
      * 按照属性 childCount 进行匹配
      *
@@ -3752,7 +3307,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     childCount(value: any): S;
-
     /**
      * 按照属性 editable 进行匹配
      *
@@ -3760,7 +3314,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     editable(value: any): S;
-
     /**
      * 按照属性 password 进行匹配
      *
@@ -3768,7 +3321,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     password(value: any): S;
-
     /**
      * 按照属性 dismissable 进行匹配
      *
@@ -3776,7 +3328,6 @@ declare class S {
      * @return {S} 节点选择器
      */
     dismissable(value: any): S;
-
     /**
      * 按照属性 multiLine 进行匹配
      *
@@ -3784,10 +3335,8 @@ declare class S {
      * @return {S} 节点选择器
      */
     multiLine(value: any): S;
-
     toJSONString(): string;
 }
-
 declare namespace S {
     /**
      * 获取节点选择器集合的对象
@@ -3795,12 +3344,9 @@ declare namespace S {
      */
     function get(): S;
 }
-
 declare function NotificationInfo(javaNotification: any): void;
-
 declare class NotificationInfo {
     constructor(javaNotification: any);
-
     seqId: any;
     pkg: any;
     text: any;
@@ -3814,88 +3360,59 @@ declare class NotificationInfo {
     key: any;
     tickerText: any;
 }
-
 declare function ToastInfo(javaToast: any): void;
-
 declare class ToastInfo {
     constructor(javaToast: any);
-
     pkg: any;
     text: any;
     time: any;
 }
-
 declare function Point(javaPoint: any): void;
-
 declare class Point {
     constructor(javaPoint: any);
-
     x: any;
     y: any;
-
     setX(x: any): this;
-
     setY(y: any): this;
-
     toJSONString(): string;
 }
-
 declare namespace Point {
     function get(): Point;
-
     function jsonToObject(res: any): Point;
 }
-
 declare function Rect(javaRect: any): void;
-
 declare class Rect {
     constructor(javaRect: any);
-
     top: any;
     bottom: any;
     left: any;
     right: any;
     similarity: any;
-
     /**
      * 取得中间的坐标点
      * @return Point 对象
      */
     center(): Point;
-
     setLeft(left: any): this;
-
     setTop(top: any): this;
-
     setRight(right: any): this;
-
     setBottom(bottom: any): this;
-
     toJSONString(): string;
 }
-
 declare namespace Rect {
     function jsonToObject(res: any): Rect;
-
     function get(): Rect;
 }
-
 declare function Match(javaMatch: any): void;
-
 declare class Match {
     constructor(javaMatch: any);
-
     point: Point;
     similarity: any;
-
     toJSONString(): string;
 }
-
 declare function NodeInfo(javaNodeInfo: any): void;
-
 declare class NodeInfo {
     constructor(javaNodeInfo: any);
-
     bounds: Rect;
     visibleBounds: Rect;
     childCount: any;
@@ -3929,44 +3446,37 @@ declare class NodeInfo {
     columnSpan: any;
     rowCount: any;
     columnCount: any;
-
     /**
      * 该节点的父级节点
      * @return NodeInfo 对象 或者null
      */
     parent(): NodeInfo;
-
     /**
      * 取得单个子节点
      * @param index 子节点索引
      * @return NodeInfo 对象 或者null
      */
     child(index: any): NodeInfo;
-
     /**
      * 取得所有子节点
      * @return NodeInfo 节点集合
      */
     allChildren(): any[];
-
     /**
      * 当前节点的所有兄弟节点
      * @return NodeInfo 节点集合
      */
     siblings(): any[];
-
     /**
      * 在当前节点前面的兄弟节点
      * @return NodeInfo 节点集合
      */
     previousSiblings(): NodeInfo[];
-
     /**
      * 点击中心点
      * @return 布尔型 true 成功
      */
     clickCenter(): any;
-
     /**
      * 通过选择器 获取第一个节点信息
      * @param selectors 选择器
@@ -3974,7 +3484,6 @@ declare class NodeInfo {
      * @return {@link NodeInfo} 对象或者null
      */
     getOneNodeInfo(selectors: any, timeout: any): any;
-
     /**
      * 通过选择器 获取节点信息
      * @param selectors 选择器
@@ -3982,191 +3491,172 @@ declare class NodeInfo {
      * @return {Array} NodeInfo 数组
      */
     getNodeInfo(selectors: any, timeout: any): any[];
-
     /**
      * 在当前节点后面的兄弟节点
      * @return NodeInfo 节点集合
      */
     nextSiblings(): any[];
-
     /**
      * 点击节点
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     click(): any;
-
     /**
      * 无指针点击节点
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     clickEx(): any;
-
+    /**
+     * 聚焦
+     * @return {*}
+     */
+    setFocus(): any;
     /**
      * 无指针长点击节点
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     longClickEx(): any;
-
     /**
      * 向前滚动
      * @return 布尔型 true 代表成功 false 代表失败
      */
     scrollForward(): any;
-
     /**
      * 向后滚动
      * @return 布尔型 true 代表成功 false 代表失败
      */
     scrollBackward(): any;
-
     /**
      * 向下滚动
      * @return 布尔型 true 代表成功 false 代表失败
      */
     scrollDown(): any;
-
     /**
      * 向上滚动
      * @return 布尔型 true 代表成功 false 代表失败
      */
     scrollUp(): any;
-
     /**
      * 向左滚动
      * @return 布尔型 true 代表成功 false 代表失败
      */
     scrollLeft(): any;
-
     /**
      * 向右滚动
      * @return 布尔型 true 代表成功 false 代表失败
      */
     scrollRight(): any;
-
     /**
      * 对某个节点粘贴数据
      * @param content 要输入的内容
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     pasteText(content: any): any;
-
     /**
      * 长点击节点
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     longClick(): any;
-
     /**
      * 对某个节点输入数据
      * @param content 要输入的内容
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     inputText(content: any): any;
-
     /**
      * 使用输入法对某个节点输入数据，前提是已经设置本程序的输入法为默认输入法
      * @param content 要输入的内容
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     imeInputText(content: any): any;
-
     /**
      * 使用输入法对某个节点输入数据，前提是已经设置本程序的输入法为默认输入法
      * @param content 具体请看 KeyEvent.KEYCODE_*的值，例如66 = enter 67=del,84=SEARCH
      * @return boolean|布尔型 true 成功 ,false 失败
      */
     imeInputKeyCode(content: any): any;
-
     /**
      * 清除节点文本数据
      *  @return boolean 布尔型| true代表成功
      */
-    clearText(): any;
-
+    clearText(): boolean;
     /**
      * 该方法会刷新节点缓存
      */
     refresh(): void;
-
     /**
      * 节点信息是否有效
      */
-    isValid(): any;
-
+    isValid(): boolean;
     toJSONString(): string;
 }
-
 declare function AutoImage(uuid: any): void;
-
 declare class AutoImage {
     constructor(uuid: any);
-
-    uuid: any;
+    uuid: string;
+    mat: boolean;
+    toString(): string;
 }
-
 /**
  * 点击文本
  * @param text 文本
  * @return boolean|布尔型
  */
 declare function clickText(text: any): any;
-
 /**
  * 随机点击选择器的任意元素
  * @param selectors 选择器对象
  * @return boolean|布尔型
  */
 declare function clickRandom(selectors: any): any;
-
 /**
  * 随机点击选择器的任意元素(无指针模式)
  * @param selectors 选择器对象
  * @return boolean|布尔型
  */
 declare function clickRandomEx(selectors: any): any;
-
 /**
  * 随机点击区域中的坐标
  * @param rect 区域对象
  * @return boolean|布尔型
  */
 declare function clickRandomRect(rect: any): any;
-
 /**
  * 随机长点击区域中的坐标
  * @param rect 区域对象
  * @return boolean|布尔型
  */
 declare function longClickRandomRect(rect: any): any;
-
 /**
  * 点击选择器
  * @param selectors 选择器对象
  * @return boolean|布尔型
  */
 declare function click(selectors: any): any;
-
 /**
  * 无指针模式点击选择器
  * @param selectors 选择器对象
  * @return boolean|布尔型
  */
 declare function clickEx(selectors: any): any;
-
+/**
+ * 设置节点聚焦
+ * @param selectors 选择器对象
+ * @return boolean|布尔型
+ */
+declare function setFocus(selectors: any): any;
 /**
  * 无指针模式长按选择器
  * @param selectors 选择器对象
  * @return boolean|布尔型
  */
 declare function longClickEx(selectors: any): any;
-
 /**
  * 点击某个区域中心坐标点
  * @param rect 区域
  * @return  布尔型 true 成功，false 失败
  */
 declare function clickCenter(rect: any): any;
-
 /**
  * 点击坐标
  * @param x x坐标
@@ -4174,7 +3664,6 @@ declare function clickCenter(rect: any): any;
  * @return boolean|布尔型
  */
 declare function clickPoint(x: any, y: any): any;
-
 /**
  * 双击坐标
  * @param x x坐标
@@ -4182,14 +3671,12 @@ declare function clickPoint(x: any, y: any): any;
  * @return boolean|布尔型
  */
 declare function doubleClickPoint(x: any, y: any): any;
-
 /**
  * 长点击选择器
  * @param selectors 选择器对象
  * @return boolean|布尔型
  */
 declare function longClick(selectors: any): any;
-
 /**
  * 长点击坐标
  * @param x x坐标
@@ -4197,14 +3684,12 @@ declare function longClick(selectors: any): any;
  * @return boolean|布尔型
  */
 declare function longClickPoint(x: any, y: any): any;
-
 /**
  * 获取选择器得到的文本数据
  * @param selectors 选择器
  * @return 字符串集合
  */
 declare function getText(selectors: any): any;
-
 /**
  * 获取节点属性信息
  * @param selectors 选择器
@@ -4212,24 +3697,20 @@ declare function getText(selectors: any): any;
  * @return null|字符串数组|Rect对象数组
  */
 declare function getNodeAttrs(selectors: any, attr: any): any[];
-
 /**
  * 锁定当前节点，锁定后，后面就算界面刷新，但是节点还是老的信息，需要和releaseNode进行配合才能进行解锁
  */
 declare function lockNode(): void;
-
 /**
  * 释放节点的锁，释放后，当界面刷新的时候，节点信息会变成最新的
  */
 declare function releaseNode(): void;
-
 /**
  * 设置各种手势模式事件的操作类型，默认是异步,目前只对无障碍模式有效
  * @param mode 1 代表异步，2代表同步
- * @param bool true代表成功 false代表失败
+ * @return {boolean} true代表成功 false代表失败
  */
-declare function setGestureActionMode(mode: any): any;
-
+declare function setGestureActionMode(mode: any): boolean;
 /**
  * 获取节点信息
  * @param selectors 选择器
@@ -4237,52 +3718,44 @@ declare function setGestureActionMode(mode: any): any;
  * @return {Array} NodeInfo 数组 节点信息集合
  */
 declare function getNodeInfo(selectors: any, timeout: any): any[];
-
 /**
  * 通过Selector 判断元素是否存在
  * @param selectors 选择器
- * @return bool|布尔型
+ * @return {boolean}|布尔型
  */
-declare function has(selectors: any): any;
-
+declare function has(selectors: any): boolean;
 /**
  * 通过Selector 判断并等待元素是否存
  * @param selectors 选择器
  * @param timeout 超时时间，单位毫秒
- * @return bool|布尔型
+ * @return {boolean}|布尔型
  */
-declare function waitExistNode(selectors: any, timeout: any): any;
-
+declare function waitExistNode(selectors: any, timeout: any): boolean;
 /**
  *  等待activity界面出现
  * @param activity 界面名称
  * @param timeout 超时时间，单位毫秒
- * @return bool|布尔型
+ * @return {boolean}|布尔型
  */
-declare function waitExistActivity(activity: any, timeout: any): any;
-
+declare function waitExistActivity(activity: any, timeout: any): boolean;
 /**
  * 将元素节点变成XML
  * @return string string|null
  */
 declare function dumpXml(): string;
-
 /**
  *  将通知发射处理，相当于点击了通知栏
  * @param seqId
- * @return bool|布尔型
+ * @return {boolean}|布尔型
  */
-declare function shotNotification(seqId: any): any;
-
+declare function shotNotification(seqId: any): boolean;
 /**
  * 将通知进行取消操作
  * @param seqId
- * @return bool|布尔型
+ * @return {boolean}|布尔型
  */
-declare function cancelNotification(seqId: any): any;
-
+declare function cancelNotification(seqId: any): boolean;
 declare function ignoreNotification(seqId: any): any;
-
 /**
  * 获取toast数据
  *  @param pkg 指定包名
@@ -4290,7 +3763,6 @@ declare function ignoreNotification(seqId: any): any;
  * @return null|ToastInfo数组
  */
 declare function getLastToast(pkg: any, size: any): ToastInfo[];
-
 /**
  * 获取最近通知栏对象
  * @param pkg 指定包名
@@ -4298,7 +3770,6 @@ declare function getLastToast(pkg: any, size: any): ToastInfo[];
  * @return NotificationInfo数组|null
  */
 declare function getLastNotification(pkg: any, size: any): NotificationInfo[];
-
 /**
  * 请求监听状态栏的权限
  * <Br/>
@@ -4308,7 +3779,6 @@ declare function getLastNotification(pkg: any, size: any): NotificationInfo[];
  * @return true 代表请求权限成功，false代表失败
  */
 declare function requestNotificationPermission(timeout: any): any;
-
 /**
  * 检查是否含有状态栏监听权限
  * <Br/>
@@ -4318,20 +3788,17 @@ declare function requestNotificationPermission(timeout: any): any;
  * @return true 有权限,false 代表无权限
  */
 declare function hasNotificationPermission(): any;
-
 /**
  * 取得当前运行的Activity类名
  * @return {string}
  */
 declare function getRunningActivity(): string;
-
 /**
  * 这个获取的不准，请使用  getCurrentRunningPkg 函数
  * 取得当前运行的App包名
  * @return string
  */
 declare function getRunningPkg(): string;
-
 /**
  *
  * 取得当前运行的App包名
@@ -4340,63 +3807,53 @@ declare function getRunningPkg(): string;
  * @return string
  */
 declare function getCurrentRunningPkg(): string;
-
 /**
  *
- *  @return bool 布尔型| true代表成功
+ *  @return {boolean} 布尔型| true代表成功
  */
-declare function home(): any;
-
+declare function home(): boolean;
 /**
  * 返回桌面2
  * 适配EC 安卓 9.16.0+
  * @return {boolean} true 代表成功
  */
 declare function home2(): boolean;
-
 /**
  * 分割屏幕
- * @return bool 布尔型| true代表成功
+ * @return {boolean} 布尔型| true代表成功
  */
-declare function splitScreen(): any;
-
+declare function splitScreen(): boolean;
 /**
  * 模拟电源键
  * @return 布尔型 true 成功 false 失败
  */
 declare function power(): any;
-
 /**
  * 打开快速设置
  * @return 布尔型 true 成功, else 失败
  */
 declare function openQuickSettings(): any;
-
 /**
  * 打开通知栏
  *
  * @return 布尔型 true 成功, else 失败
  */
 declare function openNotification(): any;
-
 /**
  * 返回按键
  * @return boolean|布尔型
  */
 declare function back(): any;
-
 /**
  * 最近APP任务按键
  * @return boolean|布尔型
  */
 declare function recentApps(): any;
-
 /**
  * 当前是否是我们的输入法
  * @return boolean|布尔型
  */
 declare function currentIsOurIme(): any;
-
 /**
  * 通过Selector输入数据
  * @param selectors  选择器
@@ -4404,7 +3861,6 @@ declare function currentIsOurIme(): any;
  * @return boolean|布尔型
  */
 declare function inputText(selectors: any, content: any): any;
-
 /**
  * 通过选择器粘贴数据
  * @param selectors  选择器
@@ -4412,7 +3868,6 @@ declare function inputText(selectors: any, content: any): any;
  * @return boolean|布尔型
  */
 declare function pasteText(selectors: any, content: any): any;
-
 /**
  * 使用输入法输入内容，前提是已经设置本程序的输入法为默认输入法
  * 适合没有节点的情况，例如游戏等
@@ -4421,16 +3876,14 @@ declare function pasteText(selectors: any, content: any): any;
  * 特殊代码： 1000: 模拟搜索按键，1001: 模拟完成按键 1002:模拟go按键，1003:模拟下一个按键，1004:模拟上一个按键 1005:模拟发送按键
  * @return {boolean|布尔型}
  */
-declare function imeInputText(selectors: any, content: any): boolean | 布尔型;
-
+declare function imeInputText(selectors: any, content: any): boolean;
 /**
  * 使用输入法输入内容时，输入法键盘视图是否展示出来
  * 前提：在EC 系统设置中，勾选了 显示输入法键盘
  * 适配EC 9.18.0+
  * @return {boolean|布尔型} true代表视图展示 false代表未展示
  */
-declare function imeInputViewShown(): boolean | 布尔型;
-
+declare function imeInputViewShown(): boolean ;
 /**
  * 使用输入法输入内容，前提是已经设置本程序的输入法为默认输入法
  * @param selectors  选择器
@@ -4438,14 +3891,12 @@ declare function imeInputViewShown(): boolean | 布尔型;
  * @return boolean|布尔型
  */
 declare function imeInputKeyCode(selectors: any, content: any): any;
-
 /**
  * 清除文本数据
  * @param selectors 节点选择器
  *  @return boolean 布尔型| true代表成功
  */
 declare function clearTextField(selectors: any): any;
-
 /**
  * 通过选择器滑动节点
  * @param selectors 节点选择器
@@ -4455,7 +3906,6 @@ declare function clearTextField(selectors: any): any;
  * @return 布尔型 true 代表成功 false 代表失败
  */
 declare function swipe(selectors: any, endX: any, endY: any, duration: any): any;
-
 /**
  * 从一个坐标滑动到另一个坐标
  * @param startX 起始坐标的X轴值
@@ -4466,7 +3916,6 @@ declare function swipe(selectors: any, endX: any, endY: any, duration: any): any
  * @return 布尔型 true 滑动成功, false 滑动失败
  */
 declare function swipeToPoint(startX: any, startY: any, endX: any, endY: any, duration: any): any;
-
 /**
  * 通过选择器从下向上滑动
  * @param selectors 节点选择器
@@ -4475,7 +3924,6 @@ declare function swipeToPoint(startX: any, startY: any, endX: any, endY: any, du
  * @return 布尔型 true 滑动成功，false 滑动失败
  */
 declare function swipeFromDownToUp(selectors: any, distance: any, duration: any): any;
-
 /**
  * 通过选择器从上向下滑动
  * @param selectors 节点选择器
@@ -4484,7 +3932,6 @@ declare function swipeFromDownToUp(selectors: any, distance: any, duration: any)
  * @return 布尔型 true 滑动成功，false 滑动失败
  */
 declare function swipeFromUpToDown(selectors: any, distance: any, duration: any): any;
-
 /**
  * 通过选择器从右向左滑动
  * @param selectors 节点选择器
@@ -4493,7 +3940,6 @@ declare function swipeFromUpToDown(selectors: any, distance: any, duration: any)
  * @return 布尔型 true 滑动成功，false 滑动失败
  */
 declare function swipeFromRightToLeft(selectors: any, distance: any, duration: any): any;
-
 /**
  * 通过选择器从左向右滑动
  * @param selectors 节点选择器
@@ -4502,7 +3948,6 @@ declare function swipeFromRightToLeft(selectors: any, distance: any, duration: a
  * @return 布尔型 true 滑动成功，false 滑动失败
  */
 declare function swipeFromLeftToRight(selectors: any, distance: any, duration: any): any;
-
 /**
  * 向上滑动
  * @param distance 滑动距离 单位像素
@@ -4510,7 +3955,6 @@ declare function swipeFromLeftToRight(selectors: any, distance: any, duration: a
  * @return 布尔型 true 成功，false 失败
  */
 declare function swipeFromDownToUpInScreen(distance: any, duration: any): any;
-
 /**
  * 向下滑动
  * @param distance 滑动距离 单位像素
@@ -4518,7 +3962,6 @@ declare function swipeFromDownToUpInScreen(distance: any, duration: any): any;
  * @return 布尔型 true 代表成功 false 代表失败
  */
 declare function swipeFromUpToDownInScreen(distance: any, duration: any): any;
-
 /**
  * 向左滑动
  * @param distance 滑动距离 单位像素
@@ -4526,7 +3969,6 @@ declare function swipeFromUpToDownInScreen(distance: any, duration: any): any;
  * @return 布尔型 true 代表成功 false 代表失败
  */
 declare function swipeFromRightToLeftInScreen(distance: any, duration: any): any;
-
 /**
  * 向右滑动
  * @param distance 滑动距离 单位像素
@@ -4534,7 +3976,6 @@ declare function swipeFromRightToLeftInScreen(distance: any, duration: any): any
  * @return 布尔型 true 代表成功 false 代表失败
  */
 declare function swipeFromLeftToRightInScreen(distance: any, duration: any): any;
-
 /**
  * 是否滚动到底部了，如果查不到元素也会返回false
  * @param distance 滚动方向 UP,DOWN,LEFT,RIGHT
@@ -4542,7 +3983,6 @@ declare function swipeFromLeftToRightInScreen(distance: any, duration: any): any
  * @return false 代表未滚动到位，true 代表滚动完成了
  */
 declare function isScrollEnd(distance: any, selectors: any): any;
-
 /**
  * <p>执行从一个坐标到另一个坐标的拖动</p>
  * </p>
@@ -4554,7 +3994,6 @@ declare function isScrollEnd(distance: any, selectors: any): any;
  * @return 布尔型 true 拖动成功, false 拖动失败
  */
 declare function drag(startX: any, startY: any, endX: any, endY: any, duration: any): any;
-
 /**
  * 通过选择器拖动某个元素到目标元素
  * @param selectors 选择器 {@link S}
@@ -4563,7 +4002,6 @@ declare function drag(startX: any, startY: any, endX: any, endY: any, duration: 
  * @return 布尔型 true 成功 false 失败
  */
 declare function dragTo(selectors: any, destObj: any, duration: any): any;
-
 /**
  * 通过选择器拖动某个元素到目标X Y 坐标
  * @param selectors 原始元素选择器
@@ -4573,7 +4011,6 @@ declare function dragTo(selectors: any, destObj: any, duration: any): any;
  * @return 布尔型 true 成功 false 失败
  */
 declare function dragToPoint(selectors: any, endX: any, endY: any, duration: any): any;
-
 /**
  * 请求展示浮窗的权限
  * <Br/>
@@ -4584,7 +4021,6 @@ declare function dragToPoint(selectors: any, endX: any, endY: any, duration: any
  * @return true 代表请求权限成功，false代表失败
  */
 declare function requestFloatViewPermission(timeout: any): any;
-
 /**
  * 展示浮窗
  * @param params js的map对象，包含的
@@ -4602,34 +4038,29 @@ declare function requestFloatViewPermission(timeout: any): any;
  * @return true 代表请求权限成功，false代表失败
  */
 declare function showFloatView(params: any): any;
-
 /**
  * 折叠日志悬浮窗，只保留标题
  * 适配EC 9.32.0+
  * @return true 成功，false代表失败
  */
 declare function collapseLogView(): any;
-
 /**
  * 关闭浮窗
  * @param tag showFloatView 使用的tag参数，对悬浮窗唯一定位的
  * @return true 成功，false代表失败
  */
 declare function closeFloatView(tag: any): any;
-
 /**
  * 展开日志悬浮窗
  * 适配EC 9.32.0+
  * @return true 成功，false代表失败
  */
 declare function expandLogView(): any;
-
 /**
  * 关闭所有悬浮窗，但不包含日志悬浮窗
  * @return true 成功，false代表失败
  */
 declare function closeAllFloatView(): any;
-
 /**
  * 设置日志窗口大小
  * <Br/>
@@ -4642,7 +4073,6 @@ declare function closeAllFloatView(): any;
  * @param backgroundColor 背景颜色，例如#336699
  */
 declare function setLogViewSize(w: any, h: any, textSize: any, backgroundColor: any): void;
-
 /**
  * 设置日志窗口大小扩展函数
  * <Br/>
@@ -4670,10 +4100,9 @@ declare function setLogViewSize(w: any, h: any, textSize: any, backgroundColor: 
  *      title:日志框标题
  *      showTitle：是否显示标题
  *      backgroundImg 背景图片，放到工程的res文件夹，录入填写res/a.png
- * @return bool true代表成功，false代表失败
+ * @return {boolean} true代表成功，false代表失败
  */
-declare function setLogViewSizeEx(map: any): any;
-
+declare function setLogViewSizeEx(map: any): boolean;
 /**
  * 设置日志固定栏目属性
  * 适合EC 6.17.0+
@@ -4689,12 +4118,10 @@ declare function setLogViewSizeEx(map: any): any;
  *      h:高度
  *      textSize:日志的字体大小
  *      backgroundColor:背景颜色，例如#336699
- * @return bool true代表成功，false代表失败
+ * @return {boolean} true代表成功，false代表失败
  */
-declare function setLogFixedViewEx(map: any): any;
-
+declare function setLogFixedViewEx(map: any): boolean;
 declare function setFixedViewText(msg: any): any;
-
 /**
  * 设置启停控制悬浮窗窗口位置扩展函数
  * <Br/>
@@ -4711,10 +4138,9 @@ declare function setFixedViewText(msg: any): any;
  *      x: 起始X位置
  *      y: 起始Y位置
  *      backgroundColor:背景颜色，例如#336699
- * @return bool true代表成功，false代表失败
+ * @return {boolean} true代表成功，false代表失败
  */
-declare function setCtrlViewSizeEx(map: any): any;
-
+declare function setCtrlViewSizeEx(map: any): boolean;
 /**
  * 检查是否含有浮窗权限
  * <Br/>
@@ -4724,7 +4150,6 @@ declare function setCtrlViewSizeEx(map: any): any;
  * @return true 有权限,false 代表无权限
  */
 declare function hasFloatViewPermission(): any;
-
 /**
  * 展示日志浮窗
  * <Br/>
@@ -4733,31 +4158,26 @@ declare function hasFloatViewPermission(): any;
  * 兼容版本: Android 4.4 以上
  */
 declare function showLogWindow(): any;
-
 /**
  * 显示脚本暂停控制悬浮窗
  * 适配EC 10.0.0+
  */
 declare function showScriptCtrlFloatView(): void;
-
 /**
  * 关闭脚本暂停控制悬浮窗
  * 适配EC 10.0.0+
  */
 declare function closeScriptCtrlFloatView(): void;
-
 /**
  * 展示启停浮窗
  * 兼容版本: Android 4.4 以上
  */
 declare function showCtrlWindow(): any;
-
 /**
  * 关闭启停浮窗
  * 兼容版本: Android 4.4 以上
  */
 declare function closeCtrlWindow(): any;
-
 /**
  * 关闭日志浮窗
  * <Br/>
@@ -4766,7 +4186,6 @@ declare function closeCtrlWindow(): any;
  * 兼容版本: Android 4.4 以上
  */
 declare function closeLogWindow(): any;
-
 /**
  * 展示消息到悬浮窗日志中，颜色是白色的
  * @param msg 消息
@@ -4775,7 +4194,6 @@ declare function closeLogWindow(): any;
  * @return {*}
  */
 declare function setLogText(msg: any, color: any, size: any): any;
-
 /**
  * 通过选择器 获取第一个节点信息
  * @param selectors 选择器
@@ -4783,14 +4201,12 @@ declare function setLogText(msg: any, color: any, size: any): any;
  * @return {NodeInfo} 对象或者null
  */
 declare function getOneNodeInfo(selectors: any, timeout: any): NodeInfo;
-
 /**
  * 取得父级
  * @param nodeinfo NodeInfo对象
  * @return { NodeInfo} {NodeInfo 对象|null}
  */
 declare function getNodeInfoParent(nodeinfo: any): NodeInfo;
-
 /**
  * 取得单个子节点
  * @param nodeinfo NodeInfo对象
@@ -4798,51 +4214,44 @@ declare function getNodeInfoParent(nodeinfo: any): NodeInfo;
  * @return {NodeInfo} {NodeInfo 对象|null}
  */
 declare function getNodeInfoChild(nodeinfo: any, index: any): NodeInfo;
-
 /**
  * 取得所有子节点
  * @param nodeinfo NodeInfo对象
  * @return {Array} NodeInfo 数组
  */
 declare function getNodeInfoAllChildren(nodeinfo: any): any[];
-
 /**
  * 当前节点的所有兄弟节点
  * @param nodeinfo NodeInfo对象
  * @return {Array} NodeInfo 数组
  */
 declare function getSiblingNodeInfo(nodeinfo: any): any[];
-
 /**
  * 在当前节点前面的兄弟节点
  * @param nodeinfo NodeInfo对象
  * @return NodeInfo 节点集合
  */
 declare function getPreviousSiblingNodeInfo(nodeinfo: any): NodeInfo[];
-
 /**
  * 在当前节点后面的兄弟节点
  * @param nodeinfo NodeInfo对象
  * @return {Array} NodeInfo 数组
  */
 declare function getNextSiblingNodeInfo(nodeinfo: any): any[];
-
 /**
  * 对某个节点输入数据
  * @param nodeinfo NodeInfo对象
  * @param content 数据字符串
  * @return {boolean|布尔型}
  */
-declare function inputTextNodeInfo(nodeinfo: any, content: any): boolean | 布尔型;
-
+declare function inputTextNodeInfo(nodeinfo: any, content: any): boolean ;
 /**
  * 对某个节点粘贴数据
  * @param nodeinfo NodeInfo对象
  * @param content 数据字符串
  * @return {boolean|布尔型}
  */
-declare function pasteTextNodeInfo(nodeinfo: any, content: any): boolean | 布尔型;
-
+declare function pasteTextNodeInfo(nodeinfo: any, content: any): boolean ;
 /**
  * 使用输入法对某个节点输入数据，前提是已经设置本程序的输入法为默认输入法
  * @param nodeinfo NodeInfo对象
@@ -4850,7 +4259,6 @@ declare function pasteTextNodeInfo(nodeinfo: any, content: any): boolean | 布�
  * @return boolean|布尔型
  */
 declare function imeInputTextNodeInfo(nodeinfo: any, content: any): any;
-
 /**
  * 使用输入法对某个节点输入数据，前提是已经设置本程序的输入法为默认输入法
  * @param nodeinfo NodeInfo对象
@@ -4858,27 +4266,23 @@ declare function imeInputTextNodeInfo(nodeinfo: any, content: any): any;
  * @return boolean|布尔型
  */
 declare function imeInputKeyCodeNodeInfo(nodeinfo: any, content: any): any;
-
 /**
  * 清除节点文本数据
  *  @param nodeinfo NodeInfo对象
- *   @return bool 布尔型| true代表成功
+ *   @return {boolean} 布尔型| true代表成功
  */
-declare function clearTextFieldNodeInfo(nodeinfo: any): any;
-
+declare function clearTextFieldNodeInfo(nodeinfo: any): boolean;
 /**
  *  刷新节点缓存
  *  @param nodeinfo NodeInfo对象
  */
 declare function refreshNodeInfo(nodeinfo: any): void;
-
 /**
  *  节点信息是否有效
  *  @param nodeinfo NodeInfo对象
- *  @return bool|布尔型 true代表有
+ *  @return {boolean}|布尔型 true代表有
  */
-declare function isValidNodeInfo(nodeinfo: any): any;
-
+declare function isValidNodeInfo(nodeinfo: any): boolean;
 /**
  * 设置获取节点的模式
  * @param mode 1 是增强型， 2 是快速型，默认是增强型
@@ -4888,7 +4292,6 @@ declare function isValidNodeInfo(nodeinfo: any): any;
  * @return boolean|布尔型
  */
 declare function setFetchNodeMode(mode: any, fetchInvisibleNode: any, fetchNotImportantNode: any, algorithm: any): any;
-
 /**
  * 设置nsf抓节点参数
  * 适配EC 10.9.0+
@@ -4899,7 +4302,6 @@ declare function setFetchNodeMode(mode: any, fetchInvisibleNode: any, fetchNotIm
  * @return boolean|布尔型
  */
 declare function setNodeDumpParam(data: any): any;
-
 /**
  * 设置要屏蔽的节点属性
  * 设置后，系统不会抓取这些节点数据属性
@@ -4909,109 +4311,91 @@ declare function setNodeDumpParam(data: any): any;
  * @return {boolean|*}
  */
 declare function setBlockNodeAttr(blockNodeAttr: any): boolean | any;
-
 /**
  * 加上节点获取的某个标志位
  * @param flag 参见 AccessibilityServiceInfo.FLAG_*，如果是0是强制刷新
  * @return {null|boolean}
  */
 declare function addNodeFlag(flag: any): null | boolean;
-
 /**
  * 移除节点获取的某个标志位
  * @param flag 参见 AccessibilityServiceInfo.FLAG_*，如果是0是强制刷新
  */
 declare function removeNodeFlag(flag: any): void;
-
 /**
  * 转换成node inf的数组
  * @param d
  * @return NodeInfo {NodeInfo 数组 | null}
  */
 declare function nodeInfoArray(d: any): NodeInfo[];
-
 /**
  * 多点触摸集合
  * @constructor
  */
 declare function MultiPoint(): void;
-
 declare class MultiPoint {
     mps: any[];
     m: {};
-
     create(): void;
-
     /**
      * 创建一个多点触摸下一个对象
      *
      * @return MultiPoint 选择器对象
      */
     next(): this;
-
     /**
      * 动作，可以参考android的MotionEvent.ACTION_*
      * @param value 一般情况下 按下为0，弹起为1，移动为2
      * @return MultiPoint
      */
     action(value: any): this;
-
     /**
      * 按下动作
      * @return MultiPoint
      */
     downAction(): this;
-
     /**
      * 弹起动作
      * @return MultiPoint
      */
     upAction(): this;
-
     /**
      * 移动动作
      * @return MultiPoint
      */
     moveAction(): this;
-
     /**
      * 设置X坐标
      * @param value X坐标
      * @return MultiPoint
      */
     x(value: any): this;
-
     /**
      * 设置X坐标
      * @param value X坐标
      * @return MultiPoint
      */
     y(value: any): this;
-
     /**
      * 设置第几个手指触摸点，分别是 1，2，3等，代表第n个手机
      * @param value 整型
      * @return MultiPoint
      */
     pointer(value: any): this;
-
     /**
      * 该动作延迟多少毫秒执行
      * @param value 延迟时间，单位是毫秒
      * @return MultiPoint
      */
     delay(value: any): this;
-
     /**
      * meta / modifier 键的状态，一般设置为0
      * @param value
      * @return MultiPoint
      */
     metaState(value: any): this;
-
     toJSON(): any[];
 }
-
 declare namespace MultiPoint {
     /**
      * 多点触摸对象
@@ -5019,7 +4403,6 @@ declare namespace MultiPoint {
      */
     function get(): MultiPoint;
 }
-
 /**
  * 按照属性 id 进行匹配
  *
@@ -5027,7 +4410,6 @@ declare namespace MultiPoint {
  * @return {S} 节点选择器
  */
 declare function id(value: any): S;
-
 /**
  * 按照属性 id 进行匹配, 支持正则
  *
@@ -5035,7 +4417,6 @@ declare function id(value: any): S;
  * @return {S} 节点选择器
  */
 declare function idMatch(value: any): S;
-
 /**
  * 按照属性 clz 进行匹配
  *
@@ -5043,7 +4424,6 @@ declare function idMatch(value: any): S;
  * @return {S} 节点选择器
  */
 declare function clz(value: any): S;
-
 /**
  * 按照属性 clz 进行匹配, 支持正则
  *
@@ -5051,7 +4431,6 @@ declare function clz(value: any): S;
  * @return {S} 节点选择器
  */
 declare function clzMatch(value: any): S;
-
 /**
  * 按照属性 pkg 进行匹配
  *
@@ -5059,7 +4438,6 @@ declare function clzMatch(value: any): S;
  * @return {S} 节点选择器
  */
 declare function pkg(value: any): S;
-
 /**
  * 按照属性 pkg 进行匹配, 支持正则
  *
@@ -5067,7 +4445,6 @@ declare function pkg(value: any): S;
  * @return {S} 节点选择器
  */
 declare function pkgMatch(value: any): S;
-
 /**
  * 按照属性 desc 进行匹配
  *
@@ -5075,7 +4452,6 @@ declare function pkgMatch(value: any): S;
  * @return {S} 节点选择器
  */
 declare function desc(value: any): S;
-
 /**
  * 按照属性 desc 进行匹配, 支持正则
  *
@@ -5083,7 +4459,6 @@ declare function desc(value: any): S;
  * @return {S} 节点选择器
  */
 declare function descMatch(value: any): S;
-
 /**
  * 按照属性 text 进行匹配
  *
@@ -5091,19 +4466,20 @@ declare function descMatch(value: any): S;
  * @return {S} 节点选择器
  */
 declare function text(value: any): S;
-
+/**
+ * xpath选择器，xpath技术请看 :https://www.jianshu.com/p/c205334122b3 和 https://www.runoob.com/xpath/xpath-syntax.html
+ * xpath使用请到idea的节点面板查看xpath属性以及测试xpath功能
+ * 适配EC 10.12.0+
+ * @param value 例如 //node[@text='易点云测'] 代表选取文本等于易点云测的节点
+ * @return {S} 节点选择器
+ */
+declare function xpath(value: any): S;
 declare function row(value: any): S;
-
 declare function column(value: any): S;
-
 declare function rowSpan(value: any): S;
-
 declare function columnSpan(value: any): S;
-
 declare function rowCount(value: any): S;
-
 declare function columnCount(value: any): S;
-
 /**
  * 按照属性 bounds 进行范围
  *
@@ -5114,7 +4490,6 @@ declare function columnCount(value: any): S;
  * @return {S} 节点选择器
  */
 declare function bounds(left: any, top: any, right: any, bottom: any): S;
-
 /**
  * 按照属性 text 进行匹配, 支持正则
  *
@@ -5122,7 +4497,6 @@ declare function bounds(left: any, top: any, right: any, bottom: any): S;
  * @return {S} 节点选择器
  */
 declare function textMatch(value: any): S;
-
 /**
  * 按照属性 visible 进行匹配
  *
@@ -5130,7 +4504,6 @@ declare function textMatch(value: any): S;
  * @return {S} 节点选择器
  */
 declare function visible(value: any): S;
-
 /**
  * 按照属性 depth 进行匹配
  *
@@ -5138,7 +4511,6 @@ declare function visible(value: any): S;
  * @return {S} 节点选择器
  */
 declare function depth(value: any): S;
-
 /**
  * 按照属性 checked 进行匹配
  *
@@ -5146,7 +4518,6 @@ declare function depth(value: any): S;
  * @return {S} 节点选择器
  */
 declare function checked(value: any): S;
-
 /**
  * 按照属性 drawingOrder 进行匹配
  *
@@ -5154,7 +4525,6 @@ declare function checked(value: any): S;
  * @return {S} 节点选择器
  */
 declare function drawingOrder(value: any): S;
-
 /**
  * 按照属性 checkable 进行匹配
  *
@@ -5162,7 +4532,6 @@ declare function drawingOrder(value: any): S;
  * @return {S} 节点选择器
  */
 declare function checkable(value: any): S;
-
 /**
  * 按照属性 childCount 进行匹配
  *
@@ -5170,7 +4539,6 @@ declare function checkable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function childCount(value: any): S;
-
 /**
  * 按照属性 clickable 进行匹配
  *
@@ -5178,7 +4546,6 @@ declare function childCount(value: any): S;
  * @return {S} 节点选择器
  */
 declare function clickable(value: any): S;
-
 /**
  * 按照属性 dismissable 进行匹配
  *
@@ -5186,7 +4553,6 @@ declare function clickable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function dismissable(value: any): S;
-
 /**
  * 按照属性 editable 进行匹配
  *
@@ -5194,7 +4560,6 @@ declare function dismissable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function editable(value: any): S;
-
 /**
  * 按照属性 enabled 进行匹配
  *
@@ -5202,7 +4567,6 @@ declare function editable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function enabled(value: any): S;
-
 /**
  * 按照属性 focusable 进行匹配
  *
@@ -5210,7 +4574,6 @@ declare function enabled(value: any): S;
  * @return {S} 节点选择器
  */
 declare function focusable(value: any): S;
-
 /**
  * 按照属性 focused 进行匹配
  *
@@ -5218,7 +4581,6 @@ declare function focusable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function focused(value: any): S;
-
 /**
  * 按照属性 index 进行匹配
  *
@@ -5226,7 +4588,6 @@ declare function focused(value: any): S;
  * @return {S} 节点选择器
  */
 declare function index(value: any): S;
-
 /**
  * 按照属性 longClickable 进行匹配
  *
@@ -5234,7 +4595,6 @@ declare function index(value: any): S;
  * @return {S} 节点选择器
  */
 declare function longClickable(value: any): S;
-
 /**
  * 按照属性 multiLine 进行匹配
  *
@@ -5242,7 +4602,6 @@ declare function longClickable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function multiLine(value: any): S;
-
 /**
  * 按照属性 password 进行匹配
  *
@@ -5250,7 +4609,6 @@ declare function multiLine(value: any): S;
  * @return {S} 节点选择器
  */
 declare function password(value: any): S;
-
 /**
  * 按照属性 scrollable 进行匹配
  *
@@ -5258,7 +4616,6 @@ declare function password(value: any): S;
  * @return {S} 节点选择器
  */
 declare function scrollable(value: any): S;
-
 /**
  * 按照属性 selected 进行匹配
  *
@@ -5266,7 +4623,6 @@ declare function scrollable(value: any): S;
  * @return {S} 节点选择器
  */
 declare function selected(value: any): S;
-
 /**
  * 多点触摸<br/>
  * 触摸参数: action :一般情况下 按下为0，弹起为1，移动为2<br/>
@@ -5283,7 +4639,6 @@ declare function selected(value: any): S;
  * @return boolean|布尔型
  */
 declare function multiTouch(touch1: any, touch2: any, touch3: any, timeout: any): any;
-
 /**
  * 取得某个范围的随机值
  * @param min 最小值
@@ -5291,7 +4646,6 @@ declare function multiTouch(touch1: any, touch2: any, touch3: any, timeout: any)
  * @return 整型 在min和max中间的值, 包含最大和最小值
  */
 declare function random(min: any, max: any): any;
-
 /**
  * 开启一个定时脚本任务
  * @param tag 任务的唯一标示，不能为空，脚本中可以使用readConfigString("jobTaskTag")获取当前tag值，判断是那个任务过来执行的
@@ -5300,98 +4654,79 @@ declare function random(min: any, max: any): any;
  * @return 整型 jobid
  */
 declare function startJob(tag: any, execTime: any, cancelBeforeRunning: any): any;
-
 /**
  * 取消所有定时任务
- * @return bool true 代表有任务被取消
+ * @return {boolean} true 代表有任务被取消
  */
-declare function cancelAllJob(): any;
-
+declare function cancelAllJob(): boolean;
 /**
  * 通过tag对定时任务进行取消
  * @param tag tag名称
- * @return bool true 代表有任务被取消
+ * @return {boolean} true 代表有任务被取消
  */
-declare function cancelJob(tag: any): any;
-
+declare function cancelJob(tag: any): boolean;
 /**
  * 取得所有的定时任务标签
  * @return 字符串数组或者null
  */
 declare function getAllJobTag(): any;
-
 /**
  * 向前滚动
  * @param selectors 选择器对象
  * @return {boolean} true 成功，false 失败
  */
 declare function scrollForward(selectors: any): boolean;
-
 /**
  * 向后滚动
  * @param selectors 选择器对象
  * @return {boolean} true 成功，false 失败
  */
 declare function scrollBackward(selectors: any): boolean;
-
 /**
  * 向左滚动
  * @param selectors 选择器对象
  * @return {boolean} true 成功，false 失败
  */
 declare function scrollLeft(selectors: any): boolean;
-
 /**
  * 向右滚动
  * @param selectors 选择器对象
  * @return {boolean} true 成功，false 失败
  */
 declare function scrollRight(selectors: any): boolean;
-
 /**
  * 向上滚动
  * @param selectors 选择器对象
  * @return {boolean} true 成功，false 失败
  */
 declare function scrollUp(selectors: any): boolean;
-
 /**
  * 向下滚动
  * @param selectors 选择器对象
  * @return {boolean} true 成功，false 失败
  */
 declare function scrollDown(selectors: any): boolean;
-
 declare function clickExNodeInfo(nodeinfo: any): any;
-
+declare function setFocusNodeInfo(nodeinfo: any): any;
 declare function longClickExNodeInfo(nodeinfo: any): any;
-
 declare function scrollForwardNodeInfo(nodeinfo: any): any;
-
 declare function scrollBackwardNodeInfo(nodeinfo: any): any;
-
 declare function scrollLeftNodeInfo(nodeinfo: any): any;
-
 declare function scrollRightNodeInfo(nodeinfo: any): any;
-
 declare function scrollUpNodeInfo(nodeinfo: any): any;
-
 declare function scrollDownNodeInfo(nodeinfo: any): any;
-
 /**
  * 读取res文件夹中的资源文件，并返 AutoImage 图片对象
  * @param fileName 文件名称，不要加res前缀
  * @return AutoImage 如果是null代表没内容
  */
 declare function readResAutoImage(fileName: any): false | AutoImage;
-
 /**
  * 获取最近的节点事件处罚的时间，可通过时间判断节点服务是否可用
  *
- * @return {long} 长整型时间，毫秒级别
+ * @return {number} 长整型时间，毫秒级别
  */
-declare function lastNodeEventTime(): long;
-
+declare function lastNodeEventTime(): number;
 /**
  * 长按住事件
  * @param x x坐标
@@ -5400,7 +4735,6 @@ declare function lastNodeEventTime(): long;
  * @return {boolean} true 成功 false 失败
  */
 declare function press(x: any, y: any, delay: any): boolean;
-
 /**
  * 执行按下事件
  * 适合EC 7.4.0+
@@ -5409,7 +4743,6 @@ declare function press(x: any, y: any, delay: any): boolean;
  * @return 布尔型 true 代表成功 false代表失败
  */
 declare function touchDown(x: any, y: any): any;
-
 /**
  * 执行移动事件
  * 适合EC 7.4.0+
@@ -5418,7 +4751,6 @@ declare function touchDown(x: any, y: any): any;
  * @return 布尔型 true 代表成功 false代表失败
  */
 declare function touchMove(x: any, y: any): any;
-
 /**
  * 执行弹起事件
  * 适合EC 7.4.0+
@@ -5427,9 +4759,7 @@ declare function touchMove(x: any, y: any): any;
  * @return 布尔型 true 代表成功 false代表失败
  */
 declare function touchUp(x: any, y: any): any;
-
 declare function HidEventWrapper(): void;
-
 declare class HidEventWrapper {
     /**
      * [网络模式]设置HID主控地址
@@ -5438,21 +4768,18 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     setHidCenter(hidCenterUrl: any): string;
-
     /**
      * [网络模式]初始化HID设备
      * 适配版本 EC 安卓 9.15.0+
      * @return {string} null 代表成功，其他代表错误消息
      */
     initUsbDevice(): string;
-
     /**
      * [USB模式]初始化HID设备
      * 适配版本 EC 安卓 10.6.0+
      * @return {string} null 代表成功，其他代表错误消息
      */
     initUsbDeviceByUsb(): string;
-
     /**
      * @deprecated
      * 函数已废弃
@@ -5462,21 +4789,18 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     checkFirstPoint(): string;
-
     /**
      * [网络模式]关闭HID设备
      * 适配版本 EC 安卓 9.15.0+
      * @return {string} null 代表成功，其他代表错误消息
      */
     closeUsbDevice(): string;
-
     /**
      * [USB模式]关闭HID设备
      * 适配版本 EC 安卓 10.6.0+
      * @return {string} null 代表成功，其他代表错误消息
      */
     closeUsbDeviceByUsb(): string;
-
     /**
      * [网络模式]点击坐标
      * 适配版本 EC 安卓 9.15.0+
@@ -5485,7 +4809,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     clickPoint(x: any, y: any): string;
-
     /**
      * [USB模式]点击坐标
      * 适配版本 EC 安卓 10.6.0+
@@ -5494,7 +4817,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     clickPointByUsb(x: any, y: any): string;
-
     /**
      * [网络模式]双击坐标
      * 适配版本 EC 安卓 9.15.0+
@@ -5503,7 +4825,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     doubleClickPoint(x: any, y: any): string;
-
     /**
      * [USB模式]双击坐标
      * 适配版本 EC 安卓 10.6.0+
@@ -5512,7 +4833,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     doubleClickPointByUsb(x: any, y: any): string;
-
     /**
      * [网络模式]长按坐标
      * 适配版本 EC 安卓 9.15.0+
@@ -5522,7 +4842,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     press(x: any, y: any, delay: any): string;
-
     /**
      * [USB模式]长按坐标
      * 适配版本 EC 安卓 10.6.0+
@@ -5532,7 +4851,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     pressByUsb(x: any, y: any, delay: any): string;
-
     /**
      * [网络模式]滑动
      * 适配版本 EC 安卓 9.36.0+
@@ -5544,7 +4862,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     swipe(x: any, y: any, ex: any, ey: any, delay: any): string;
-
     /**
      * [USB模式]滑动
      * 适配版本 EC 安卓 10.6.0+
@@ -5556,7 +4873,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     swipeByUsb(x: any, y: any, ex: any, ey: any, delay: any): string;
-
     /**
      * [网络模式]多点触摸
      * 适配版本 EC 安卓 9.15.0+
@@ -5570,7 +4886,6 @@ declare class HidEventWrapper {
      * @return boolean|布尔型
      */
     multiTouch(touch1: any, timeout: any): any;
-
     /**
      * [USB模式]多点触摸
      * 适配版本 EC 安卓 10.6.0+
@@ -5584,7 +4899,6 @@ declare class HidEventWrapper {
      * @return boolean|布尔型
      */
     multiTouchByUsb(touch1: any, timeout: any): any;
-
     /**
      * @deprecated
      * 函数已废弃
@@ -5595,7 +4909,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     mouseMove(x: any, y: any): string;
-
     /**
      * [网络模式]按下
      * 适配版本 EC 安卓 9.19.0+
@@ -5604,7 +4917,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     touchDown(x: any, y: any): string;
-
     /**
      * [USB模式]按下
      * 适配版本 EC 安卓 10.6.0+
@@ -5613,7 +4925,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     touchDownByUsb(x: any, y: any): string;
-
     /**
      * [网络模式]移动
      * 适配版本 EC 安卓 9.19.0+
@@ -5622,7 +4933,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     touchMove(x: any, y: any): string;
-
     /**
      * [USB模式]移动
      * 适配版本 EC 安卓 10.6.0+
@@ -5631,7 +4941,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     touchMoveByUsb(x: any, y: any): string;
-
     /**
      * [网络模式]弹起
      * 适配版本 EC 安卓 9.19.0+
@@ -5640,7 +4949,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     touchUp(x: any, y: any): string;
-
     /**
      * [USB模式]弹起
      * 适配版本 EC 安卓 10.6.0+
@@ -5649,7 +4957,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     touchUpByUsb(x: any, y: any): string;
-
     /**
      * @deprecated
      * 函数已废弃
@@ -5660,7 +4967,6 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     setting(mouseStep: any, mouseSleep: any): string;
-
     /**
      * [USB模式]重置USB数据流
      * 如果长时间写不进去数据或者失败，尝试重新重置数据流
@@ -5668,12 +4974,75 @@ declare class HidEventWrapper {
      * @return {string} null 代表成功，其他代表错误消息
      */
     resetIOByUsb(): string;
+    /**
+     * [网络模式]home键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    home(): string;
+    /**
+     * [网络模式] 返回 键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    back(): string;
+    /**
+     * [网络模式] 打开通知栏 键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    openNotification(): string;
+    /**
+     * [网络模式] 最近历史任务 键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    recentApps(): string;
+    /**
+     * [网络模式] hid键盘输入
+     * 适配版本 EC 安卓 10.21.0+
+     * @param modifiers number 辅助键 306:Left Ctrl,304:Left Shift,308:Left Alt,305:Right Ctrl,303:Right Shift,307:Right Alt,309:left Windows key,310:Right Windows key
+     * @param code number 实际键， 详细请参考 https://max.book118.com/html/2018/0108/147954370.shtm 或者 https://wenku.csdn.net/answer/f525e3adc4034414899a2d53fe143c3e
+     * 或者百度搜索 搜索 关键字 hid键盘键码值
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    sendKey(modifiers: any, code: any): string;
+    /**
+     * [USB模式]home键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    homeByUsb(): string;
+    /**
+     * [USB模式] 返回 键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    backByUsb(): string;
+    /**
+     * [USB模式] 打开通知栏 键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    openNotificationByUsb(): string;
+    /**
+     * [USB模式] 最近历史任务 键
+     * 适配版本 EC 安卓 10.21.0+
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    recentAppsByUsb(): string;
+    /**
+     * [USB模式] hid键盘输入
+     * 适配版本 EC 安卓 10.21.0+
+     * @param modifiers number 辅助键 306:Left Ctrl,304:Left Shift,308:Left Alt,305:Right Ctrl,303:Right Shift,307:Right Alt,309:left Windows key,310:Right Windows key
+     * @param code number 实际键， 详细请参考 https://max.book118.com/html/2018/0108/147954370.shtm 或者 https://wenku.csdn.net/answer/f525e3adc4034414899a2d53fe143c3e
+     * 或者百度搜索 搜索 关键字 hid键盘键码值
+     * @return {string} null 代表成功，其他代表错误消息
+     */
+    sendKeyByUsb(modifiers: any, code: any): string;
 }
-
 declare let hidEvent: HidEventWrapper;
-
 declare function HttpWrapper(): void;
-
 declare class HttpWrapper {
     /**
      * 下载远程文件到本地,支持断点续传
@@ -5689,7 +5058,6 @@ declare class HttpWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     downloadFile(remoteUrl: any, file: any, timeout: any, headers: any): any;
-
     /**
      * 下载远程文件到本地，支持断点续传，默认超时时间为30秒
      * <Br/>
@@ -5703,7 +5071,6 @@ declare class HttpWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     downloadFileDefault(remoteUrl: any, file: any, headers: any): any;
-
     /**
      * Http GET 请求
      * <Br/>
@@ -5717,7 +5084,6 @@ declare class HttpWrapper {
      * @return 字符串 请求后返回的字符串
      */
     httpGetDefault(url: any, timeout: any, headers: any): string;
-
     /**
      * Http GET 请求
      * <Br/>
@@ -5732,7 +5098,6 @@ declare class HttpWrapper {
      * @return 字符串 请求后返回的字符串
      */
     httpGet(url: any, params: any, timeout: any, headers: any): string;
-
     /**
      * Http POST 请求
      * <Br/>
@@ -5748,7 +5113,6 @@ declare class HttpWrapper {
      * @return 字符串 请求后返回的字符串
      */
     httpPost(url: any, params: any, files: any, timeout: any, headers: any): string;
-
     /**
      * Http POST 请求扩展，底层使用okhttp实现
      * 运行环境: 无限制
@@ -5762,7 +5126,6 @@ declare class HttpWrapper {
      * @return 字符串 请求后返回的字符串
      */
     httpPostEx(url: any, params: any, files: any, timeout: any, headers: any): string;
-
     /**
      * HTTP POST JSON数据
      * <Br/>
@@ -5777,7 +5140,6 @@ declare class HttpWrapper {
      * @return 字符串 请求后返回的字符串
      */
     postJSON(url: any, json: any, timeout: any, headers: any): string;
-
     /**
      * HTTP 请求
      * <Br/>
@@ -5809,9 +5171,7 @@ declare class HttpWrapper {
      * @return Response 对象或者null
      */
     request(param: any): Response;
-
     requestEx(param: any): Response;
-
     /**
      * 创建一个websocket
      * @param url 要连接的地址
@@ -5821,216 +5181,196 @@ declare class HttpWrapper {
      */
     newWebsocket(url: any, header: any, type: any): any;
 }
-
-declare function Response(data: any): void;
-
-declare class Response {
-    constructor(data: any);
-
-    cookie: any;
-    header: any;
-    charset: any;
-    statusMessage: any;
-    contentType: any;
-    statusCode: any;
-    body: any;
-}
-
-declare function WebSocket(ws: any): void;
-
-declare class WebSocket {
-    constructor(ws: any);
-
-    websocketClient: any;
-
-    /**
-     * 发送心跳函数
-     * 这里调用一次即可，内部已经实现了按照设定的周期时间发送
-     * @param heartDataBinCallback 心跳的二进制数据，一定要返回byte[]数组
-     * @param heartDataStrCallback 心跳的文本数据，直接返回字符串
-     * @param period               心跳周期 时间是毫秒
-     * @param cancelOld            是否取消老的，true 或者false
-     */
-    startHeartBeat(heartDataBinCallback: any, heartDataStrCallback: any, period: any, cancelOld: any): void;
-
-    /**
-     * 停止心跳函数
-     */
-    stopHeartBeat(): void;
-
-    /**
-     * 开始异步连接
-     * @param timeout 链接超时时间
-     * @return {boolean} true 代表成功 false代表失败
-     */
-    connect(timeout: any): boolean;
-
-    /**
-     * EC 6.17.0+ [已过期]
-     * 重置连接
-     * @return {boolean} true 代表成功 false代表失败
-     */
-    reset(): boolean;
-
-    /**
-     * EC 6.17.0+ [已过期]
-     * 开始同步重新链接
-     * @return {boolean} true 代表链接成功 false代表失败
-     */
-    reconnectBlocking(): boolean;
-
-    /**
-     * EC 6.17.0+ [已过期]
-     * 开始同步链接
-     * @param timeout 链接超时时间 单位是毫秒
-     * @return {boolean} true 代表链接成功 false代表失败
-     */
-    connectBlocking(timeout: any): boolean;
-
-    /**
-     * 是否已经关闭
-     * @return true 代表已经关闭，false 未关闭
-     */
-    isClosed(): any;
-
-    /**
-     * 是否已经连接了
-     * @return true 代表已经连接，false 未连接
-     */
-    isConnected(): any;
-
-    /**
-     * 关闭链接
-     */
-    close(): void;
-
-    /**
-     * 适用EC 6.17.0+
-     * 设置自动重连
-     * @param v true 代表自动重连
-     */
-    setAutoReconnect(v: any): void;
-
-    /**
-     * 适用EC 6.17.0+
-     * 在创建websocket链接类型=2的时候使用
-     * 设置丢失链接超时时间
-     * @param timeout 单位是秒
-     */
-    setConnectionLostTimeout(timeout: any): void;
-
-    /**
-     * 适用EC 6.17.0+
-     * 在创建websocket链接类型=1的时候使用
-     * 设置数据读取超时时间
-     * @param timeout 单位是秒
-     */
-    setReadTimeout(timeout: any): void;
-
-    /**
-     * 适用EC 6.17.0+
-     * 在创建websocket链接类型=1的时候使用
-     * 设置数据写入超时时间
-     * @param timeout 单位是秒
-     */
-    setWriteTimeout(timeout: any): void;
-
-    /**
-     * 适用EC 6.17.0+
-     * 在创建websocket链接类型=1的时候使用
-     * 设置心跳超时时间
-     * @param timeout 单位是秒
-     */
-    setPingInterval(timeout: any): void;
-
-    /**
-     * 适用EC 6.17.0+
-     * 在创建websocket链接类型=1的时候使用
-     * 设置调用超时时间
-     * @param timeout 单位是秒
-     */
-    setCallTimeout(timeout: any): void;
-
-    /**
-     * 发送文本消息
-     * @param text 文本信息
-     * @return true 代表成功，false 失败
-     */
-    sendText(text: any): any;
-
-    /**
-     * 发送字节信息
-     * @param bin
-     * @return true 代表成功，false 失败
-     */
-    sendBinary(bin: any): any;
-
-    /**
-     * 当连接打开的时候事件回调
-     * @param callback 回调函数
-     */
-    onOpen(callback: any): void;
-
-    /**
-     * 当有文本信息发送过来的时候回调
-     * @param callback 回调函数
-     */
-    onText(callback: any): void;
-
-    /**
-     * 当关闭的时候回调
-     * @param callback 回调函数
-     */
-    onClose(callback: any): void;
-
-    /**
-     * 当发生错误的时候回调
-     * @param callback 回调函数
-     */
-    onError(callback: any): void;
-
-    /**
-     * 当有二进制数据过来的时候回调
-     * @param callback 回调函数
-     */
-    onBinary(callback: any): void;
-}
-
+// declare function Response(data: any): void;
+// declare class Response {
+//     constructor(data: any);
+//     cookie: any;
+//     header: any;
+//     charset: any;
+//     statusMessage: any;
+//     contentType: any;
+//     statusCode: any;
+//     body: any;
+// }
+// declare function WebSocket(ws: any): void;
+// declare class WebSocket {
+//     constructor(ws: any);
+//     websocketClient: any;
+//     /**
+//      * 发送心跳函数
+//      * 这里调用一次即可，内部已经实现了按照设定的周期时间发送
+//      * @param heartDataBinCallback 心跳的二进制数据，一定要返回byte[]数组
+//      * @param heartDataStrCallback 心跳的文本数据，直接返回字符串
+//      * @param period               心跳周期 时间是毫秒
+//      * @param cancelOld            是否取消老的，true 或者false
+//      */
+//     startHeartBeat(heartDataBinCallback: any, heartDataStrCallback: any, period: any, cancelOld: any): void;
+//     /**
+//      * 停止心跳函数
+//      */
+//     stopHeartBeat(): void;
+//     /**
+//      * 开始异步连接
+//      * @param timeout 链接超时时间
+//      * @return {boolean} true 代表成功 false代表失败
+//      */
+//     connect(timeout: any): boolean;
+//     /**
+//      * EC 6.17.0+ [已过期]
+//      * 重置连接
+//      * @return {boolean} true 代表成功 false代表失败
+//      */
+//     reset(): boolean;
+//     /**
+//      * EC 6.17.0+ [已过期]
+//      * 开始同步重新链接
+//      * @return {boolean} true 代表链接成功 false代表失败
+//      */
+//     reconnectBlocking(): boolean;
+//     /**
+//      * EC 6.17.0+ [已过期]
+//      * 开始同步链接
+//      * @param timeout 链接超时时间 单位是毫秒
+//      * @return {boolean} true 代表链接成功 false代表失败
+//      */
+//     connectBlocking(timeout: any): boolean;
+//     /**
+//      * 是否已经关闭
+//      * @return true 代表已经关闭，false 未关闭
+//      */
+//     isClosed(): any;
+//     /**
+//      * 是否已经连接了
+//      * @return true 代表已经连接，false 未连接
+//      */
+//     isConnected(): any;
+//     /**
+//      * 关闭链接
+//      */
+//     close(): void;
+//     /**
+//      * 适用EC 6.17.0+
+//      * 设置自动重连
+//      * @param v true 代表自动重连
+//      */
+//     setAutoReconnect(v: any): void;
+//     /**
+//      * 适用EC 6.17.0+
+//      * 在创建websocket链接类型=2的时候使用
+//      * 设置丢失链接超时时间
+//      * @param timeout 单位是秒
+//      */
+//     setConnectionLostTimeout(timeout: any): void;
+//     /**
+//      * 适用EC 6.17.0+
+//      * 在创建websocket链接类型=1的时候使用
+//      * 设置数据读取超时时间
+//      * @param timeout 单位是秒
+//      */
+//     setReadTimeout(timeout: any): void;
+//     /**
+//      * 适用EC 6.17.0+
+//      * 在创建websocket链接类型=1的时候使用
+//      * 设置数据写入超时时间
+//      * @param timeout 单位是秒
+//      */
+//     setWriteTimeout(timeout: any): void;
+//     /**
+//      * 适用EC 6.17.0+
+//      * 在创建websocket链接类型=1的时候使用
+//      * 设置心跳超时时间
+//      * @param timeout 单位是秒
+//      */
+//     setPingInterval(timeout: any): void;
+//     /**
+//      * 适用EC 6.17.0+
+//      * 在创建websocket链接类型=1的时候使用
+//      * 设置调用超时时间
+//      * @param timeout 单位是秒
+//      */
+//     setCallTimeout(timeout: any): void;
+//     /**
+//      * 发送文本消息
+//      * @param text 文本信息
+//      * @return true 代表成功，false 失败
+//      */
+//     sendText(text: any): any;
+//     /**
+//      * 发送字节信息
+//      * @param bin
+//      * @return true 代表成功，false 失败
+//      */
+//     sendBinary(bin: any): any;
+//     /**
+//      * 当连接打开的时候事件回调
+//      * @param callback 回调函数
+//      */
+//     onOpen(callback: any): void;
+//     /**
+//      * 当有文本信息发送过来的时候回调
+//      * @param callback 回调函数
+//      */
+//     onText(callback: any): void;
+//     /**
+//      * 当关闭的时候回调
+//      * @param callback 回调函数
+//      */
+//     onClose(callback: any): void;
+//     /**
+//      * 当发生错误的时候回调
+//      * @param callback 回调函数
+//      */
+//     onError(callback: any): void;
+//     /**
+//      * 当有二进制数据过来的时候回调
+//      * @param callback 回调函数
+//      */
+//     onBinary(callback: any): void;
+// }
 declare var http: HttpWrapper;
-
 declare function PointIndex(javaPoint: any): void;
-
 declare class PointIndex {
     constructor(javaPoint: any);
-
     x: any;
     y: any;
     index: any;
-
     setX(x: any): this;
-
     setY(y: any): this;
-
     setIndex(index: any): this;
-
     toJSONString(): string;
 }
-
 declare namespace PointIndex {
     function get(): PointIndex;
-
     function jsonToObject(res: any): Point;
 }
-
 declare function ImageWrapper(): void;
-
 declare class ImageWrapper {
     /**
      * 设置图色模块初始化参数，可用于多分辨率兼容
      * @param param
+     * auto_click_request_dialog: true 自动点击截图权限对话框
+     * auto_detect_orientation: true 自动检测方向 false 不检测方向
      */
     setInitParam(param: any): void;
-
+    /**
+     * 切换图片存储模式为opencv的mat格式
+     * 这个函数调用会初始化OPENCV，所以打包的时候组件要包含opencv组件(找图组件)
+     * 适合 EC  10.18.0+
+     * 切换后抓图、读取图片、找图、找色等都会切换到mat格式，速度更快内存更少
+     * 如果让图片格式切换请参考 imageToMatFormat和matToImageFormat两个函数
+     * @param use 1 是 0 否
+     * @return {boolean|*}  true 成功 false 失败
+     */
+    useOpencvMat(use: any): boolean | any;
+    /**
+     * 截屏时候如果转换mat失败，可以是这个函数试试，一般用不上
+     * 这个函数调用会初始化OPENCV，所以打包的时候组件要包含opencv组件
+     * 先转为bitmap再转为mat
+     * 适合 EC  10.18.0+
+     * @param use 1 是 0 否
+     * @return {boolean|*}  true 成功 false 失败
+     */
+    setConvertMatWithBitmap(use: any): boolean | any;
     /**
      * 设置找色找图的算法模式
      * 适合EC 9.10.0+
@@ -6038,14 +5378,26 @@ declare class ImageWrapper {
      * @return {boolean|*}
      */
     setFindColorImageMode(type: any): boolean | any;
-
+    /**
+     * 转换Mat存储格式
+     * 适合 EC  10.18.0+
+     * @param img {AutoImage} 图片对象
+     * @return MAT存储格式的AutoImage 对象或者null
+     */
+    imageToMatFormat(img: AutoImage): AutoImage;
+    /**
+     * 转换普通image存储格式
+     * 适合 EC  10.18.0+
+     * @param img {AutoImage} 图片对象
+     * @return 普通存储格式的AutoImage 对象或者null
+     */
+    matToImageFormat(img: AutoImage): AutoImage;
     /**
      * 初始化OPENCV 类库
      * 如果使用找图请先调用这个函数，第一次初始化需要复制类库，时间可能较长，以后再次执行就很快
      *  @return 布尔型 true 代表成功 false代表失败
      */
     initOpenCV(): any;
-
     /**
      * 向系统申请屏幕截图权限，返回是否请求成功。
      * <p>
@@ -6068,7 +5420,6 @@ declare class ImageWrapper {
      * @return 布尔型 true 代表成功 false代表失败
      */
     requestScreenCapture(timeout: any, type: any): any;
-
     /**
      * 释放截屏请求
      * <Br/>
@@ -6077,7 +5428,6 @@ declare class ImageWrapper {
      * 兼容版本: Android 5.0 以上
      */
     releaseScreenCapture(): void;
-
     /**
      * 截取当前屏幕并返回一个Image对象。
      * 运行环境: 无限制
@@ -6093,7 +5443,6 @@ declare class ImageWrapper {
      * @return AutoImage AutoImage对象或者null
      */
     captureScreen(retryNumber: any, x: any, y: any, ex: any, ey: any): AutoImage;
-
     /**
      * 将屏幕抓取为Bitmap对象，如果中间有-1或者宽度、宽度为-1，将会是全屏
      * @param format jpg或者png，代理模式下有用
@@ -6105,27 +5454,23 @@ declare class ImageWrapper {
      * @return Bitmap null或者bitmap对象
      */
     captureScreenBitmap(format: any, x: any, y: any, ex: any, ey: any, q: any): any;
-
     /**
      * 将屏幕抓取为Bitmap对象，在代理模式下和captureScreenBitmap实现不一样，速度比captureScreenBitmap快
      * 适合版本 EC 8.3.+
      * @return Bitmap null或者bitmap对象
      */
     captureScreenBitmapEx(): any;
-
     /**
      * 抓取全屏
      * @return {null|AutoImage}
      */
     captureFullScreen(): null | AutoImage;
-
     /**
      * 抓取全屏函数，代理模式下并且requestScreenCapture函数的type为0的时候，会使用截屏函数，尽力消除色差问题。
      * 其他的和captureFullScreen一致
      * @return {null|AutoImage}
      */
     captureFullScreenEx(): null | AutoImage;
-
     /**
      * 截取当前屏幕并以PNG格式保存到path中。如果文件不存在会被创建；文件存在会被覆盖。
      * <Br/>
@@ -6143,7 +5488,6 @@ declare class ImageWrapper {
      * @return 布尔型 true 截图成功 false 代表不成功
      */
     captureToFile(retryNumber: any, x: any, y: any, ex: any, ey: any, path: any): any;
-
     /**
      * 读取在路径path的图片文件并返回一个{@link AutoImage}对象。
      * 如果文件不存在或者文件无法解码则返回null。
@@ -6157,7 +5501,6 @@ declare class ImageWrapper {
      * @return AutoImage AutoImage对象或者null
      */
     readImage(path: any): AutoImage;
-
     /**
      * 读取在路径path的图片文件并返回一个{@link AutoImage}对象。
      * 如果文件不存在或者文件无法解码则返回null。
@@ -6167,7 +5510,6 @@ declare class ImageWrapper {
      * @return AutoImage AutoImage对象或者null
      */
     readImageNotAgent(path: any): AutoImage;
-
     /**
      * 将安卓原生的Bitmap对象转换为AutoImage
      * 适合版本: EC 9.41.0+
@@ -6175,8 +5517,7 @@ declare class ImageWrapper {
      * @param bitmap {Bitmap}对象
      * @return {AutoImage} 对象
      */
-    bitmapToImageNotAgent(bitmap: Bitmap): AutoImage;
-
+    bitmapToImageNotAgent(bitmap: any): AutoImage;
     /**
      * 将res文件夹的文件转换为AutoImage
      * 适合版本: EC 9.41.0+
@@ -6185,7 +5526,6 @@ declare class ImageWrapper {
      * @return {AutoImage} 对象
      */
     readResAutoImageNotAgent(res: string): AutoImage;
-
     /**
      * 读取在路径path的图片文件并返回一个{@link Bitmap}对象。如果文件不存在或者文件无法解码则返回null。
      * <Br/>
@@ -6197,7 +5537,6 @@ declare class ImageWrapper {
      * @return Bitmap android的bitmap对象或者null
      */
     readBitmap(path: any): any;
-
     /**
      * 返回图片image在点(x, y)处的像素的ARGB值。
      * <p>
@@ -6211,7 +5550,6 @@ declare class ImageWrapper {
      * @return 整型
      */
     pixelInImage(image1: any, x: any, y: any): any;
-
     /**
      * 找图。在大图片image中查找小图片template的位置（模块匹配），找到时返回位置坐标区域(Rect)，找不到时返回null。
      * <Br/>
@@ -6232,7 +5570,6 @@ declare class ImageWrapper {
      * @return Rect 区域坐标对象数组或者null
      */
     findImage(image1: any, template: any, x: any, y: any, ex: any, ey: any, weakThreshold: any, threshold: any, limit: any, method: any): Rect[];
-
     /**
      * 找图。在大图片image中查找小图片template的位置（模块匹配），找到时返回位置坐标区域(Rect)，找不到时返回null。
      * 找图函数缩放找图，比findImage更精准
@@ -6250,7 +5587,6 @@ declare class ImageWrapper {
      * @return Rect 区域坐标对象数组或者null
      */
     findImage2(image1: any, template: any, x: any, y: any, ex: any, ey: any, weakThreshold: any, threshold: any, limit: any, method: any): Rect[];
-
     /**
      * 找图。在当前屏幕中查找小图片template的位置（模块匹配），找到时返回位置坐标区域(Rect)，找不到时返回null。
      * <Br/>
@@ -6269,7 +5605,6 @@ declare class ImageWrapper {
      * @return Rect 区域坐标对象数组或者null
      */
     findImageEx(template: any, x: any, y: any, ex: any, ey: any, weakThreshold: any, threshold: any, limit: any, method: any): Rect[];
-
     /**
      * OpenCV模板匹配封装
      * <Br/>
@@ -6289,7 +5624,6 @@ declare class ImageWrapper {
      * @return Match集合 匹配到的集合
      */
     matchTemplate(image1: any, template: any, weakThreshold: any, threshold: any, rect: any, maxLevel: any, limit: any, method: any): Match[];
-
     /**
      * OpenCV模板匹配封装
      * 包含缩放找图功能
@@ -6306,7 +5640,6 @@ declare class ImageWrapper {
      * @return Match集合 匹配到的集合
      */
     matchTemplate2(image1: any, template: any, weakThreshold: any, threshold: any, rect: any, maxLevel: any, limit: any, method: any): Match[];
-
     /**
      * OpenCV模板匹配封装，在当前屏幕截图中进行匹配
      * <Br/>
@@ -6325,7 +5658,6 @@ declare class ImageWrapper {
      * @return Match集合 匹配到的集合
      */
     matchTemplateEx(template: any, weakThreshold: any, threshold: any, rect: any, maxLevel: any, limit: any, method: any): Match[];
-
     /**
      * 找非色
      * 在图片中找到颜色和color完全不相等的点，如果没有找到，则返回null。
@@ -6343,7 +5675,6 @@ declare class ImageWrapper {
      * @return 多个 PointIndex 坐标点数组或者null
      */
     findNotColor(image1: any, color: any, threshold: any, x: any, y: any, ex: any, ey: any, limit: any, orz: any): PointIndex[];
-
     /**
      * 在图片中找到颜色和color完全相等的点，；如果没有找到，则返回null。
      * 运行环境: 无限制
@@ -6360,7 +5691,6 @@ declare class ImageWrapper {
      * @return 多个 PointIndex 坐标点数组或者null
      */
     findColor(image1: any, color: any, threshold: any, x: any, y: any, ex: any, ey: any, limit: any, orz: any): PointIndex[];
-
     /**
      * 在图片中找到颜色和color完全相等的点，参数从JSON中获取如果没有找到，则返回null。
      * <Br/>
@@ -6373,7 +5703,6 @@ declare class ImageWrapper {
      * @return 多个 PointIndex 坐标点数组或者null
      */
     findColorJ(image1: any, jsonFileName: any): PointIndex[];
-
     /**
      * 在当前屏幕中找到颜色和color完全相等的点，如果没有找到，则返回null。
      * <Br/>
@@ -6392,7 +5721,6 @@ declare class ImageWrapper {
      * @return 多个 PointIndex 坐标点数组或者null
      */
     findColorEx(color: any, threshold: any, x: any, y: any, ex: any, ey: any, limit: any, orz: any): PointIndex[];
-
     /**
      * 在当前屏幕中找到颜色和color完全相等的点，参数从JSON中获取如果没有找到，则返回null。
      * <Br/>
@@ -6404,7 +5732,6 @@ declare class ImageWrapper {
      * @return 多个 PointIndex 坐标点数组或者null
      */
     findColorExJ(jsonFileName: any): any;
-
     /**
      * 多点找色，找到所有符合标准的点，类似于按键精灵的多点找色
      * <p>
@@ -6427,7 +5754,6 @@ declare class ImageWrapper {
      * @return 多个Point 坐标点数组或者null
      */
     findMultiColor(image1: any, firstColor: any, points: any, threshold: any, x: any, y: any, ex: any, ey: any, limit: any, orz: any): Point[];
-
     /**
      * 多点找色，找到所有符合标准的点，参数从JSON文件中读取，类似于按键精灵的多点找色
      * <p>
@@ -6442,7 +5768,6 @@ declare class ImageWrapper {
      * @return 多个Point 坐标点数组或者null
      */
     findMultiColorJ(image1: any, jsonFileName: any): any;
-
     /**
      * 多点找色，找到所有符合标准的点，自动抓取当前屏幕的图片，类似于按键精灵的多点找色
      * <p>
@@ -6464,7 +5789,6 @@ declare class ImageWrapper {
      * @return 多个Point 坐标点数组或者null
      */
     findMultiColorEx(firstColor: any, points: any, threshold: any, x: any, y: any, ex: any, ey: any, limit: any, orz: any): Point[];
-
     /**
      * 多点找色，找到所有符合标准的点，自动抓取当前屏幕的图片,参数从JSON文件中读取，类似于按键精灵的多点找色
      * 整张图片都找不到时返回null
@@ -6477,7 +5801,6 @@ declare class ImageWrapper {
      * @return 多个Point 坐标点数组或者null
      */
     findMultiColorExJ(jsonFileName: any): any;
-
     /**
      * 单点或者多点比色，找到所有符合标准的点，如果都符合返回true，否则是false
      * 运行环境: 无限制
@@ -6494,7 +5817,6 @@ declare class ImageWrapper {
      * @return 布尔型，true代表找到了 false代表未找到
      */
     cmpColor(image1: any, points: any, threshold: any, x: any, y: any, ex: any, ey: any): boolean;
-
     /**
      * 单点或者多点比色，找到所有符合标准的点，默认自己截图，如果都符合返回true，否则是false
      * 运行环境: 无限制
@@ -6510,7 +5832,6 @@ declare class ImageWrapper {
      * @return 布尔型，true代表找到了 false代表未找到
      */
     cmpColorEx(points: any, threshold: any, x: any, y: any, ex: any, ey: any): boolean;
-
     /**
      * 多点或者多点数组比色，找到所有符合标准的点，依次查找，如果找到就返回当前points的索引值，如果返回-1，说明都没有找到
      * 运行环境: 无限制
@@ -6526,7 +5847,6 @@ declare class ImageWrapper {
      * @return 整型，如果找到就返回当前points的索引值，如果返回-1，说明都没有找到
      */
     cmpMultiColor(image1: any, points: any, threshold: any, x: any, y: any, ex: any, ey: any): any;
-
     /**
      * 多点或者多点数组比色，找到所有符合标准的点，自动截屏，依次查找，如果找到就返回当前points的索引值，如果返回-1，说明都没有找到
      * 运行环境: 无限制
@@ -6541,36 +5861,31 @@ declare class ImageWrapper {
      * @return 整型，如果找到就返回当前points的索引值，如果返回-1，说明都没有找到
      */
     cmpMultiColorEx(points: any, threshold: any, x: any, y: any, ex: any, ey: any): any;
-
     /**
      * 取得宽度
      * @param img 图片对象
-     * @return int
+     * @return number
      */
     getWidth(img: any): any;
-
     /**
      * 取得高度
      * @param img 图片对象
-     * @return int
+     * @return number
      */
     getHeight(img: any): any;
-
     /**
      * 保存到文件中
      * @param img 图片对象
      * @param path 路径
-     * @return bool true代表成功，false 代表失败
+     * @return {boolean} true代表成功，false 代表失败
      */
-    saveTo(img: any, path: any): any;
-
+    saveTo(img: any, path: any): boolean;
     /**
      * 转成base64的字符串
      * @param img 图片对象
      * @return string
      */
     toBase64(img: any): string;
-
     /**
      *  转成base64的字符串, jpg格式较小，可以减少内存
      * @param img 图片对象
@@ -6579,7 +5894,6 @@ declare class ImageWrapper {
      * @return 字符串
      */
     toBase64Format(img: any, format: any, q: any): string;
-
     /**
      * 剪切图片
      * @param img 图片对象
@@ -6590,7 +5904,6 @@ declare class ImageWrapper {
      * @return AutoImage 对象或者null
      */
     clip(img: any, x: any, y: any, ex: any, ey: any): AutoImage;
-
     /**
      * 缩放图片
      * 适合EC 9.42.0+
@@ -6600,32 +5913,28 @@ declare class ImageWrapper {
      * @return AutoImage 对象或者null
      */
     scaleImage(img: any, w: any, h: any): AutoImage;
-
     /**
      * 取得图片的某个点的颜色值
      * @param img 图片对象
      * @param x x坐标点
      * @param y y坐标点
-     * @return int 颜色值
+     * @return number 颜色值
      */
     pixel(img: any, x: any, y: any): any;
-
     /**
      * 将整型的颜色值转成16进制RGB字符串
      * @param color 整型值
      * @return {string} 颜色字符串
      */
     argb(color: any): string;
-
     /**
      * 取得Bitmap图片的某个点的颜色值
      * @param bitmap 图片对象
      * @param x x坐标点
      * @param y y坐标点
-     * @return int 颜色值
+     * @return number 颜色值
      */
     getPixelBitmap(bitmap: any, x: any, y: any): any;
-
     /**
      * 取得Bitmap图片的某个区域点的颜色值，等同于 Bitmap.getPixels
      * @param bitmap 图片对象
@@ -6636,26 +5945,27 @@ declare class ImageWrapper {
      * @param y           从位图中读取的第一个像素的y坐标值
      * @param width    　　从每一行中读取的像素宽度
      * @param height 　　　读取的行数
-     * @return int 颜色值数组
+     * @return number 颜色值数组
      */
     getPixelsBitmap(bitmap: any, arraySize: any, offset: any, stride: any, x: any, y: any, width: any, height: any): any;
-
     /**
      * 是否被回收了
      * @param img 图片对象
-     * @return bool true代表已经被回收了
+     * @return {boolean} true代表已经被回收了
      */
-    isRecycled(img: any): any;
-
+    isRecycled(img: any): boolean;
     /**
      * 回收图片
      * @param img 图片对象
      * @return {*}
      */
     recycle(img: any): any;
-
+    /**
+     * 回收所有图片
+     * @return {*}
+     */
+    recycleAllImage(): any;
     toRectList(res: any): Rect[];
-
     /**
      * 对AutoImage图片进行二值化
      * @param img AutoImage图片对象
@@ -6672,7 +5982,6 @@ declare class ImageWrapper {
      * @return AutoImage 对象或者null
      */
     binaryzation(img: any, type: any, threshold: any): AutoImage;
-
     /**
      * 自适应二值化，使用了opencv的adaptiveThreshold函数实现
      * 适合版本 EC 8.3.0+
@@ -6689,7 +5998,6 @@ declare class ImageWrapper {
      * @return {null|AutoImage}
      */
     binaryzationEx(img: any, map: any): null | AutoImage;
-
     /**
      * 自适应二值化，使用了opencv的adaptiveThreshold函数实现
      * 适合版本 EC 8.3.0+
@@ -6705,7 +6013,6 @@ declare class ImageWrapper {
      * @return Bitmap 对象或者null
      **/
     binaryzationBitmapEx(bitmap: any, map: any): any;
-
     /**
      * 对安卓的 Bitmap 图片进行二值化
      * @param bitmap Bitmap 图片对象
@@ -6722,7 +6029,6 @@ declare class ImageWrapper {
      * @return Bitmap 对象或者null
      */
     binaryzationBitmap(bitmap: any, type: any, threshold: any): any;
-
     /**
      * 剪裁图片，请自行判断参数，正确性
      * @param bitmap 图片
@@ -6732,8 +6038,7 @@ declare class ImageWrapper {
      * @param h 剪裁高度
      * @return {Bitmap} 安卓的Bitmap对象
      */
-    clipBitmap(bitmap: any, x: any, y: any, w: any, h: any): Bitmap;
-
+    clipBitmap(bitmap: any, x: any, y: any, w: any, h: any): any;
     /**
      * 缩放bitmap
      * 适合EC 9.42.0+
@@ -6742,8 +6047,7 @@ declare class ImageWrapper {
      * @param h 目标高度
      * @return {Bitmap} 安卓的Bitmap对象
      */
-    scaleBitmap(bitmap: any, w: any, h: any): Bitmap;
-
+    scaleBitmap(bitmap: any, w: any, h: any): any;
     /**
      * base64字符串转为Bitmap图片
      * @param data base64 数据
@@ -6751,15 +6055,13 @@ declare class ImageWrapper {
      * 可选参数为 ：0 默认， 1 无填充模式，2 无换行模式，4 换行模式
      * @return {Bitmap} 安卓的Bitmap对象
      */
-    base64Bitmap(data: any, flag: any): Bitmap;
-
+    base64Bitmap(data: any, flag: any): any;
     /**
      * 将AutoImage转换为安卓原生的Bitmap对象
      * @param img {AutoImage}
      * @return {Bitmap} 对象
      */
-    imageToBitmap(img: AutoImage): Bitmap;
-
+    imageToBitmap(img: AutoImage): any;
     /**
      * 将安卓原生的Bitmap对象转换为AutoImage
      * 适合EC 6.15.0+版本
@@ -6767,7 +6069,6 @@ declare class ImageWrapper {
      * @return {AutoImage} 对象
      */
     bitmapToImage(bitmap: any): AutoImage;
-
     /**
      * bitmap转为base64
      * @param bitmap 图片
@@ -6776,7 +6077,6 @@ declare class ImageWrapper {
      * @return {string} base64字符串
      */
     bitmapBase64(bitmap: any, format: any, q: any): string;
-
     /**
      * 保存bitmap图像
      * @param bitmap 图片
@@ -6786,9 +6086,23 @@ declare class ImageWrapper {
      * @return {boolean} true 成功 false 失败
      */
     saveBitmap(bitmap: any, format: any, q: any, path: any): boolean;
-
+    /**
+     * 旋转Bitmap
+     * 支持EC 10.11.0+
+     * @param bitmap 安卓的bitmap对象
+     * @param degree 度数，-90代表逆时针旋转90度，home键在右，90度代表顺时针旋转90度，home键在左
+     * @return Bitmap 对象或者null
+     */
+    rotateBitmap(bitmap: any, degree: any): any;
+    /**
+     * 旋转图片
+     * 支持EC 10.11.0+
+     * @param img 图片对象
+     * @param degree 度数，-90代表逆时针旋转90度，home键在右，90度代表顺时针旋转90度，home键在左
+     * @return AutoImage 对象或者null
+     */
+    rotateImage(img: any, degree: any): AutoImage;
     readResAutoImage(res: any): false | AutoImage;
-
     /**
      * 使用系统的screencap命令截图AutoImage，适合root或者代理模式, 有root权限或者开启了代理服务
      * 适合版本 EC 6.8.0+
@@ -6796,23 +6110,17 @@ declare class ImageWrapper {
      * @return AutoImage 对象或者null
      */
     screencapImage(root: any): AutoImage;
-
     /**
      * 使用系统的screencap命令截图为bitmap，适合root或者代理模式, 有root权限或者开启了代理服务
      * 适合版本 EC 6.8.0+
      * @param root 是否优先使用root方式截图
      * @return {Bitmap} 对象
      */
-    screencapBitmap(root: any): Bitmap;
-
+    screencapBitmap(root: any): any;
     convertFirstColorArrayToString(arr: any): any;
-
     convertMultiColorArrayToString(arr: any): string;
-
     convertFirstColorArrayToString2(arr: any): string;
-
     convertMultiCmpColorArrayToString(arr: any): string | string[];
-
     /**
      * 通过颜色找图，支持透明图，这个不需要处理话opencv
      * <p>
@@ -6832,7 +6140,6 @@ declare class ImageWrapper {
      * @return 多个Point 坐标点数组或者null
      */
     findImageByColor(image1: any, template: any, x: any, y: any, ex: any, ey: any, threshold: any, limit: any): Point[];
-
     /**
      * 通过颜色找图，支持透明图，这个不需要处理话opencv
      * <p>
@@ -6857,26 +6164,19 @@ declare class ImageWrapper {
      */
     findImageByColorEx(image1: any, template: any, x: any, y: any, ex: any, ey: any, limit: any, extra: any): Point[];
 }
-
 declare function OCRWrapper(): void;
-
 declare class OCRWrapper {
     newOcr(): OcrInst;
-
     /**
      * OCR远程服务连接上，只有使用easyedge和paddleocr的时候可用
      * @return {boolean} 成功或者失败
      */
     isOcrServerOk(): boolean;
 }
-
 declare function OcrInst(s: any): void;
-
 declare class OcrInst {
     constructor(s: any);
-
     ocrUtil: any;
-
     /**
      * 初始化OCR模块
      * @param map map参数表
@@ -6899,15 +6199,15 @@ declare class OcrInst {
      *  - maxSideLen: 按图片最长边的长度，此值为0代表不缩放，例：1024，如果图片长边大于1024则把图像整体缩小到1024再进行图像分割计算，如果图片长边小于1024则不缩放，如果图片长边小于32，则缩放到32。<br/>
      * 如果类型设置为: paddleOcrOnline 请到网盘中下载**EasyClick-PaddleOcr.zip文件解压运行**<br/>
      *  - 例子{
-     *    "type": "paddleOcrOnline",
+     *  	"type": "paddleOcrOnline",
      *      "ocrType":"ONNX_PPOCR_V3",
-     *    "padding": 50,
-     *    "maxSideLen": 0,
-     *    "boxScoreThresh": 0.5,
-     *    "boxThresh": 0.3,
-     *    "unClipRatio": 1.6,
-     *    "doAngleFlag": 0,
-     *    "mostAngleFlag": 0
+     *  	"padding": 50,
+     *  	"maxSideLen": 0,
+     *  	"boxScoreThresh": 0.5,
+     *  	"boxThresh": 0.3,
+     *  	"unClipRatio": 1.6,
+     *  	"doAngleFlag": 0,
+     *  	"mostAngleFlag": 0
      *  }<br/>
      *  - ocrType : 模型 ONNX_PPOCR_V3,ONNX_PPOCR_V4,NCNN_PPOCR_V3
      *  - serverUrl：paddle ocr服务器地址，可以在其他电脑部署，然后中控链接，例如 192.168.2.8，部署在电脑就改ip地址即可，端口是 9022 可以不写
@@ -6923,21 +6223,18 @@ declare class OcrInst {
      * @return {boolean} 布尔型 成功或者失败
      */
     initOcr(map: any): boolean;
-
     /**
      * 初始化OCR远程服务，只有使用easyedge和paddleocr的时候需要调用
      * @param timeout 超时时间，毫秒
      * @return {boolean} 成功或者失败
      */
     initOcrServer(timeout: any): boolean;
-
     /**
      * 设置OCR实现方式
      * @param type 值分别为 tess = Tesseract模块，baiduOnline=百度在在线识别模块
      * @return {boolean} 成功或者失败
      */
     setOcrType(type: any): boolean;
-
     /**
      * 设置是否守护OCR服务
      * 适合版本 EC 6.9.0+
@@ -6946,19 +6243,16 @@ declare class OcrInst {
      * @return {boolean} 成功或者失败
      */
     setDaemonServer(daemon: any, delay: any): boolean;
-
     /**
      * 释放OCR占用的资源
      * @return {boolean} 成功或者失败
      */
     releaseAll(): boolean;
-
     /**
      * 获取错误消息
      * @return {string} null代表没有错误
      */
     getErrorMsg(): string;
-
     /**
      * 对Bitmap进行OCR，返回的是JSON数据，其中数据类似于与：
      *
@@ -6983,18 +6277,100 @@ declare class OcrInst {
      * @return {JSON} JSON对象
      */
     ocrBitmap(bitmap: any, timeout: any, extra: any): JSON;
-
     ocrImage(img: any, timeout: any, extra: any): any;
 }
-
+declare function Yolov8Wrapper(): void;
+declare class Yolov8Wrapper {
+    /**
+     * 初始化yolov8实例
+     * 适配EC 10.15.0+
+     * @return  Yolov8Util 实例对象
+     */
+    newYolov8(): Yolov8Util;
+}
+declare function Yolov8Util(instance: any): void;
+declare class Yolov8Util {
+    constructor(instance: any);
+    yolov8Instance: any;
+    /**
+     * 获取YOLOV8错误消息
+     * 适配EC 10.15.0+
+     * @return string 字符串
+     */
+    getErrorMsg(): any;
+    /**
+     * 获取 yolov8 默认配置
+     * 适配EC 10.15.0+
+     * @param model_name 模型名称 默认写  yolov8s-640 即可
+     * @param input_size yolov8训练时候的imgsz参数，默认写640即可
+     * @param box_thr 检测框系数，默认写0.25即可
+     * @param iou_thr 输出系数，，默认写0.35 即可
+     * @param bind_cpu 是否绑定CPU，选项为ALL,BIG,LITTLE 三个,默认写ALL
+     * @param use_vulkan_compute 是否启用硬件加速，1是，0否
+     * @param obj_names JSON数组，训练的时候分类名称例如 ["star","common","face"]
+     * @return JSON数据
+     */
+    getDefaultConfig(model_name: any, input_size: any, box_thr: any, iou_thr: any, bind_cpu: any, use_vulkan_compute: any, obj_names: any): {
+        name: string;
+        input_size: number;
+        box_thr: number;
+        iou_thr: number;
+        ver: number;
+        bind_cpu: string;
+        use_vulkan_compute: number;
+        input_name: string;
+        names: any[];
+        outputs: {
+            name: string;
+            stride: number;
+            anchors: number[];
+        }[];
+    };
+    /**
+     * 初始化yolov8模型
+     * 具体如何生成param和bin文件，请参考文件的yolo使用章节，通过yolo的pt转成ncnn的param、bin文件
+     * 适配EC 10.15.0+
+     * @param map 参数表 参考 getDefaultConfig函数获取默认的参数
+     * @param paramPath param文件路径
+     * @param binPath bin文件路径
+     * @return boolean true代表成功 false代表失败
+     */
+    initYoloModel(map: any, paramPath: any, binPath: any): any;
+    /**
+     * 检测图片
+     * 适配EC 10.15.0+
+     * 返回数据例如
+     * [{"name":"heart","confidence":0.92,"left":957,"top":986,"right":1050,"bottom":1078}]
+     * name: 代表是分类，confidence:代表可信度，left,top,right,bottom代表结果坐标选框
+     * @param bitmap 安卓的bitmap对象
+     * @param obj_names JSON数组，不写代表不过滤，写了代表只取填写的分类
+     * @return string 字符串数据
+     */
+    detectBitmap(bitmap: any, obj_names: any): any;
+    /**
+     * 检测Image
+     * 适配EC 10.16.0+
+     * 返回数据例如
+     * [{"name":"heart","confidence":0.92,"left":957,"top":986,"right":1050,"bottom":1078}]
+     * name: 代表是分类，confidence:代表可信度，left,top,right,bottom代表结果坐标选框
+     * @param img AutoImage对象
+     * @param obj_names JSON数组，不写代表不过滤，写了代表只取填写的分类
+     * @return string 字符串数据
+     */
+    detectImage(img: any, obj_names: any): any;
+    /**
+     * 释放yolov8资源
+     * 适配EC 10.15.0+
+     * @return boolean
+     */
+    release(): any;
+}
 declare var image: ImageWrapper;
 declare var ocr: OCRWrapper;
-
+declare let yolov8Api: Yolov8Wrapper;
 declare function EcNetCardWrapper(): void;
-
 declare class EcNetCardWrapper {
     version: string;
-
     /**
      * [网络验证]获取卡密信息
      * 这个可以在UI中调用，将信息显示在界面上
@@ -7006,7 +6382,6 @@ declare class EcNetCardWrapper {
      * @return {null|JSON} 返回JSON对象,{"code":0,"msg":"",}
      */
     getCardInfo(appId: any, appSecret: any, cardNo: any): null | JSON;
-
     /**
      * [网络验证]初始化卡密
      * 提卡网址 [http://uc.ieasyclick.com]
@@ -7016,13 +6391,11 @@ declare class EcNetCardWrapper {
      * @return {boolean} true 成功 false 失败
      */
     netCardInit(appId: any, appSecret: any): boolean;
-
     /**
      * 设置错误提示回调
      * @param back 回调函数
      */
     setErrorCallback(back: any): void;
-
     /**
      * [网络验证]绑定卡密
      * 提卡网址 [http://uc.ieasyclick.com]
@@ -7031,7 +6404,6 @@ declare class EcNetCardWrapper {
      * @return {null|JSON} 返回JSON对象,{"code":0,"msg":"",}
      */
     netCardBind(cardNo: any): null | JSON;
-
     /**
      * [网络验证]解绑卡密
      * 提卡网址 [http://uc.ieasyclick.com]
@@ -7041,7 +6413,6 @@ declare class EcNetCardWrapper {
      * @return {null|JSON} 返回JSON对象,{"code":0,"msg":"",}
      */
     netCardUnbind(cardNo: any, password: any): null | JSON;
-
     /**
      * [网络验证-远程变量]获取远程变量
      * 提卡网址 [http://uc.ieasyclick.com]
@@ -7050,7 +6421,6 @@ declare class EcNetCardWrapper {
      * @return {null|JSON} 返回JSON对象,{"code":0,"msg":""}
      */
     netCardGetCloudVar(key: any): null | JSON;
-
     /**
      * [网络验证-远程变量]更新远程变量
      * 提卡网址 [http://uc.ieasyclick.com]
@@ -7061,11 +6431,8 @@ declare class EcNetCardWrapper {
      */
     netCardUpdateCloudVar(key: any, value: any): null | JSON;
 }
-
 declare let ecNetCard: EcNetCardWrapper;
-
 declare function ShellWrapper(): void;
-
 declare class ShellWrapper {
     /**
      * 安装 apk
@@ -7078,7 +6445,6 @@ declare class ShellWrapper {
      * @return 布尔型 true 代表安装成功，false 代表安装失败
      */
     installApp(path: any): any;
-
     /**
      * 卸载应用程序
      * <Br/>
@@ -7090,7 +6456,6 @@ declare class ShellWrapper {
      * @return 布尔型 true 代表卸载成功，false 代表卸载失败
      */
     uninstallApp(packageName: any): any;
-
     /**
      * 停止正在执行的应用
      * <Br/>
@@ -7102,7 +6467,6 @@ declare class ShellWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     stopApp(packageName: any): any;
-
     /**
      * 执行Shell命令
      * <Br/>
@@ -7114,7 +6478,6 @@ declare class ShellWrapper {
      * @return string 命令执行后返回的字符串结果
      */
     execCommand(command: any): string;
-
     /**
      * 执行root模式下，相关的命令，需要有root权限
      * 运行环境: 无限制
@@ -7122,14 +6485,12 @@ declare class ShellWrapper {
      * @return {string|null}
      */
     sudo(command: any): string | null;
-
     /**
      * 请求授予root权限
      * 运行环境: 无限制
      * @return {boolean} true代表有root权限
      */
     su(): boolean;
-
     /**
      * 新增root命令
      * 运行环境: 无限制
@@ -7137,7 +6498,6 @@ declare class ShellWrapper {
      * @return {boolean} true
      */
     addSuBin(cmd: any): boolean;
-
     /**
      * 执行shell命令
      * <Br/>
@@ -7148,7 +6508,6 @@ declare class ShellWrapper {
      * @return 字符串 shell结果
      */
     execAgentCommand(command: any): string;
-
     /**
      * 执行shell - Shizuku命令
      * <Br/>
@@ -7159,14 +6518,12 @@ declare class ShellWrapper {
      * @return 字符串 shell结果
      */
     execShizukuCommand(command: any): string;
-
     /**
      * Shizuku服务是否正常
      * 支持EC 9.9.0
-     * @return bool true代表支持 false代表不正常
+     * @return {boolean} true代表支持 false代表不正常
      */
-    isShizukuOk(): string;
-
+    isShizukuOk(): boolean;
     /**
      * 执行shell命令，包含正常和错误结果，返回的是JSON数组，自己判断正确还是错误
      * <Br/>
@@ -7180,19 +6537,14 @@ declare class ShellWrapper {
      */
     execAgentCommandEx(command: any): any;
 }
-
 declare var shell: ShellWrapper;
-
 declare function JsSocket(): void;
-
 declare class JsSocket {
     scSocket: any;
-
     /**
      * 关闭socket
      */
     close(): void;
-
     /**
      * 链接socket到远程
      * @param hostName ip或者域名
@@ -7200,55 +6552,47 @@ declare class JsSocket {
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     connect(hostName: any, port: any): boolean;
-
     /**
      * 设置超时时间
      * @param timeout 超时时间 单位是毫秒
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     setSoTimeout(timeout: any): boolean;
-
     /**
      * 设置TCP不延迟
      * @param b true 或者false
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     setTcpNoDelay(b: any): boolean;
-
     /**
      * 地址端口复用
      * @param b true 或者false
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     setReuseAddress(b: any): boolean;
-
     /**
      * 保持链接
      * @param b true 或者false
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     setKeepAlive(b: any): boolean;
-
     /**
      * 设置接收缓冲区大小
      * @param b 大小
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     setReceiveBufferSize(b: any): boolean;
-
     /**
      * 设置发送缓冲区大小
      * @param b 大小
      * @return {boolean} 布尔型 ，true代表成功  false代表失败
      */
     setSendBufferSize(b: any): boolean;
-
     /**
      * 读取一行数据，服务端发送的数据必须是\n结尾，否则可能无法正确读取
      * @return {string} 字符串
      */
     readLine(): string;
-
     /**
      * 写入文本数据
      * @param text 文本数据
@@ -7256,40 +6600,33 @@ declare class JsSocket {
      * @return {string} 字符串
      */
     writeText(text: any, flush: any): string;
-
     /**
      * 获取Socket对象，这里socket是java的socket对象，当其他函数无法满足，可以使用Socket扩展
      * @return {socket} 对象
      */
-    getSocket(): socket;
-
+    getSocket(): any;
     /**
      * 获取InputStream对象，这里是java的 InputStream 对象
      * @return {InputStream} 对象
      */
-    getInputStream(): InputStream;
-
+    getInputStream(): any;
     /**
      * 获取 OutputStream 对象，这里是java的 OutputStream 对象
      * @return {OutputStream} 对象
      */
-    getOutputStream(): OutputStream;
-
+    getOutputStream(): any;
     /**
      * 链接是否关闭
      * @return {boolean} true代表关闭
      */
     isClosed(): boolean;
-
     /**
      * 获取错误消息
      * @return {string} 字符串 ,null代表没有问题
      */
     getErrorMsg(): string;
 }
-
 declare function SqliteApiWrapper(): void;
-
 declare class SqliteApiWrapper {
     /**
      * 创建或者链接一个数据库
@@ -7301,7 +6638,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     connectOrCreateDb(dbName: any): any;
-
     /**
      * 创建或者链接一个数据库
      * <Br/>
@@ -7313,13 +6649,11 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     connectOrCreateDbEx(dbName: any, version: any): any;
-
     /**
      * 获取上一次执行sql的错误信息
      * @return {string} null代表无错误信息
      */
     getErrorMsg(): string;
-
     /**
      * 创建数据表
      * <Br/>
@@ -7331,7 +6665,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     createTable(tableName: any, columns: any): any;
-
     /**
      * 插入数据
      * <Br/>
@@ -7343,7 +6676,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     insert(tableName: any, map: any): any;
-
     /**
      * 删除数据
      * <Br/>
@@ -7354,7 +6686,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     delete(sql: any): any;
-
     /**
      * 更新数据
      * <Br/>
@@ -7367,7 +6698,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     update(tablename: any, map: any, where: any): any;
-
     /**
      * 执行sql
      * <Br/>
@@ -7378,7 +6708,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     execSql(sql: any): any;
-
     /**
      * 删除数据库
      * <Br/>
@@ -7388,7 +6717,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     dropDatabase(): any;
-
     /**
      * 删除表
      * <Br/>
@@ -7399,7 +6727,6 @@ declare class SqliteApiWrapper {
      * @return boolean true 代表请求权限成功，false代表失败
      */
     dropTable(table: any): any;
-
     /**
      * 查询数据
      * <Br/>
@@ -7410,7 +6737,6 @@ declare class SqliteApiWrapper {
      * @return JSON | 数据集合对象
      */
     query(sql: any): any;
-
     /**
      * 关闭数据库链接，释放资源
      * <Br/>
@@ -7421,9 +6747,7 @@ declare class SqliteApiWrapper {
      */
     close(): any;
 }
-
 declare function JdbcApiWrapper(): void;
-
 declare class JdbcApiWrapper {
     /**
      * 初始化JDBC链接
@@ -7434,19 +6758,16 @@ declare class JdbcApiWrapper {
      * @return {boolean} true 代表成功 false 代表失败
      */
     init(jdbcDriver: any, dbUrl: any, user: any, password: any): boolean;
-
     /**
      * 获取最近的错误
      * @return {string} 错误字符串,null 代表没错误
      */
     getLastError(): string;
-
     /**
      * 链接数据库，该方法在init函数执行后调用
      * @return {boolean} true 代表成功 false 代表失败
      */
     connect(): boolean;
-
     /**
      * 查询数据
      * @param sql SQL语句
@@ -7454,7 +6775,6 @@ declare class JdbcApiWrapper {
      * @return {string} JSON字符串
      */
     query(sql: any, timeout: any): string;
-
     /**
      * 创建一个预处理SQL语句
      * @param sql 预处理语句
@@ -7462,13 +6782,11 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     createPreparedStatement(sql: any, timeout: any): boolean;
-
     /**
      * 执行之前创建得预处理语句
      * @return {string} JSON字符串
      */
     psqlQuery(): string;
-
     /**
      * 预处理语句设置字符串条件参数
      * @param index 条件索引
@@ -7476,7 +6794,6 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetString(index: any, input: any): boolean;
-
     /**
      * 预处理语句设置long条件参数
      * @param index 条件索引
@@ -7484,7 +6801,6 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetLong(index: any, input: any): boolean;
-
     /**
      * 预处理语句设置int条件参数
      * @param index 条件索引
@@ -7492,7 +6808,6 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetInt(index: any, input: any): boolean;
-
     /**
      * 预处理语句设置float条件参数
      * @param index 条件索引
@@ -7500,7 +6815,6 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetFloat(index: any, input: any): boolean;
-
     /**
      * 预处理语句设置boolean条件参数
      * @param index 条件索引
@@ -7508,7 +6822,6 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetBoolean(index: any, input: any): boolean;
-
     /**
      * 预处理语句设置日期条件参数
      * @param index 条件索引
@@ -7517,7 +6830,6 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetDate(index: any, dateFormat: any, input: any): boolean;
-
     /**
      * 预处理语句设置时间戳条件参数
      * @param index 条件索引
@@ -7526,37 +6838,30 @@ declare class JdbcApiWrapper {
      * @return  {boolean} true 代表成功 false 代表失败
      */
     psqlSetTimestamp(index: any, dateFormat: any, input: any): boolean;
-
     /**
      * 是否设定为批量提交
      * @return {boolean} true 代表成功 false 代表失败
      */
     psqlAddBatch(): boolean;
-
     /**
      * 执行更新操作
-     * @return {int} 更新影响到行数量
+     * @return {number} 更新影响到行数量
      */
-    psqlExecuteUpdate(): int;
-
+    psqlExecuteUpdate(): number;
     /**
      * 结束预处理语句
      * @return {boolean} true 代表成功 false 代表失败
      */
     psqlClose(): boolean;
-
     /**
      * 关闭数据库链接
      * @return {boolean} true 代表成功 false 代表失败
      */
     connectionClose(): boolean;
 }
-
 declare var sqlite: SqliteApiWrapper;
 declare var jdbc: JdbcApiWrapper;
-
 declare function ThreadWrapper(): void;
-
 declare class ThreadWrapper {
     /**
      * 设置多少周期进行执行一次，在子线程中执行
@@ -7566,14 +6871,12 @@ declare class ThreadWrapper {
      * @return 线程对象ID  该对象可以进行取消
      */
     setInterval(runnable: any, interval: any): any;
-
     /**
      * 取消周期执行的函数
      *
      * @param t 线程对象ID
      */
     cancelInterval(t: any): any;
-
     /**
      * 设定延迟多少毫秒后执行函数，在子线程中执行
      * @param runnable 要执行的函数
@@ -7581,14 +6884,12 @@ declare class ThreadWrapper {
      * @return 对象 线程对象ID
      */
     setTimeout(runnable: any, timeout: any): any;
-
     /**
      * 取消延迟执行
      * @param t 线程对象ID
      * @return {null|null|number}
      */
     cancelTimeout(t: any): null | null | number;
-
     /**
      * 异步执行线程，这里会将Runnable放到线程池中进行管理
      * <Br/>
@@ -7600,26 +6901,22 @@ declare class ThreadWrapper {
      * @param string，线程对象ID
      */
     execAsync(runnable: any): any;
-
     /**
      * 取消线程的执行
      * @param t 线程对象ID
      * @return boolean
      */
     cancelThread(t: any): boolean;
-
     /**
      * 取消线程的执行
      * @param t 线程对象ID
      * @return boolean true代表已经取消了，false表示未取消
      */
     isCancelled(t: any): any;
-
     /**
      * 取消所有正在运行的线程
      */
     stopAll(): void;
-
     /**
      * 执行某个函数并且等待true返回，如果函数中返回的是true，该方法将立刻执行完毕
      * <Br/>
@@ -7633,7 +6930,6 @@ declare class ThreadWrapper {
      */
     execSync(condition: any, timeout: any): any;
 }
-
 declare function setTimeout(handler: TimerHandler, timeout?: number, ...arguments: any[]): number;
 /**
  * 设定延迟多少毫秒后执行函数，在子线程中执行
@@ -7642,13 +6938,11 @@ declare function setTimeout(handler: TimerHandler, timeout?: number, ...argument
  * @return 线程对象ID  该对象可以进行取消
  */
 declare function setTimeout(func: any, timeout: any): any;
-
 /**
  * 取消延迟执行
  * @param t 要取消的线程对象ID
  */
 declare function cancelTimeout(t: any): any;
-
 declare function setInterval(handler: TimerHandler, timeout?: number, ...arguments: any[]): number;
 /**
  * 设置多少周期进行执行一次，在子线程中执行
@@ -7658,13 +6952,11 @@ declare function setInterval(handler: TimerHandler, timeout?: number, ...argumen
  * @return 线程对象ID  该对象可以进行取消
  */
 declare function setInterval(func: any, interval: any): any;
-
 /**
  * 取消周期执行的函数
  * @param t 要取消的函数
  */
 declare function cancelInterval(t: any): any;
-
 /**
  * 执行某个函数并且等待true返回，如果函数中返回的是true，该方法将立刻执行完毕
  * <Br/>
@@ -7677,58 +6969,48 @@ declare function cancelInterval(t: any): any;
  * @return 布尔型 返回一个布尔型值
  */
 declare function execSync(condition: any, timeout: any): any;
-
 declare var thread: ThreadWrapper;
-
 declare function UIWrapper(): void;
-
 declare class UIWrapper {
     /**
      * 显示Toast信息
      * @param msg 信息
      */
     toast(msg: any): any;
-
     /**
      * 读取IEC包中的res文件夹某个文件资源，并变成android的Bitmap对象返回
      * @param path res文件夹中的资源文件路径
      * @return Bitmap 图像对象或者null
      */
     resResAsBitmap(path: any): any;
-
     /**
      * 读取IEC包中的res文件夹某个文件资源，并变成android的Drawable对象返回
      * @param path res文件夹中的资源文件路径
      * @return Drawable 图像对象或者null
      */
     resResAsDrawable(path: any): any;
-
     /**
      * 调试日志打印
      * @param msg 打印的消息
      * @return {null}
      */
     logd(msg: any): null;
-
     /**
      * 脚本是否处于暂停中
      * 适配 EC 10.0.0+
      * @return {boolean} true 代表脚本处于暂停中
      */
     isScriptPause(): boolean;
-
     /**
      * 显示脚本暂停控制悬浮窗
      * 适配EC 10.0.0+
      */
     showScriptCtrlFloatView(): void;
-
     /**
      * 关闭脚本暂停控制悬浮窗
      * 适配EC 10.0.0+
      */
     closeScriptCtrlFloatView(): void;
-
     /**
      * 设置脚本暂停或者继续
      * 适配 EC 10.0.0+
@@ -7737,7 +7019,6 @@ declare class UIWrapper {
      * @return {boolean} true 代表脚本处于暂停中，false 代表继续运行中
      */
     setScriptPause(pause: any, timeout: any): boolean;
-
     /**
      * 创建一个布局并设置到当前的页面中
      * @param name tab标签的名称
@@ -7745,21 +7026,18 @@ declare class UIWrapper {
      * @return 布尔型 true代表成功， false代表失败
      */
     layout(name: any, content: any): any;
-
     /**
      * 解析布局并返回
      * @param content 可以是layout文件夹中的文件名称，也可以直接是xml文件的内容
      * @return View android的View对象，解析有问题就是null
      */
     parseView(content: any): any;
-
     /**
      * 通过tag查找到一个视图
      * @param tag 标签值
      * @return View android原生的View对象
      */
     findViewByTag(tag: any): any;
-
     /**
      * 设置事件
      * @param view 要设置事件的视图，可以是事件的tag值
@@ -7768,9 +7046,7 @@ declare class UIWrapper {
      * @return 布尔型 true代表设置成功， false代表设置失败
      */
     setEvent(view: any, eventType: any, eventCallback: any): any;
-
     setUIvar(): void;
-
     /**
      * 存储数据到存储区中，脚本可以使用
      * @param key 键
@@ -7778,58 +7054,48 @@ declare class UIWrapper {
      * @return 布尔型 true成功 false失败
      */
     putShareData(key: any, value: any): any;
-
     /**
      * 从存储区获取在UI模块存储的数据
      * @param key 键
      * @return 存储的数据
      */
     getShareData(key: any): any;
-
     /**
      * 清理所有存储区的数据
      * @return true 或者 false
      */
     clearAllShareData(): any;
-
     /**
      * 将所有的tag转换成UI的对象直接调用
      * @return {null}
      */
     resetUIVar(): null;
-
     /**
      * 取得当前的activity对象
      * @return Activity 对象或者null
      */
     getActivity(): any;
-
     getContext(): any;
-
     /**
      * 取得当前的Handler对象
      * @return Handler 对象或者null
      */
     getHandler(): any;
-
     /**
      * 取得当前的根视图对象，因为有可能是多标签的页面，返回的有可能是个集合
      * @return View 对象列表
      */
     getRootView(): any[];
-
     /**
      * 启动脚本
      * @return 布尔型 true代表成功  false代表失败
      */
     start(): any;
-
     /**
      * 是否有浮窗权限
      * @return 布尔型 true代表有权限 false代表无权限
      */
     hasFloatViewPermission(): any;
-
     /**
      * 异步请求浮窗权限
      * @param timeout 超时时间
@@ -7837,26 +7103,22 @@ declare class UIWrapper {
      * @return 布尔型 true代表有权限 false代表无权限
      */
     requestFloatViewPermissionAsync(timeout: any, callback: any): any;
-
     /**
      * 取得所有UI配置
      * @return JSON字符串
      */
     getConfigJSON(): any;
-
     /**
      * 取得单个UI配置项
      * @param key 配置的key
      * @return 字符串
      */
     getConfig(key: any): any;
-
     /**
      * 打开EC的系统设置
      * @return 布尔型 true代表成功 false代表失败
      */
     openECSystemSetting(): any;
-
     /**
      * 保存UI参数值
      * @param key UI的key
@@ -7864,19 +7126,16 @@ declare class UIWrapper {
      * @return 布尔型 true代表成功 false代表失败
      */
     saveConfig(key: any, value: any): any;
-
     /**
      * 移出所有保存的UI参数值
      * @return 布尔型 true代表成功 false代表失败
      */
     removeAllUIConfig(): any;
-
     /**
      * 根据设置的tag，保存所有配置
      * @return 布尔型 true 保存成功，false 保存失败
      */
     saveAllConfig(): any;
-
     /**
      * 设置视图的值
      * @param tagOrView 视图的tag或者视图对象
@@ -7884,39 +7143,33 @@ declare class UIWrapper {
      * @return 布尔型 true代表成功 false代表失败
      */
     setViewValue(tagOrView: any, value: any): any;
-
     /**
      * 取得视图的值
      * @param tagOrView 视图的tag或者视图对象
      * @return 字符串或者布尔型
      */
     getViewValue(tagOrView: any): string | number | boolean;
-
     /**
      * 是否是无障碍运行模式
      * @return 布尔型 true 是 false 否
      */
     isAccMode(): any;
-
     /**
      * 是否是代理运行模式
      * @return 布尔型 true 是 false 否
      */
     isAgentMode(): any;
-
     /**
      * 自动化服务是否正常
      * @return 布尔型 true 是 false 否
      */
     isServiceOk(): any;
-
     /**
      * 设置运行模式
      * @param mode 1 代表是代理模式  2 代表无障碍模式
      * @return 布尔型 true 是 false 否
      */
     setRunningMode(mode: any): any;
-
     /**
      * 设置EC的系统参数
      * @param params  map形式例如 {"running_mode":"无障碍"},<br/>
@@ -7943,13 +7196,11 @@ declare class UIWrapper {
      * @return 布尔型 true 是 false 否
      */
     setECSystemConfig(params: any): any;
-
     /**
      * 启动环境
      * @return 布尔型 true代表启动成功，false代表启动失败
      */
     startEnv(): any;
-
     /**
      * 开启一个定时任务
      * @param tag
@@ -7958,44 +7209,37 @@ declare class UIWrapper {
      * @return 整型 jobid
      */
     startJob(tag: any, execTime: any, cancelBeforeRunning: any): any;
-
     /**
      * 取消所有的定时任务
      * @return 布尔型 true代表成功，false代表失败
      */
     cancelAllJob(): any;
-
     /**
      * 取消指定标签的任务
      * @param tag 标签
      * @return 布尔型 true代表成功，false代表失败
      */
     cancelJob(tag: any): any;
-
     /**
      * 获取所有定时任务TAG
      * @return JSON字符串
      */
     getAllJobTag(): any;
-
     /**
      * 停止当前运行的测试任务
      * @return 布尔型 true代表成功，false代表失败
      */
     stopTask(): any;
-
     /**
      * 显示日志浮窗
      * @return 布尔型 true代表成功，false代表失败
      */
     showLogWindow(): any;
-
     /**
      * 关闭日志浮窗
      * @return 布尔型 true代表成功，false代表失败
      */
     closeLogWindow(): any;
-
     /**
      * 新增启停浮窗按钮
      * @param tag 按钮的标签
@@ -8007,7 +7251,6 @@ declare class UIWrapper {
      * @return 布尔型 true代表成功，false代表失败
      */
     addCtrlView(tag: any, icon: any, width: any, height: any, index: any, onClickListener: any): any;
-
     /**
      * 更新启停浮窗按钮
      * @param tag 按钮的标签
@@ -8016,51 +7259,43 @@ declare class UIWrapper {
      * @return 布尔型 true代表成功，false代表失败
      */
     updateCtrlView(tag: any, icon: any, onClickListener: any): any;
-
     /**
      * 删除启停浮窗按钮
      * @param tag 按钮的标签，默认都有main_page_ctrl: 主页，log_window_ctrl:日志窗口控制，script_status_ctrl:脚本启停，log_close_ctrl: 日志框关闭
      * @return 布尔型 true代表成功，false代表失败
      */
     removeCtrlView(tag: any): any;
-
     /**
      * 删除所有启停浮窗按钮
      * @return 布尔型 true代表成功，false代表失败
      */
     removeAllCtrlView(): any;
-
     /**
      * 重置启停浮窗按钮
      * @return 布尔型 true代表成功，false代表失败
      */
     resetDefaultCtrlView(): any;
-
     /**
      * 显示启停浮窗
      * @return 布尔型 true代表成功，false代表失败
      */
     showCtrlWindow(): any;
-
     /**
      * 关闭启停浮窗
      * @return 布尔型 true代表成功，false代表失败
      */
     closeCtrlWindow(): any;
-
     /**
      * 异步启动环境
      * @param callback
      */
     startEnvAsync(callback: any): void;
-
     /**
      * 监听UI所在的activity事件
      * @param eventType 事件类型，分别为：onResume：Activity恢复时， onPause: Activity暂停时， onStop：Activity停止时， onDestroy：Activity销毁时
      * @param callback 回调函数
      */
     onActivityEvent(eventType: any, callback: any): void;
-
     /**
      * 打开一个activity，通过map参数
      * @param map 例如{"action":""},key的固定只有
@@ -8069,7 +7304,6 @@ declare class UIWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     openActivity(map: any): any;
-
     /**
      * alert，弹窗
      * @param map 例如{"title":""},key的固定只有
@@ -8084,7 +7318,6 @@ declare class UIWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     alert(map: any, okBtnCallback: any, cancelBtnCallback: any, dismissListener: any): any;
-
     /**
      * inputDialog 输入框弹窗
      * @param map 例如{"title":""},key的固定只有
@@ -8099,7 +7332,6 @@ declare class UIWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     inputDialog(map: any, okBtnCallback: any, cancelBtnCallback: any, dismissListener: any): any;
-
     /**
      * 自定义对话框
      *  @param params 例如{"cancelable":""},key的固定只有
@@ -8111,14 +7343,12 @@ declare class UIWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     customDialog(params: any, view: any, onViewBind: any, dismissListener: any): any;
-
     /**
      * 在主线程进行运行函数，相当于 getHandler.post
      * @param delayTime 延迟时间，单位毫秒，如果是0就是理解执行
      * @param callback 回调
      */
     run(delayTime: any, callback: any): any;
-
     /**
      * 向网页中注入一个JS函数，H5可以调用该函数，以实现脚本和HTML的互通扩展
      * @param funcName 注入的函数名称
@@ -8126,32 +7356,26 @@ declare class UIWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     registeH5Function(funcName: any, callback: any): any;
-
     /**
      * 取消向网页中注入一个JS函数
      * @param funcName 注入的函数名称
      * @return 布尔型 true 代表成功，false 代表失败
      */
     unregisteH5Function(funcName: any): any;
-
     /**
      * 设置加载网页的webview组件组件类型，默认是X5浏览器
      * @param type 1：系统自带的webview， 2：X5浏览器
      * @return 布尔型 true 代表成功，false 代表失败
      */
     setWebViewType(type: any): any;
-
     /**
      * 脚本是否正在运行
      * @return 布尔型 true 代表成功，false 代表失败
      */
     isScriptRunning(): any;
 }
-
 declare var ui: UIWrapper;
-
 declare function UtilsWrapper(): void;
-
 declare class UtilsWrapper {
     /**
      * 请求展示浮窗的权限
@@ -8163,7 +7387,6 @@ declare class UtilsWrapper {
      * @return true 代表请求权限成功，false代表失败
      */
     requestFloatViewPermission(timeout: any): any;
-
     /**
      * 展示浮窗
      * @param params js的map对象，包含的
@@ -8181,34 +7404,29 @@ declare class UtilsWrapper {
      * @return true 代表请求权限成功，false代表失败
      */
     showFloatView(params: any): any;
-
     /**
      * 关闭浮窗
      * @param tag showFloatView 使用的tag参数，对悬浮窗唯一定位的
      * @return true 成功，false代表失败
      */
     closeFloatView(tag: any): any;
-
     /**
      * 折叠日志悬浮窗，只保留标题
      * 适配EC 9.32.0+
      * @return true 成功，false代表失败
      */
     collapseLogView(): any;
-
     /**
      * 展开日志悬浮窗
      * 适配EC 9.32.0+
      * @return true 成功，false代表失败
      */
     expandLogView(): any;
-
     /**
      * 关闭所有悬浮窗，但不包含日志悬浮窗
      * @return true 成功，false代表失败
      */
     closeAllFloatView(): any;
-
     /**
      * 检查是否含有浮窗权限
      * <Br/>
@@ -8218,7 +7436,6 @@ declare class UtilsWrapper {
      * @return true 有权限,false 代表无权限
      */
     hasFloatViewPermission(): any;
-
     /**
      * 设置日志窗口大小
      * <Br/>
@@ -8231,7 +7448,6 @@ declare class UtilsWrapper {
      * @param backgroundColor 背景颜色，例如#336699
      */
     setLogViewSize(w: any, h: any, textSize: any, backgroundColor: any): any;
-
     /**
      * 设置日志顶部固定窗口属性
      * 适合EC 6.17.0+
@@ -8242,7 +7458,6 @@ declare class UtilsWrapper {
      * @param backgroundColor 背景颜色，例如#336699
      */
     setLogFixedViewEx(p: any): any;
-
     /**
      * 设置日志顶部固定窗口属性
      * 适合EC 6.17.0+
@@ -8250,11 +7465,8 @@ declare class UtilsWrapper {
      * @return true代表成功 false代表失败
      */
     setFixedViewText(p: any): any;
-
     setLogViewSizeEx(p: any): any;
-
     setCtrlViewSizeEx(p: any): any;
-
     /**
      * 展示日志浮窗
      * <Br/>
@@ -8263,11 +7475,8 @@ declare class UtilsWrapper {
      * 兼容版本: Android 4.4 以上
      */
     showLogWindow(): any;
-
     showCtrlWindow(): any;
-
     hideCtrlWindow(): any;
-
     /**
      * 展示日志到浮窗中
      * <Br/>
@@ -8279,7 +7488,6 @@ declare class UtilsWrapper {
      * @param size 大小
      */
     setLogText(log: any, color: any, size: any): any;
-
     /**
      * 隐藏日志浮窗
      * <Br/>
@@ -8288,7 +7496,6 @@ declare class UtilsWrapper {
      * 兼容版本: Android 4.4 以上
      */
     hideLogWindow(): any;
-
     /**
      * 显示消息
      * <Br/>
@@ -8299,7 +7506,6 @@ declare class UtilsWrapper {
      * @param msg 消息内容
      */
     toast(msg: any): any;
-
     /**
      * 打开APP
      * <Br/>
@@ -8311,7 +7517,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     openApp(packageName: any): any;
-
     /**
      * 拼接打开APP命令
      *
@@ -8319,7 +7524,6 @@ declare class UtilsWrapper {
      * @return {string} 命令字符串
      */
     getStartAppCmd(packageName: any): string;
-
     /**
      * 拼接启动activity命令，通过map参数
      * @param map 例如{"action":""},key的固定只有
@@ -8328,7 +7532,6 @@ declare class UtilsWrapper {
      * @return {string} 命令字符串
      */
     getStartActivityCmd(map: any): string;
-
     /**
      * 打开一个activity，通过map参数
      * @param map 例如{"action":""},key的固定只有
@@ -8337,7 +7540,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     openActivity(map: any): any;
-
     /**
      * 通过Action打开某个界面
      * @param action action动作，例如 android.settings.ACCESSIBILITY_SETTINGS = 辅助功能，
@@ -8395,7 +7597,6 @@ declare class UtilsWrapper {
      * @return {null|boolean|*}
      */
     openIntentAction(action: any): null | boolean | any;
-
     /**
      * 打开APP，通过应用名称
      * <Br/>
@@ -8407,7 +7608,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     openAppByName(appName: any): any;
-
     /**
      * App是否已经安装
      * <Br/>
@@ -8419,7 +7619,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true 代表已经安装，false代表未安装
      */
     isAppExist(packageName: any): any;
-
     /**
      * 取得已安装的程序的版本整型标示
      * <Br/>
@@ -8431,7 +7630,6 @@ declare class UtilsWrapper {
      * @return 整型 返回版本代码
      */
     getAppVersionCode(packageName: any): any;
-
     /**
      * 取得已安装的程序的版本字符串标示
      * <Br/>
@@ -8443,7 +7641,6 @@ declare class UtilsWrapper {
      * @return string 例如 1.0.0
      */
     getAppVersionName(packageName: any): string;
-
     /**
      * 取得App文件的包名
      * <Br/>
@@ -8455,7 +7652,6 @@ declare class UtilsWrapper {
      * @return string 例如com.tencent.mm
      */
     getApkPkgName(filePath: any): string;
-
     /**
      * 将图片插入到相册中，此方法会立刻更新相册数据
      * <Br/>
@@ -8466,7 +7662,6 @@ declare class UtilsWrapper {
      * @param path 图片路径
      */
     insertImageToAlbum(path: any): any;
-
     /**
      * 将视频插入到相册中，此方法会立刻更新相册数据
      * <Br/>
@@ -8477,7 +7672,6 @@ declare class UtilsWrapper {
      * @param path 视频路径
      */
     insertVideoToAlbum(path: any): any;
-
     /**
      * 文件的MD5
      * <Br/>
@@ -8489,7 +7683,6 @@ declare class UtilsWrapper {
      * @return string 文件MD5字符串或者null
      */
     fileMd5(filePath: any): string;
-
     /**
      * 数据计算出来的MD5
      * <Br/>
@@ -8501,7 +7694,6 @@ declare class UtilsWrapper {
      * @return string 数据MD5字符串或者null
      */
     dataMd5(data: any): string;
-
     /**
      * 读取JSON中的整型数据
      * <Br/>
@@ -8514,7 +7706,6 @@ declare class UtilsWrapper {
      * @return 整型 JSON中key对应的整型数据
      */
     readJSONInt(jsonObject: any, key: any): any;
-
     /**
      * 读取JSON中的字符串数据
      * <Br/>
@@ -8527,7 +7718,6 @@ declare class UtilsWrapper {
      * @return string JSON中key对应的字符串数据
      */
     readJSONString(jsonObject: any, key: any): string;
-
     /**
      * 判断一个对象为空
      * <Br/>
@@ -8539,7 +7729,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true或者false
      */
     isObjectNull(obj: any): any;
-
     /**
      * 判断一个对象不为空
      * <Br/>
@@ -8551,7 +7740,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true或者false
      */
     isObjectNotNull(obj: any): any;
-
     /**
      * 判断布尔型对象是否为真
      * <Br/>
@@ -8563,7 +7751,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true 或者 false
      */
     isTrue(r: any): any;
-
     /**
      * 取得比例，例如10参数，就是返回10%的比例，如果是true，说明随机比例正确，否则不正确
      * <Br/>
@@ -8575,7 +7762,6 @@ declare class UtilsWrapper {
      * @return 布尔型 true或者false
      */
     getRatio(ratio: any): any;
-
     /**
      * 随机整型数据，参数是整型长度
      *
@@ -8583,7 +7769,6 @@ declare class UtilsWrapper {
      * @return 整型 返回指定长度的整型数据
      */
     randomInt(length: any): any;
-
     /**
      * 取得随机的数字和字母，参数是长度
      * <Br/>
@@ -8595,7 +7780,6 @@ declare class UtilsWrapper {
      * @return string 字符串数字混合
      */
     randomCharNumber(length: any): string;
-
     /**
      * 取得某个范围的随机值
      * <Br/>
@@ -8608,20 +7792,17 @@ declare class UtilsWrapper {
      * @return 整型 在min和max中间的值, 包含最大和最小值
      */
     getRangeInt(min: any, max: any): any;
-
     /**
      * 设置剪贴板文本
      * @param text 文本
      * @return boolean
      */
     setClipboardText(text: any): any;
-
     /**
      * 读取剪贴板文本
      * @return string
      */
     getClipboardText(): string;
-
     /**
      * 播放mp3音乐
      * @param path 文件路径 例如 /sdcard/a.mp3
@@ -8629,7 +7810,6 @@ declare class UtilsWrapper {
      * @return {boolean} true 代表成功 false 代表失败
      */
     playMp3(path: any, loop: any): boolean;
-
     /**
      * 播放mp3音乐，等待结束
      * 适配EC 10.3.0+
@@ -8638,13 +7818,11 @@ declare class UtilsWrapper {
      * @return {boolean} true 代表成功 false 代表失败
      */
     playMp3WaitEnd(path: any, loop: any): boolean;
-
     /**
      * 停止播放mp3音乐
      * @return {boolean} true 代表成功 false 代表失败
      */
     stopMp3(): boolean;
-
     /**
      * 生成一个二维码
      * @param content 二维码字符串内容
@@ -8653,15 +7831,13 @@ declare class UtilsWrapper {
      * @param logo 图像中心的logo，非必填项，Bitmap 对象，文件转Bitmap请看image模块
      * @return {Bitmap} Android的Bitmap对象，保存到文件请看image模块
      */
-    createQRCode(content: any, width: any, height: any, logo: any): Bitmap;
-
+    createQRCode(content: any, width: any, height: any, logo: any): any;
     /**
      * 解析一个二维码
      * @param src 图像 Bitmap 对象，文件转Bitmap请看image模块
      * @return {string} 解析后的字符串
      */
     decodeQRCode(src: any): string;
-
     /**
      * 将zip文件解压到一个文件夹中
      * @param zipFile 目标zip文件的路径
@@ -8670,7 +7846,6 @@ declare class UtilsWrapper {
      * @return {boolean} true 代表成功  false代表失败
      */
     unzip(zipFile: any, passwd: any, destDir: any): boolean;
-
     /**
      * 解压文件
      * 将zip文件解压到一个文件夹中
@@ -8682,7 +7857,6 @@ declare class UtilsWrapper {
      * @return {boolean} true 代表成功  false代表失败
      */
     unzipWithEncode(zipFile: any, passwd: any, destDir: any, fileNameEncode: any): boolean;
-
     /**
      * 将多个文件压缩成一个zip文件
      * @param zipFile 目标zip文件的路径
@@ -8691,7 +7865,6 @@ declare class UtilsWrapper {
      * @return {boolean} true 代表成功  false代表失败
      */
     zip(zipFile: any, passwd: any, files: any): boolean;
-
     /**
      * 从zip文件中读取数据
      * @param zipFile zip文件的路径
@@ -8701,16 +7874,13 @@ declare class UtilsWrapper {
      */
     readFileInZip(zipFile: any, passwd: any, filePathInZip: any): string;
 }
-
 declare function EncodeDecodeWrapper(): void;
-
 declare class EncodeDecodeWrapper {
     /**
      * 获取上一次加解密的错误信息
      * @return {string} null代表无错误
      */
     getErrorMsg(): string;
-
     /**
      * AES加密
      * @param data 数据字符串
@@ -8718,7 +7888,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 加密后的base64字符串
      */
     aesEncrypt(data: any, password: any): string;
-
     /**
      * AES解密
      * @param data 加密后的base64字符串
@@ -8726,7 +7895,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 解密后的字符串
      */
     aesDecrypt(data: any, password: any): string;
-
     /**
      * DES加密
      * @param data 数据字符串
@@ -8734,7 +7902,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 加密后的base64字符串
      */
     desEncrypt(data: any, password: any): string;
-
     /**
      * DES解密
      * @param data 加密后的base64字符串
@@ -8742,7 +7909,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 解密后的字符串
      */
     desDecrypt(data: any, password: any): string;
-
     /**
      * 3DES加密,算法是 DESede/CBC/PKCS5Padding
      * @param data 数据字符串
@@ -8750,7 +7916,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 加密后的base64字符串
      */
     des3Encrypt(data: any, password: any): string;
-
     /**
      * 3DES解密，算法是 DESede/CBC/PKCS5Padding
      * @param data 加密后的base64字符串
@@ -8758,7 +7923,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 解密后的字符串
      */
     des3Decrypt(data: any, password: any): string;
-
     /**
      * RSA 私钥加密，算法是RSA/ECB/PKCS1Padding
      * @param data 数据字符串
@@ -8766,7 +7930,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 加密后的base64字符串
      */
     rsaEncryptByPrivate(data: any, password: any): string;
-
     /**
      * RSA 私钥解密，算法是RSA/ECB/PKCS1Padding
      * @param data 加密后的base64字符串
@@ -8774,7 +7937,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 解密后的字符串
      */
     rsaDecryptByPrivate(data: any, password: any): string;
-
     /**
      * RSA 公钥加密，算法是RSA/ECB/PKCS1Padding
      * @param data 数据字符串
@@ -8782,7 +7944,6 @@ declare class EncodeDecodeWrapper {
      * @return {string} 加密后的base64字符串
      */
     rsaEncryptByPublic(data: any, password: any): string;
-
     /**
      * RSA 公钥解密，算法是RSA/ECB/PKCS1Padding
      * @param data 加密后的base64字符串
@@ -8791,14 +7952,10 @@ declare class EncodeDecodeWrapper {
      */
     rsaDecryptByPublic(data: any, password: any): string;
 }
-
 declare function FloatyWrapper(): void;
-
 declare class FloatyWrapper {
     requestFloatViewPermission(timeout: any): any;
-
     hasFloatViewPermission(): any;
-
     /**
      * 显示一个XML悬浮窗
      * @param tag 悬浮窗的标签
@@ -8807,8 +7964,7 @@ declare class FloatyWrapper {
      * @param y 起始Y位置
      * @return {View} android的View对象
      */
-    showFloatXml(tag: any, xml: any, x: any, y: any): View;
-
+    showFloatXml(tag: any, xml: any, x: any, y: any): any;
     /**
      * 显示一个View悬浮窗
      * @param tag 悬浮窗的标签
@@ -8817,8 +7973,7 @@ declare class FloatyWrapper {
      * @param y 起始Y位置
      * @return {View} android的View对象
      */
-    showFloatView(tag: any, view: any, x: any, y: any): View;
-
+    showFloatView(tag: any, view: any, x: any, y: any): any;
     /**
      * 设置悬浮窗X坐标
      * @param tag 悬浮窗的标签
@@ -8826,7 +7981,6 @@ declare class FloatyWrapper {
      * @return {boolean} true成功 false 失败
      */
     updateX(tag: any, x: any): boolean;
-
     /**
      * 设置悬浮窗Y坐标
      * @param tag 悬浮窗的标签
@@ -8834,35 +7988,30 @@ declare class FloatyWrapper {
      * @return {boolean} true成功 false 失败
      */
     updateY(tag: any, y: any): boolean;
-
     /**
      * 获取浮窗位置X坐标
      * @param tag 悬浮窗的标签
-     * @return {int} -1 代表失败 其他都是坐标
+     * @return {number} -1 代表失败 其他都是坐标
      */
-    getX(tag: any): int;
-
+    getX(tag: any): number;
     /**
      * 获取浮窗位置Y坐标
      * @param tag 悬浮窗的标签
-     * @return {int} -1 代表失败 其他都是坐标
+     * @return {number} -1 代表失败 其他都是坐标
      */
-    getY(tag: any): int;
-
+    getY(tag: any): number;
     /**
      * 获取浮窗宽度
      * @param tag 悬浮窗的标签
-     * @return {int} -1 代表失败 其他都是坐标
+     * @return {number} -1 代表失败 其他都是坐标
      */
-    getWidth(tag: any): int;
-
+    getWidth(tag: any): number;
     /**
      * 获取浮窗高度
      * @param tag 悬浮窗的标签
-     * @return {int} -1 代表失败 其他都是坐标
+     * @return {number} -1 代表失败 其他都是坐标
      */
-    getHeight(tag: any): int;
-
+    getHeight(tag: any): number;
     /**
      * 设置悬浮窗大小
      * @param tag 悬浮窗的标签
@@ -8871,40 +8020,32 @@ declare class FloatyWrapper {
      * @return {boolean} true成功 false 失败
      */
     updateSize(tag: any, w: any, h: any): boolean;
-
     /**
      * 关闭悬浮窗
      * @param tag 悬浮窗的标签
      * @return {boolean} true成功 false 失败
      */
     close(tag: any): boolean;
-
     /**
      * 设置悬浮窗聚焦
      * @param focusable 是否聚焦
      * @return {boolean} true成功 false 失败
      */
     focusable(tag: any, focusable: any): boolean;
-
     /**
      * 设置悬浮窗可触摸
      * @param touchable 是否可触摸
      * @return {boolean} true成功 false 失败
      */
     touchable(tag: any, touchable: any): boolean;
-
     showLogWindow(): any;
-
     closeLogWindow(): any;
-
     setLogViewSizeEx(p: any): any;
 }
-
 /**
  * 数据存储类
  */
 declare function StoragesWrapper(): void;
-
 declare class StoragesWrapper {
     /**
      * 创建存储对象
@@ -8913,34 +8054,27 @@ declare class StoragesWrapper {
      */
     create(name: any): StorageApiWrapper;
 }
-
 declare function StorageApiWrapper(name: any): void;
-
 declare class StorageApiWrapper {
     constructor(name: any);
-
     name: any;
-
     /**
      * 清空存储
      * @return {boolean} true成功 false 失败
      */
     clear(): boolean;
-
     /**
      * 是否包含某个key
      * @param key 键
      * @return {boolean} true成功 false 失败
      */
     contains(key: any): boolean;
-
     /**
      * 移出key对应的值
      * @param key 键
      * @return {boolean} true成功 false 失败
      */
     remove(key: any): boolean;
-
     /**
      * 存储字符串
      * @param key 键
@@ -8948,7 +8082,6 @@ declare class StorageApiWrapper {
      * @return {boolean} true成功 false 失败
      */
     putString(key: any, value: any): boolean;
-
     /**
      * 存储整型数据
      * @param key 键
@@ -8956,7 +8089,6 @@ declare class StorageApiWrapper {
      * @return {boolean} true成功 false 失败
      */
     putInt(key: any, value: any): boolean;
-
     /**
      * 存储布尔型数据
      * @param key 键
@@ -8964,7 +8096,6 @@ declare class StorageApiWrapper {
      * @return {boolean} true成功 false 失败
      */
     putBoolean(key: any, value: any): boolean;
-
     /**
      * 存储浮点型数据
      * @param key 键
@@ -8972,7 +8103,6 @@ declare class StorageApiWrapper {
      * @return {boolean} true成功 false 失败
      */
     putFloat(key: any, value: any): boolean;
-
     /**
      * 存储并加密字符串数据
      * @param key 键
@@ -8980,55 +8110,47 @@ declare class StorageApiWrapper {
      * @return {boolean} true成功 false 失败
      */
     putEncrypt(key: any, value: any): boolean;
-
     /**
      * 获取解密字符串数据
      * @param key 键
      * @return {string} 解密后的字符串
      */
     getDecryptString(key: any): string;
-
     /**
      * 获取字符串数据
      * @param key 键
      * @return {string} 字符串
      */
     getString(key: any, defaultValue: any): string;
-
     /**
      * 获取整型数据
      * @param key 键
      * @return {string} 整型
      */
     getInt(key: any, defaultValue: any): string;
-
     /**
      * 获取布尔型数据
      * @param key 键
      * @return {string} 布尔型
      */
     getBoolean(key: any, defaultValue: any): string;
-
     /**
      * 获取浮点型数据
      * @param key 键
      * @return {string} 浮点型
      */
     getFloat(key: any, defaultValue: any): string;
-
     /**
      * 获取所有的key
      * @return {string} JSON字符串
      */
     keys(): string;
-
     /**
      * 获取所有的key和值
      * @return {string} JSON字符串
      */
     all(): string;
 }
-
 declare var utils: UtilsWrapper;
 declare var encodeDecoder: EncodeDecodeWrapper;
 declare var floaty: FloatyWrapper;
