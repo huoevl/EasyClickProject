@@ -1,8 +1,8 @@
-let screenshot;
-
+"use strict";
+var screenshot;
 /**
  * 寻图并随机范围点击
- * @param module
+ * @param moduleName
  * @param name
  * @param x
  * @param y
@@ -11,24 +11,25 @@ let screenshot;
  * @param isUseLast
  * @returns {boolean}
  */
-function findImgRandClick(module, name, x, y, width, height, isUseLast) {
-    let url = module + "/" + name + ".png";
+function findImgRandClick(moduleName, name, x, y, width, height, isUseLast) {
+    var url = moduleName + "/" + name + ".png";
     logd(url);
-    let img = readResAutoImage(url);
-    let result = false;
+    var img = readResAutoImage(url);
+    var result = false;
     screenshot = screenshot || image.captureFullScreen();
     if (screenshot != null) {
-        let xy = getXy(x, y)
-        let points = image.findImage(screenshot, img, xy.x, xy.y, width, height, 0.7, 0.9, 1, 5);
+        var xy = getXy(x, y);
+        var points = image.findImage(screenshot, img, xy.x, xy.y, width, height, 0.7, 0.9, 1, 5);
         if (points && points.length) {
             sleep(sleepTime100);
-            let rect = getPointsRectTemp(points);
+            var rect = getPointsRectTemp(points);
             if (rect) {
                 loggerE("寻图成功！" + name + "点击");
-                clickRandomRect(rect)
+                clickRandomRect(rect);
                 result = true;
             }
-        } else {
+        }
+        else {
             loggerE("寻图失败！" + name);
             sleep(sleepTime100);
         }

@@ -1,3 +1,3 @@
-function startMainTask(){
-
+"use strict";
+function startMainTask() {
 }
