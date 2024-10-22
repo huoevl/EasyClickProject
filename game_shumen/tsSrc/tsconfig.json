@@ -15,5 +15,6 @@
   "exclude": [
     "node_modules",                 // 排除 node_modules 文件夹
     "dist",                          // 排除 dist 文件夹
+    "scripts",
   ]
 }

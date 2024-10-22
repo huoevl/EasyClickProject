@@ -1,15 +1,28 @@
-function isHasCloseView() {
-    let len = MiscImgData.length;
-    let click = false;
-    for (let index = 0; index < len; index++) {
-        let data = MiscImgData[index];
-        let isClick = findImgRandClick("misc", data[0], data[1], data[2], data[3], data[4], index < len - 1)
-        if (isClick) {
-            click = true;
-        }
+import { BaseClass } from "../../_base/BaseClass";
+declare global {
+    interface IModuleMap {
+        /** 通用关闭界面 */
+        closeView: CloseView
     }
-    if (click) {
-        sleep(sleepTime100);
-        isHasCloseView();
+}
+export class CloseView extends BaseClass {
+    exec() {
+        let click = false;
+
+        for (const name in MiscImgData) {
+            if (Object.prototype.hasOwnProperty.call(MiscImgData, name)) {
+                const data = MiscImgData[name];
+                let isClick = ccf.ecRoot.findImgRandClick("misc", data, true)
+                if (isClick) {
+                    click = true;
+                }
+            }
+        }
+        if (click) {
+            sleep(sleepTime100);
+            this.exec();
+        } else {
+            ccf.ecRoot.freeScreenshot();
+        }
     }
 }

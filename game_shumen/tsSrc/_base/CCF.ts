@@ -1,0 +1,1 @@
+const ccf: IModuleMap = {} as any;

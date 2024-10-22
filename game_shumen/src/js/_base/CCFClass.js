@@ -15,32 +15,23 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CloseView = void 0;
-var BaseClass_1 = require("../../_base/BaseClass");
-var CloseView = /** @class */ (function (_super) {
-    __extends(CloseView, _super);
-    function CloseView() {
+exports.CCF = void 0;
+var Root_1 = require("../pkg/Root");
+var CloseView_1 = require("../pkg/misc/CloseView");
+var Adapt_1 = require("./Adapt");
+var BaseClass_1 = require("./BaseClass");
+var EcRoot_1 = require("./EcRoot");
+var CCF = /** @class */ (function (_super) {
+    __extends(CCF, _super);
+    function CCF() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    CloseView.prototype.exec = function () {
-        var click = false;
-        for (var name_1 in MiscImgData) {
-            if (Object.prototype.hasOwnProperty.call(MiscImgData, name_1)) {
-                var data = MiscImgData[name_1];
-                var isClick = ccf.ecRoot.findImgRandClick("misc", data, true);
-                if (isClick) {
-                    click = true;
-                }
-            }
-        }
-        if (click) {
-            sleep(sleepTime100);
-            this.exec();
-        }
-        else {
-            ccf.ecRoot.freeScreenshot();
-        }
+    CCF.prototype.init = function () {
+        ccf.root = Root_1.Root.getIns();
+        ccf.closeView = CloseView_1.CloseView.getIns();
+        ccf.adpat = Adapt_1.Adapt.getIns();
+        ccf.ecRoot = EcRoot_1.EcRoot.getIns();
     };
-    return CloseView;
+    return CCF;
 }(BaseClass_1.BaseClass));
-exports.CloseView = CloseView;
+exports.CCF = CCF;

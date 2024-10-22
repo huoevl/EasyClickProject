@@ -15,32 +15,22 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CloseView = void 0;
-var BaseClass_1 = require("../../_base/BaseClass");
-var CloseView = /** @class */ (function (_super) {
-    __extends(CloseView, _super);
-    function CloseView() {
+exports.Adapt = void 0;
+var BaseClass_1 = require("./BaseClass");
+var Adapt = /** @class */ (function (_super) {
+    __extends(Adapt, _super);
+    function Adapt() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    CloseView.prototype.exec = function () {
-        var click = false;
-        for (var name_1 in MiscImgData) {
-            if (Object.prototype.hasOwnProperty.call(MiscImgData, name_1)) {
-                var data = MiscImgData[name_1];
-                var isClick = ccf.ecRoot.findImgRandClick("misc", data, true);
-                if (isClick) {
-                    click = true;
-                }
-            }
-        }
-        if (click) {
-            sleep(sleepTime100);
-            this.exec();
-        }
-        else {
-            ccf.ecRoot.freeScreenshot();
-        }
+    /**
+     * 获取实际xy坐标
+     * @param x
+     * @param y
+     * @returns {{x, y}}
+     */
+    Adapt.prototype.getXy = function (x, y) {
+        return { x: x, y: y };
     };
-    return CloseView;
+    return Adapt;
 }(BaseClass_1.BaseClass));
-exports.CloseView = CloseView;
+exports.Adapt = Adapt;

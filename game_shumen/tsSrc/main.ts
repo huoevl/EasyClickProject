@@ -1,13 +1,19 @@
-// main();
-function start() {
-    if (!rootInit()) {
-        return
+import { CCF } from "./_base/CCFClass";
+
+export class Main {
+    constructor() {
+        let itself = this;
+        itself.exec();
     }
-    loopExec();
+    exec() {
+        if (!ccf.root.isHasJietu) {
+            return;
+        }
+        this.loopExec();
+    }
+    loopExec() {
+        ccf.closeView.exec();
+    }
 }
-
-function loopExec() {
-    isHasCloseView();
-}
-
-start();
+CCF.getIns();
+new Main();

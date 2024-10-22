@@ -7,3 +7,14 @@ let sleepTime500 = 500;
 let sleepTime1000 = 1000;
 let sleepTime2000 = 2000;
 let sleepTime3000 = 3000;
+
+
+
+interface IFindImgData {
+    /** 文件名 */
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
