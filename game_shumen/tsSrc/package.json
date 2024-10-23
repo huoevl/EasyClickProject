@@ -2,16 +2,24 @@
   "name": "game_shumen",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "tsc": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "ts-node ./scripts/Build.ts && webpack --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.12.0",
+    "@types/fs-extra": "^11.0.4",
     "eslint": "^9.12.0",
     "fs-extra": "^11.2.0",
-    "globals": "^15.11.0"
+    "glob": "^11.0.0",
+    "globals": "^15.11.0",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   }
 }

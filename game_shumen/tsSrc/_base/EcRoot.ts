@@ -1,4 +1,5 @@
 import { BaseClass } from "./BaseClass";
+import { IFindImgData, sleepTime100 } from "./Const";
 import { Debug } from "./Debug";
 import { Utils } from "./Utils";
 
@@ -13,24 +14,19 @@ export class EcRoot extends BaseClass {
     private lastMdName?: string;
     /** 截图缓存 */
     private screenshot: any;
-
     /**
      * 寻图并随机范围点击
-     * @param moduleName
-     * @param name
-     * @param x
-     * @param y
-     * @param width
-     * @param height
+     * @param moduleName 
+     * @param data 
      * @param isUseLast 是否使用上一次截图
-     * @returns {boolean}
+     * @returns 
      */
     findImgRandClick(moduleName: string, data: IFindImgData, isUseLast?: boolean): boolean {
         if (moduleName != this.lastMdName) {
             this.lastMdName = moduleName;
             this.freeScreenshot();
         }
-        let url = moduleName + "/" + name + ".png";
+        let url = moduleName + "/" + data.name + ".png";
         logd(url);
         let img = readResAutoImage(url);
         let result = false;
@@ -42,12 +38,12 @@ export class EcRoot extends BaseClass {
                 sleep(sleepTime100);
                 let rect = Utils.getPointsRectTemp(points);
                 if (rect) {
-                    Debug.loggerE("寻图成功！" + name + "点击");
+                    Debug.loggerE("寻图成功！" + data.name + "点击");
                     clickRandomRect(rect)
                     result = true;
                 }
             } else {
-                Debug.loggerE("寻图失败！" + name);
+                Debug.loggerE("寻图失败！" + data.name);
                 sleep(sleepTime100);
             }
         }
@@ -57,6 +53,9 @@ export class EcRoot extends BaseClass {
         image.recycle(img);
         return result;
     }
+    /**
+     * 释放截图
+     */
     freeScreenshot() {
         if (this.screenshot) {
             image.recycle(this.screenshot);

@@ -1,4 +1,5 @@
 import { CCF } from "./_base/CCFClass";
+import { Debug } from "./_base/Debug";
 
 export class Main {
     constructor() {
@@ -7,8 +8,10 @@ export class Main {
     }
     exec() {
         if (!ccf.root.isHasJietu) {
+            Debug.loggerD("截图失败？？？", String(ccf.root.isHasJietu))
             return;
         }
+        Debug.loggerD("开始运行")
         this.loopExec();
     }
     loopExec() {
@@ -16,4 +19,5 @@ export class Main {
     }
 }
 CCF.getIns();
+ccf.root.exec();
 new Main();

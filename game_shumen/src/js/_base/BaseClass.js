@@ -1,5 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var ccf;
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it uses a non-standard name for the exports (exports).
+(() => {
+var exports = __webpack_exports__;
+/*!****************************!*\
+  !*** ./_base/BaseClass.ts ***!
+  \****************************/
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BaseClass = void 0;
 var BaseClass = /** @class */ (function () {
     function BaseClass(data) {
@@ -17,3 +27,9 @@ var BaseClass = /** @class */ (function () {
     return BaseClass;
 }());
 exports.BaseClass = BaseClass;
+
+})();
+
+ccf = __webpack_exports__;
+/******/ })()
+;

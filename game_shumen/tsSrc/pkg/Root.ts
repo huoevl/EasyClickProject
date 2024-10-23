@@ -1,4 +1,5 @@
 import { BaseClass } from "../_base/BaseClass";
+import { sleepTime2000 } from "../_base/Const";
 import { Debug } from "../_base/Debug";
 declare global {
     interface IModuleMap {
@@ -9,7 +10,7 @@ declare global {
 export class Root extends BaseClass {
     isHasJietu = false;
     /** 是否拥有截图权限 */
-    init() {
+    exec() {
         image.setInitParam(
             {
                 "action_timeout": 10000,

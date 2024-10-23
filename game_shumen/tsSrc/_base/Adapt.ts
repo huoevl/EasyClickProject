@@ -5,7 +5,7 @@ declare global {
         adpat: Adapt
     }
 }
-export class Adapt extends BaseClass {
+class Adapt extends BaseClass {
     /**
      * 获取实际xy坐标
      * @param x
@@ -16,3 +16,5 @@ export class Adapt extends BaseClass {
         return { x: x, y: y };
     }
 }
+
+export default Adapt;

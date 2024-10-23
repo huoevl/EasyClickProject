@@ -1,6 +1,6 @@
 import { Root } from "../pkg/Root";
 import { CloseView } from "../pkg/misc/CloseView";
-import { Adapt } from "./Adapt";
+import Adapt from "./Adapt";
 import { BaseClass } from "./BaseClass";
 import { EcRoot } from "./EcRoot";
 declare global {

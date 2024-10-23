@@ -1,3 +1,5 @@
+import { rectTemp } from "./Const";
+
 export class Utils {
     /**
      * 根据寻图结果获取相似度最高的区域

@@ -1,4 +1,6 @@
 import { BaseClass } from "../../_base/BaseClass";
+import { sleepTime100 } from "../../_base/Const";
+import { MiscImgData } from "./MiscConst";
 declare global {
     interface IModuleMap {
         /** 通用关闭界面 */
