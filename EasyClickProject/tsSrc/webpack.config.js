@@ -1,3 +1,4 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require("path");
 const glob = require('glob');
 
@@ -27,6 +28,9 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
+    plugins: [
+        new CleanWebpackPlugin()
+    ],
     module: {
         rules: [
             {
