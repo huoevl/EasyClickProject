@@ -17,6 +17,7 @@ export class CloseView extends BaseClass {
                 let isClick = ccf.ecRoot.findImgRandClick("misc", data, true)
                 if (isClick) {
                     click = true;
+                    ccf.ecRoot.freeScreenshot();
                 }
             }
         }

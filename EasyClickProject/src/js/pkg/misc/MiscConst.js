@@ -16,6 +16,7 @@ exports.MiscImgData = void 0;
 exports.MiscImgData = (_a = {},
     _a["close1" /* CloseFileName.Close1 */] = { name: "close1" /* CloseFileName.Close1 */, x: 825, y: 116, width: 73, height: 64 },
     _a["use1" /* CloseFileName.Use1 */] = { name: "use1" /* CloseFileName.Use1 */, x: 844, y: 554, width: 53, height: 30 },
+    _a["mian_fei_linqu1" /* CloseFileName.MianFeiLq */] = { name: "mian_fei_linqu1" /* CloseFileName.MianFeiLq */, x: 453, y: 522, width: 109, height: 21 },
     _a);
 
 })();

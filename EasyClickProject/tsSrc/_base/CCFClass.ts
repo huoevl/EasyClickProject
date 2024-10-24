@@ -1,4 +1,5 @@
 import { Root } from "../pkg/Root";
+import { Game } from "../pkg/_base/Game";
 import { CloseView } from "../pkg/misc/CloseView";
 import Adapt from "./Adapt";
 import { BaseClass } from "./BaseClass";
@@ -14,5 +15,6 @@ export class CCF extends BaseClass {
         ccf.closeView = CloseView.getIns();
         ccf.adpat = Adapt.getIns();
         ccf.ecRoot = EcRoot.getIns();
+        ccf.game = Game.getIns();
     }
 }

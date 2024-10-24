@@ -160,7 +160,7 @@ var EcRoot = /** @class */ (function (_super) {
                 sleep(Const_1.sleepTime100);
                 var rect = Utils_1.Utils.getPointsRectTemp(points);
                 if (rect) {
-                    Debug_1.Debug.loggerE("寻图成功！" + data.name + "点击");
+                    Debug_1.Debug.loggerD("寻图成功！" + data.name + "点击");
                     clickRandomRect(rect);
                     result = true;
                 }

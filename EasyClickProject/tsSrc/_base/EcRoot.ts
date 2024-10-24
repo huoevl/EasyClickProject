@@ -38,7 +38,7 @@ export class EcRoot extends BaseClass {
                 sleep(sleepTime100);
                 let rect = Utils.getPointsRectTemp(points);
                 if (rect) {
-                    Debug.loggerE("寻图成功！" + data.name + "点击");
+                    Debug.loggerD("寻图成功！" + data.name + "点击");
                     clickRandomRect(rect)
                     result = true;
                 }
