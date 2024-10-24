@@ -2,8 +2,8 @@
 <module type="EC_MODULE_TYPE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/game_shumen">
-      <sourceFolder url="file://$MODULE_DIR$/game_shumen/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/EasyClickProject">
+      <sourceFolder url="file://$MODULE_DIR$/EasyClickProject/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
