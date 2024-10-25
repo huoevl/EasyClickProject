@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "tsc": "webpack --config webpack.config.js"
+    "tsc": "webpack --config webpack.config.js",
+    "tsc2": "ts-node ./scripts/Build.ts && webpack --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,4 +1,3 @@
-var ccf;
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -77,12 +76,25 @@ exports.BaseClass = BaseClass;
 
 /***/ }),
 
+/***/ "./_base/CCF.ts":
+/*!**********************!*\
+  !*** ./_base/CCF.ts ***!
+  \**********************/
+/***/ (() => {
+
+
+var ccf = {};
+
+
+/***/ }),
+
 /***/ "./_base/CCFClass.ts":
 /*!***************************!*\
   !*** ./_base/CCFClass.ts ***!
   \***************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -104,7 +116,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CCF = void 0;
-var Root_1 = __webpack_require__(/*! ../pkg/Root */ "./pkg/Root.ts");
+var GameRoot_1 = __webpack_require__(/*! ../pkg/_base/GameRoot */ "./pkg/_base/GameRoot.ts");
+var MainTask_1 = __webpack_require__(/*! ../pkg/daily/MainTask */ "./pkg/daily/MainTask.ts");
 var CloseView_1 = __webpack_require__(/*! ../pkg/misc/CloseView */ "./pkg/misc/CloseView.ts");
 var Adapt_1 = __importDefault(__webpack_require__(/*! ./Adapt */ "./_base/Adapt.ts"));
 var BaseClass_1 = __webpack_require__(/*! ./BaseClass */ "./_base/BaseClass.ts");
@@ -115,10 +128,11 @@ var CCF = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     CCF.prototype.init = function () {
-        ccf.root = Root_1.Root.getIns();
-        ccf.closeView = CloseView_1.CloseView.getIns();
+        ccf.gameRoot = GameRoot_1.GameRoot.getIns();
         ccf.adpat = Adapt_1.default.getIns();
         ccf.ecRoot = EcRoot_1.EcRoot.getIns();
+        ccf.mainTask = MainTask_1.MainTask.getIns();
+        ccf.closeView = CloseView_1.CloseView.getIns();
     };
     return CCF;
 }(BaseClass_1.BaseClass));
@@ -134,8 +148,9 @@ exports.CCF = CCF;
 /***/ ((__unused_webpack_module, exports) => {
 
 
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.sleepTime3000 = exports.sleepTime2000 = exports.sleepTime1000 = exports.sleepTime500 = exports.sleepTime400 = exports.sleepTime300 = exports.sleepTime200 = exports.sleepTime100 = exports.rectTemp = void 0;
+exports.AndroidSdkToV = exports.sleepTime3000 = exports.sleepTime2000 = exports.sleepTime1000 = exports.sleepTime500 = exports.sleepTime400 = exports.sleepTime300 = exports.sleepTime200 = exports.sleepTime100 = exports.rectTemp = void 0;
 exports.rectTemp = new Rect();
 exports.sleepTime100 = 100;
 exports.sleepTime200 = 200;
@@ -145,6 +160,28 @@ exports.sleepTime500 = 500;
 exports.sleepTime1000 = 1000;
 exports.sleepTime2000 = 2000;
 exports.sleepTime3000 = 3000;
+var numberMapping = {
+    35: 15,
+    34: 13
+};
+/** 安卓sdk对应的安卓版本 */
+exports.AndroidSdkToV = (_a = {},
+    _a[35] = 15,
+    _a[34] = 14,
+    _a[33] = 13,
+    _a[32] = 12,
+    _a[31] = 12,
+    _a[30] = 11,
+    _a[29] = 10,
+    _a[28] = 9,
+    _a[27] = 8.1,
+    _a[26] = 8,
+    _a[25] = 7.1,
+    _a[24] = 7,
+    _a[23] = 6,
+    _a[22] = 5.1,
+    _a[21] = 5,
+    _a);
 
 
 /***/ }),
@@ -167,9 +204,15 @@ var Debug = /** @class */ (function () {
      * @param img
      * @param name
      */
-    Debug.saveToDebug = function (img, name) {
+    Debug.saveToDebug = function (img, name, isBitmap) {
         var url = DebugImgPath + name + ".png";
-        var result = image.saveTo(img, url);
+        var result = false;
+        if (isBitmap) {
+            result = image.saveBitmap(img, "png", 100, url);
+        }
+        else {
+            result = image.saveTo(img, url);
+        }
         if (result) {
             this.loggerD("保存截图成功：" + url);
         }
@@ -204,6 +247,7 @@ exports.Debug = Debug;
   \*************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -333,10 +377,10 @@ exports.Utils = Utils;
 
 /***/ }),
 
-/***/ "./pkg/Root.ts":
-/*!*********************!*\
-  !*** ./pkg/Root.ts ***!
-  \*********************/
+/***/ "./pkg/_base/GameRoot.ts":
+/*!*******************************!*\
+  !*** ./pkg/_base/GameRoot.ts ***!
+  \*******************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -356,19 +400,21 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Root = void 0;
-var BaseClass_1 = __webpack_require__(/*! ../_base/BaseClass */ "./_base/BaseClass.ts");
-var Const_1 = __webpack_require__(/*! ../_base/Const */ "./_base/Const.ts");
-var Debug_1 = __webpack_require__(/*! ../_base/Debug */ "./_base/Debug.ts");
-var Root = /** @class */ (function (_super) {
-    __extends(Root, _super);
-    function Root() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.isHasJietu = false;
-        return _this;
+exports.GameRoot = void 0;
+var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var Const_1 = __webpack_require__(/*! ../../_base/Const */ "./_base/Const.ts");
+var Debug_1 = __webpack_require__(/*! ../../_base/Debug */ "./_base/Debug.ts");
+var GameRoot = /** @class */ (function (_super) {
+    __extends(GameRoot, _super);
+    function GameRoot() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    /** 是否拥有截图权限 */
-    Root.prototype.exec = function () {
+    GameRoot.prototype.init = function () {
+        this.initCapture();
+        this.initOcr();
+    };
+    /** 初始化截图 */
+    GameRoot.prototype.initCapture = function () {
         image.setInitParam({
             "action_timeout": 10000,
             "auto_click_request_dialog": false
@@ -376,24 +422,133 @@ var Root = /** @class */ (function (_super) {
         image.setFindColorImageMode(2);
         var req = startEnv();
         if (!req) {
-            toast("申请自动化权限失败");
+            Debug_1.Debug.loggerE("申请自动化权限失败");
             return;
         }
         var request = image.requestScreenCapture(Const_1.sleepTime2000, 0);
         if (request) {
-            this.isHasJietu = true;
-            toast("申请截图成功");
+            this.isCanJieTu = true;
+            Debug_1.Debug.loggerD(this.isCanJieTu);
+            Debug_1.Debug.loggerD("申请截图成功");
         }
         else {
-            toast("申请截图失败");
+            Debug_1.Debug.loggerE("申请截图失败");
         }
         var d = image.initOpenCV();
         Debug_1.Debug.loggerD(d);
         sleep(Const_1.sleepTime2000);
     };
-    return Root;
+    /** 初始化OCR识别 */
+    GameRoot.prototype.initOcr = function () {
+        var _this = this;
+        this.ocrObj = ocr.newOcr();
+        setStopCallback(function () {
+            var _a;
+            (_a = _this.ocrObj) === null || _a === void 0 ? void 0 : _a.releaseAll();
+        });
+        if (!isServiceOk()) {
+            startEnv();
+        }
+        var data = {
+            type: "ocrLite" /* OCRType.OcrLite */,
+            padding: 20,
+            maxSideLen: 0,
+            numThread: 1
+        };
+        var result = this.isInit = this.ocrObj.initOcr(data);
+        if (!result) {
+            Debug_1.Debug.loggerE("初始化图文识别失败：", this.ocrObj.getErrorMsg());
+        }
+        sleep(Const_1.sleepTime1000);
+    };
+    /**
+     * 获取文字识别文本
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    GameRoot.prototype.getOcrTxt = function (x, y, width, height) {
+        var _a;
+        if (!this.isInit) {
+            return "";
+        }
+        var tempbitmap = image.captureScreenBitmap("png", x, y, x + width, y + height, 100);
+        var tempbitmapEZ = image.binaryzationBitmap(tempbitmap, 1, 120);
+        Debug_1.Debug.saveToDebug(tempbitmapEZ, "文字识别截图", true);
+        var result = ((_a = this.ocrObj) === null || _a === void 0 ? void 0 : _a.ocrBitmap(tempbitmapEZ, 10000, {})) || [];
+        var label = "";
+        Debug_1.Debug.loggerD("文字识别结果：", JSON.stringify(result));
+        for (var i = 0; i < result.length; i++) {
+            var value = result[i];
+            if (value.confidence > 50) {
+                label = value.label || "";
+                break;
+            }
+        }
+        image.recycle(tempbitmap);
+        image.recycle(tempbitmapEZ);
+        return label;
+    };
+    /**
+    * 是否站立
+    */
+    GameRoot.prototype.isStand = function () {
+        var _a, _b;
+        var txt1 = (_a = this.getOcrTxt(1148, 21, 83, 17).match(/[0-9]/g)) === null || _a === void 0 ? void 0 : _a.join("");
+        sleep(Const_1.sleepTime500);
+        var txt2 = (_b = this.getOcrTxt(1148, 21, 83, 16).match(/[0-9]/g)) === null || _b === void 0 ? void 0 : _b.join("");
+        Debug_1.Debug.loggerD("是否站立：", txt1, txt2);
+        if (!txt1 || !txt2) {
+            Debug_1.Debug.loggerE("文字识别出错");
+            return false;
+        }
+        return txt1 === txt2;
+    };
+    return GameRoot;
 }(BaseClass_1.BaseClass));
-exports.Root = Root;
+exports.GameRoot = GameRoot;
+
+
+/***/ }),
+
+/***/ "./pkg/daily/MainTask.ts":
+/*!*******************************!*\
+  !*** ./pkg/daily/MainTask.ts ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MainTask = void 0;
+var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var MainTask = /** @class */ (function (_super) {
+    __extends(MainTask, _super);
+    function MainTask() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MainTask.prototype.exec = function () {
+        ccf.gameRoot.isStand();
+    };
+    return MainTask;
+}(BaseClass_1.BaseClass));
+exports.MainTask = MainTask;
 
 
 /***/ }),
@@ -404,6 +559,7 @@ exports.Root = Root;
   \*******************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -511,6 +667,7 @@ var exports = __webpack_exports__;
 /*!*****************!*\
   !*** ./main.ts ***!
   \*****************/
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Main = void 0;
@@ -522,25 +679,23 @@ var Main = /** @class */ (function () {
         itself.exec();
     }
     Main.prototype.exec = function () {
-        if (!ccf.root.isHasJietu) {
-            Debug_1.Debug.loggerD("截图失败？？？", String(ccf.root.isHasJietu));
+        if (!ccf.gameRoot.isCanJieTu) {
             return;
         }
         Debug_1.Debug.loggerD("开始运行");
         this.loopExec();
     };
     Main.prototype.loopExec = function () {
-        ccf.closeView.exec();
+        // ccf.closeView.exec();
+        ccf.mainTask.exec();
     };
     return Main;
 }());
 exports.Main = Main;
 CCFClass_1.CCF.getIns();
-ccf.root.exec();
 new Main();
 
 })();
 
-ccf = __webpack_exports__;
 /******/ })()
 ;

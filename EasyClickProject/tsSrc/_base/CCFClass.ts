@@ -1,5 +1,5 @@
-import { Root } from "../pkg/Root";
-import { Game } from "../pkg/_base/Game";
+import { GameRoot } from "../pkg/_base/GameRoot";
+import { MainTask } from "../pkg/daily/MainTask";
 import { CloseView } from "../pkg/misc/CloseView";
 import Adapt from "./Adapt";
 import { BaseClass } from "./BaseClass";
@@ -11,10 +11,11 @@ declare global {
 }
 export class CCF extends BaseClass {
     init() {
-        ccf.root = Root.getIns();
-        ccf.closeView = CloseView.getIns();
+        ccf.gameRoot = GameRoot.getIns();
         ccf.adpat = Adapt.getIns();
         ccf.ecRoot = EcRoot.getIns();
-        ccf.game = Game.getIns();
+
+        ccf.mainTask = MainTask.getIns();
+        ccf.closeView = CloseView.getIns();
     }
 }

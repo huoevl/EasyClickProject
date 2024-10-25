@@ -7,17 +7,16 @@ export class Main {
         itself.exec();
     }
     exec() {
-        if (!ccf.root.isHasJietu) {
-            Debug.loggerD("截图失败？？？", String(ccf.root.isHasJietu))
+        if (!ccf.gameRoot.isCanJieTu) {
             return;
         }
         Debug.loggerD("开始运行")
         this.loopExec();
     }
     loopExec() {
-        ccf.closeView.exec();
+        // ccf.closeView.exec();
+        ccf.mainTask.exec();
     }
 }
 CCF.getIns();
-ccf.root.exec();
 new Main();

@@ -3883,7 +3883,7 @@ declare function imeInputText(selectors: any, content: any): boolean;
  * 适配EC 9.18.0+
  * @return {boolean|布尔型} true代表视图展示 false代表未展示
  */
-declare function imeInputViewShown(): boolean ;
+declare function imeInputViewShown(): boolean;
 /**
  * 使用输入法输入内容，前提是已经设置本程序的输入法为默认输入法
  * @param selectors  选择器
@@ -4244,14 +4244,14 @@ declare function getNextSiblingNodeInfo(nodeinfo: any): any[];
  * @param content 数据字符串
  * @return {boolean|布尔型}
  */
-declare function inputTextNodeInfo(nodeinfo: any, content: any): boolean ;
+declare function inputTextNodeInfo(nodeinfo: any, content: any): boolean;
 /**
  * 对某个节点粘贴数据
  * @param nodeinfo NodeInfo对象
  * @param content 数据字符串
  * @return {boolean|布尔型}
  */
-declare function pasteTextNodeInfo(nodeinfo: any, content: any): boolean ;
+declare function pasteTextNodeInfo(nodeinfo: any, content: any): boolean;
 /**
  * 使用输入法对某个节点输入数据，前提是已经设置本程序的输入法为默认输入法
  * @param nodeinfo NodeInfo对象
@@ -6276,8 +6276,8 @@ declare class OcrInst {
      * @param extra 扩展参数，map形式，例如 {"token":"xxx"}
      * @return {JSON} JSON对象
      */
-    ocrBitmap(bitmap: any, timeout: any, extra: any): JSON;
-    ocrImage(img: any, timeout: any, extra: any): any;
+    ocrBitmap(bitmap: any, timeout: number, extra: any): IOcrBitMap[];
+    ocrImage(img: any, timeout: any, extra: any): IOcrBitMap[];
 }
 declare function Yolov8Wrapper(): void;
 declare class Yolov8Wrapper {
