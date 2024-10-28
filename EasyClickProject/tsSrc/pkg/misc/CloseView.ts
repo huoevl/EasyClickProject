@@ -14,7 +14,7 @@ export class CloseView extends BaseClass {
         for (const name in MiscImgData) {
             if (Object.prototype.hasOwnProperty.call(MiscImgData, name)) {
                 const data = MiscImgData[name];
-                let isClick = ccf.ecRoot.findImgRandClick("misc", data, true)
+                let isClick = ccf.ecRoot.findImgRandClick(data, true)
                 if (isClick) {
                     click = true;
                     ccf.ecRoot.freeScreenshot();

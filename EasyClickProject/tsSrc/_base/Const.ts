@@ -1,3 +1,5 @@
+import { MoudleName } from "../pkg/_base/PkgConst";
+
 export const rectTemp = new Rect();
 export const sleepTime100 = 100;
 export const sleepTime200 = 200;
@@ -8,15 +10,21 @@ export const sleepTime1000 = 1000;
 export const sleepTime2000 = 2000;
 export const sleepTime3000 = 3000;
 
-
-
-export interface IFindImgData {
-    /** 文件名 */
-    name: string;
+/**
+ * 起始坐标和终点
+ */
+export interface IPoint2 {
     x: number;
     y: number;
-    width: number;
-    height: number;
+    x1: number;
+    y1: number;
+}
+export interface IFindImgData {
+    moudleName: MoudleName,
+    /** 文件名 */
+    name: string;
+    /** 寻图区域，要比截图区域大，用来做点击区域,x,y,x1,y1 */
+    rect: [number, number, number, number]
 }
 const numberMapping: { [key: number]: number } = {
     35: 15,

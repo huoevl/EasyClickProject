@@ -1,4 +1,5 @@
 import { CCF } from "./_base/CCFClass";
+import { sleepTime2000 } from "./_base/Const";
 import { Debug } from "./_base/Debug";
 
 export class Main {
@@ -7,15 +8,17 @@ export class Main {
         itself.exec();
     }
     exec() {
-        if (!ccf.gameRoot.isCanJieTu) {
+        if (!ccf.ecInit.isScreenInit || !ccf.ecInit.isOpenCVInit) {
             return;
         }
         Debug.loggerD("开始运行")
         this.loopExec();
     }
     loopExec() {
-        // ccf.closeView.exec();
-        ccf.mainTask.exec();
+        while (ccf.ecInit.isLoop) {
+            ccf.mainTask.exec();
+            sleep(sleepTime2000);
+        }
     }
 }
 CCF.getIns();

@@ -23,10 +23,12 @@ export class Debug {
     }
 
     static loggerD(...msg: (string | number | boolean | undefined)[]) {
-        logd(msg.join("。"));
+        logd(msg.join("，"));
     }
-
+    static loggerW(...msg: (string | number | boolean | undefined)[]) {
+        logw(msg.join("，"));
+    }
     static loggerE(...msg: (string | number | boolean | undefined)[]) {
-        loge(msg.join("。"));
+        loge(msg.join("，"));
     }
 }

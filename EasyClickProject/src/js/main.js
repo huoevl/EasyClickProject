@@ -32,13 +32,14 @@ var Adapt = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * 获取实际xy坐标
+     * 获取实际xy,x1y1坐标
      * @param x
      * @param y
-     * @returns {{x, y}}
+     * @param x1
+     * @param y1
      */
-    Adapt.prototype.getXy = function (x, y) {
-        return { x: x, y: y };
+    Adapt.prototype.getAdaptXy2 = function (x, y, x1, y1) {
+        return { x: x, y: y, x1: x1, y1: y1 };
     };
     return Adapt;
 }(BaseClass_1.BaseClass));
@@ -121,16 +122,20 @@ var MainTask_1 = __webpack_require__(/*! ../pkg/daily/MainTask */ "./pkg/daily/M
 var CloseView_1 = __webpack_require__(/*! ../pkg/misc/CloseView */ "./pkg/misc/CloseView.ts");
 var Adapt_1 = __importDefault(__webpack_require__(/*! ./Adapt */ "./_base/Adapt.ts"));
 var BaseClass_1 = __webpack_require__(/*! ./BaseClass */ "./_base/BaseClass.ts");
+var EcInit_1 = __webpack_require__(/*! ./EcInit */ "./_base/EcInit.ts");
 var EcRoot_1 = __webpack_require__(/*! ./EcRoot */ "./_base/EcRoot.ts");
+var Temp_1 = __webpack_require__(/*! ./Temp */ "./_base/Temp.ts");
 var CCF = /** @class */ (function (_super) {
     __extends(CCF, _super);
     function CCF() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     CCF.prototype.init = function () {
-        ccf.gameRoot = GameRoot_1.GameRoot.getIns();
+        ccf.temp = Temp_1.Temp.getIns();
         ccf.adpat = Adapt_1.default.getIns();
+        ccf.ecInit = EcInit_1.EcInit.getIns();
         ccf.ecRoot = EcRoot_1.EcRoot.getIns();
+        ccf.gameRoot = GameRoot_1.GameRoot.getIns();
         ccf.mainTask = MainTask_1.MainTask.getIns();
         ccf.closeView = CloseView_1.CloseView.getIns();
     };
@@ -225,18 +230,123 @@ var Debug = /** @class */ (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             msg[_i] = arguments[_i];
         }
-        logd(msg.join("。"));
+        logd(msg.join("，"));
+    };
+    Debug.loggerW = function () {
+        var msg = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            msg[_i] = arguments[_i];
+        }
+        logw(msg.join("，"));
     };
     Debug.loggerE = function () {
         var msg = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             msg[_i] = arguments[_i];
         }
-        loge(msg.join("。"));
+        loge(msg.join("，"));
     };
     return Debug;
 }());
 exports.Debug = Debug;
+
+
+/***/ }),
+
+/***/ "./_base/EcInit.ts":
+/*!*************************!*\
+  !*** ./_base/EcInit.ts ***!
+  \*************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.EcInit = void 0;
+var BaseClass_1 = __webpack_require__(/*! ./BaseClass */ "./_base/BaseClass.ts");
+var Const_1 = __webpack_require__(/*! ./Const */ "./_base/Const.ts");
+var Debug_1 = __webpack_require__(/*! ./Debug */ "./_base/Debug.ts");
+var EcInit = /** @class */ (function (_super) {
+    __extends(EcInit, _super);
+    function EcInit() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    EcInit.prototype.init = function () {
+        this.isLoop = true;
+        if (!isServiceOk()) {
+            startEnv();
+        }
+        if (!isServiceOk()) {
+            Debug_1.Debug.loggerE("申请自动化权限失败");
+            return;
+        }
+        this.initCapture();
+        // this.initOcr();
+    };
+    /** 初始化截图 */
+    EcInit.prototype.initCapture = function () {
+        image.setInitParam({
+            "action_timeout": 10000,
+            "auto_click_request_dialog": false
+        });
+        image.setFindColorImageMode(2);
+        var request = image.requestScreenCapture(Const_1.sleepTime2000, 0);
+        if (request) {
+            this.isScreenInit = true;
+            Debug_1.Debug.loggerD("申请截图成功");
+        }
+        else {
+            Debug_1.Debug.loggerE("申请截图失败");
+        }
+        var d = image.initOpenCV();
+        if (d) {
+            this.isOpenCVInit = true;
+        }
+        else {
+            Debug_1.Debug.loggerE("初始化OpenCV失败");
+        }
+        sleep(Const_1.sleepTime2000);
+    };
+    /** 初始化OCR识别 */
+    EcInit.prototype.initOcr = function () {
+        var _this = this;
+        this.ocrObj = ocr.newOcr();
+        setStopCallback(function () {
+            var _a;
+            (_a = _this.ocrObj) === null || _a === void 0 ? void 0 : _a.releaseAll();
+        });
+        if (!isServiceOk()) {
+            startEnv();
+        }
+        var data = {
+            type: "ocrLite" /* OCRType.OcrLite */,
+            padding: 20,
+            maxSideLen: 0,
+            numThread: 1
+        };
+        var result = this.isOcrInit = this.ocrObj.initOcr(data);
+        if (!result) {
+            Debug_1.Debug.loggerE("初始化图文识别失败：", this.ocrObj.getErrorMsg());
+        }
+        sleep(Const_1.sleepTime1000);
+    };
+    return EcInit;
+}(BaseClass_1.BaseClass));
+exports.EcInit = EcInit;
 
 
 /***/ }),
@@ -276,36 +386,42 @@ var EcRoot = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * 寻图并随机范围点击
+     * @deprecated
+     */
+    EcRoot.prototype.exec = function () { };
+    /**
+     * 是否寻图成功
      * @param moduleName
      * @param data
      * @param isUseLast 是否使用上一次截图
      * @returns
      */
-    EcRoot.prototype.findImgRandClick = function (moduleName, data, isUseLast) {
-        if (moduleName != this.lastMdName) {
-            this.lastMdName = moduleName;
+    EcRoot.prototype.findImgRandClick = function (data, isUseLast) {
+        var _a;
+        if (data.moudleName != this.lastMdName) {
+            this.lastMdName = data.moudleName;
             this.freeScreenshot();
         }
-        var url = moduleName + "/" + data.name + ".png";
+        var url = data.moudleName + "/" + data.name + ".png";
         logd(url);
         var img = readResAutoImage(url);
         var result = false;
         this.screenshot = this.screenshot || image.captureFullScreen();
         if (this.screenshot != null) {
-            var xy = ccf.adpat.getXy(data.x, data.y);
-            var points = image.findImage(this.screenshot, img, xy.x, xy.y, data.width, data.height, 0.7, 0.9, 1, 5);
-            if (points && points.length) {
+            var adpXy2 = (_a = ccf.adpat).getAdaptXy2.apply(_a, data.rect);
+            var rests = image.findImage(this.screenshot, img, adpXy2.x, adpXy2.y, adpXy2.x1, adpXy2.y1, 0.7, 0.9, 1, 5);
+            if (rests && rests.length) {
                 sleep(Const_1.sleepTime100);
-                var rect = Utils_1.Utils.getPointsRectTemp(points);
+                var rect = Utils_1.Utils.getRectByArray(rests);
                 if (rect) {
                     Debug_1.Debug.loggerD("寻图成功！" + data.name + "点击");
-                    clickRandomRect(rect);
+                    this.clickRand(adpXy2);
                     result = true;
                 }
             }
             else {
-                Debug_1.Debug.loggerE("寻图失败！" + data.name);
+                Debug_1.Debug.loggerW(JSON.stringify(adpXy2));
+                Debug_1.Debug.loggerW("寻图失败！" + data.name);
                 sleep(Const_1.sleepTime100);
             }
         }
@@ -316,6 +432,20 @@ var EcRoot = /** @class */ (function (_super) {
         return result;
     };
     /**
+     * 随机点击
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    EcRoot.prototype.clickRand = function (point2) {
+        Const_1.rectTemp.left = point2.x;
+        Const_1.rectTemp.top = point2.y;
+        Const_1.rectTemp.right = point2.x1;
+        Const_1.rectTemp.bottom = point2.y1;
+        clickRandomRect(Const_1.rectTemp);
+    };
+    /**
      * 释放截图
      */
     EcRoot.prototype.freeScreenshot = function () {
@@ -324,9 +454,99 @@ var EcRoot = /** @class */ (function (_super) {
             this.screenshot = null;
         }
     };
+    /**
+     * 获取文字识别文本
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    EcRoot.prototype.getOcrTxt = function (x, y, x1, y1) {
+        var _a;
+        if (!ccf.ecInit.isOcrInit) {
+            return "";
+        }
+        var tempbitmap = image.captureScreenBitmap("png", x, y, x1, y1, 100);
+        var tempbitmapEZ = image.binaryzationBitmap(tempbitmap, 1, 120);
+        Debug_1.Debug.saveToDebug(tempbitmapEZ, "文字识别截图", true);
+        var result = ((_a = ccf.ecInit.ocrObj) === null || _a === void 0 ? void 0 : _a.ocrBitmap(tempbitmapEZ, 10000, {})) || [];
+        var label = "";
+        Debug_1.Debug.loggerD("文字识别结果：", JSON.stringify(result));
+        for (var i = 0; i < result.length; i++) {
+            var value = result[i];
+            if (value.confidence > 50) {
+                label = value.label || "";
+                break;
+            }
+        }
+        image.recycle(tempbitmap);
+        image.recycle(tempbitmapEZ);
+        return label;
+    };
+    /**
+     * 获取屏幕bitmap颜色数组
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param binaryNum 二值化数据，不传这不做二值化
+     * @returns
+     */
+    EcRoot.prototype.getScreenBitMapColors = function (x, y, x1, y1, binaryNum) {
+        var bitmap = image.captureScreenBitmap("png", x, y, x1, y1, 100);
+        if (binaryNum) {
+            bitmap = image.binaryzationBitmap(bitmap, 1, binaryNum);
+        }
+        var w = bitmap.getWidth();
+        var h = bitmap.getHeight();
+        var mPixels = image.getPixelsBitmap(bitmap, w * h, 0, w, 0, 0, w, h);
+        //图片要回收
+        image.recycle(bitmap);
+        return mPixels;
+    };
     return EcRoot;
 }(BaseClass_1.BaseClass));
 exports.EcRoot = EcRoot;
+
+
+/***/ }),
+
+/***/ "./_base/Temp.ts":
+/*!***********************!*\
+  !*** ./_base/Temp.ts ***!
+  \***********************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Temp = void 0;
+var BaseClass_1 = __webpack_require__(/*! ./BaseClass */ "./_base/BaseClass.ts");
+var Temp = /** @class */ (function (_super) {
+    __extends(Temp, _super);
+    function Temp() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Temp.prototype.init = function () {
+        this.index = 0;
+    };
+    return Temp;
+}(BaseClass_1.BaseClass));
+exports.Temp = Temp;
 
 
 /***/ }),
@@ -346,23 +566,23 @@ var Utils = /** @class */ (function () {
     }
     /**
      * 根据寻图结果获取相似度最高的区域
-     * @param {Array} points points：[{"top":135,"bottom":158,"left":853,"right":875,"similarity":1}]
+     * @param {Array} rects points：[{"top":135,"bottom":158,"left":853,"right":875,"similarity":1}]
      * @returns {Rect}
      */
-    Utils.getPointsRectTemp = function (points) {
-        if (!Array.isArray(points)) {
-            return null;
+    Utils.getRectByArray = function (rects) {
+        if (!Array.isArray(rects)) {
+            return;
         }
         var similarity = 0;
         var pointTemp = null;
-        for (var index_1 = 0; index_1 < points.length; index_1++) {
-            var point = points[index_1];
+        for (var index_1 = 0; index_1 < rects.length; index_1++) {
+            var point = rects[index_1];
             if (point.similarity > similarity) {
                 pointTemp = point;
             }
         }
         if (!pointTemp) {
-            return null;
+            return;
         }
         Const_1.rectTemp.left = pointTemp.left;
         Const_1.rectTemp.right = pointTemp.right;
@@ -383,6 +603,7 @@ exports.Utils = Utils;
   \*******************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -403,111 +624,47 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GameRoot = void 0;
 var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
 var Const_1 = __webpack_require__(/*! ../../_base/Const */ "./_base/Const.ts");
-var Debug_1 = __webpack_require__(/*! ../../_base/Debug */ "./_base/Debug.ts");
 var GameRoot = /** @class */ (function (_super) {
     __extends(GameRoot, _super);
     function GameRoot() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    GameRoot.prototype.init = function () {
-        this.initCapture();
-        this.initOcr();
-    };
-    /** 初始化截图 */
-    GameRoot.prototype.initCapture = function () {
-        image.setInitParam({
-            "action_timeout": 10000,
-            "auto_click_request_dialog": false
-        });
-        image.setFindColorImageMode(2);
-        var req = startEnv();
-        if (!req) {
-            Debug_1.Debug.loggerE("申请自动化权限失败");
-            return;
-        }
-        var request = image.requestScreenCapture(Const_1.sleepTime2000, 0);
-        if (request) {
-            this.isCanJieTu = true;
-            Debug_1.Debug.loggerD(this.isCanJieTu);
-            Debug_1.Debug.loggerD("申请截图成功");
-        }
-        else {
-            Debug_1.Debug.loggerE("申请截图失败");
-        }
-        var d = image.initOpenCV();
-        Debug_1.Debug.loggerD(d);
-        sleep(Const_1.sleepTime2000);
-    };
-    /** 初始化OCR识别 */
-    GameRoot.prototype.initOcr = function () {
-        var _this = this;
-        this.ocrObj = ocr.newOcr();
-        setStopCallback(function () {
-            var _a;
-            (_a = _this.ocrObj) === null || _a === void 0 ? void 0 : _a.releaseAll();
-        });
-        if (!isServiceOk()) {
-            startEnv();
-        }
-        var data = {
-            type: "ocrLite" /* OCRType.OcrLite */,
-            padding: 20,
-            maxSideLen: 0,
-            numThread: 1
-        };
-        var result = this.isInit = this.ocrObj.initOcr(data);
-        if (!result) {
-            Debug_1.Debug.loggerE("初始化图文识别失败：", this.ocrObj.getErrorMsg());
-        }
-        sleep(Const_1.sleepTime1000);
-    };
-    /**
-     * 获取文字识别文本
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     */
-    GameRoot.prototype.getOcrTxt = function (x, y, width, height) {
-        var _a;
-        if (!this.isInit) {
-            return "";
-        }
-        var tempbitmap = image.captureScreenBitmap("png", x, y, x + width, y + height, 100);
-        var tempbitmapEZ = image.binaryzationBitmap(tempbitmap, 1, 120);
-        Debug_1.Debug.saveToDebug(tempbitmapEZ, "文字识别截图", true);
-        var result = ((_a = this.ocrObj) === null || _a === void 0 ? void 0 : _a.ocrBitmap(tempbitmapEZ, 10000, {})) || [];
-        var label = "";
-        Debug_1.Debug.loggerD("文字识别结果：", JSON.stringify(result));
-        for (var i = 0; i < result.length; i++) {
-            var value = result[i];
-            if (value.confidence > 50) {
-                label = value.label || "";
-                break;
-            }
-        }
-        image.recycle(tempbitmap);
-        image.recycle(tempbitmapEZ);
-        return label;
-    };
     /**
     * 是否站立
     */
     GameRoot.prototype.isStand = function () {
-        var _a, _b;
-        var txt1 = (_a = this.getOcrTxt(1148, 21, 83, 17).match(/[0-9]/g)) === null || _a === void 0 ? void 0 : _a.join("");
+        var colors1 = ccf.ecRoot.getScreenBitMapColors(1150, 21, 1225, 36, 120);
         sleep(Const_1.sleepTime500);
-        var txt2 = (_b = this.getOcrTxt(1148, 21, 83, 16).match(/[0-9]/g)) === null || _b === void 0 ? void 0 : _b.join("");
-        Debug_1.Debug.loggerD("是否站立：", txt1, txt2);
-        if (!txt1 || !txt2) {
-            Debug_1.Debug.loggerE("文字识别出错");
-            return false;
+        var colors2 = ccf.ecRoot.getScreenBitMapColors(1150, 21, 1225, 36, 120);
+        var same = 0;
+        for (var index_1 = 0, len = colors1.length; index_1 < len; index_1++) {
+            if (colors1[index_1] === colors2[index_1]) {
+                same++;
+            }
         }
-        return txt1 === txt2;
+        return same / colors1.length >= 0.97;
     };
     return GameRoot;
 }(BaseClass_1.BaseClass));
 exports.GameRoot = GameRoot;
+
+
+/***/ }),
+
+/***/ "./pkg/daily/MainConst.ts":
+/*!********************************!*\
+  !*** ./pkg/daily/MainConst.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DailyImgData = void 0;
+/** 通用关闭按钮信息 */
+exports.DailyImgData = (_a = {},
+    _a["main_task" /* DailyFileName.MainTask */] = { moudleName: "daily" /* MoudleName.Daily */, name: "main_task" /* DailyFileName.MainTask */, rect: [48, 173, 235, 201] },
+    _a);
 
 
 /***/ }),
@@ -538,13 +695,24 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MainTask = void 0;
 var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var Const_1 = __webpack_require__(/*! ../../_base/Const */ "./_base/Const.ts");
+var Debug_1 = __webpack_require__(/*! ../../_base/Debug */ "./_base/Debug.ts");
+var MainConst_1 = __webpack_require__(/*! ./MainConst */ "./pkg/daily/MainConst.ts");
 var MainTask = /** @class */ (function (_super) {
     __extends(MainTask, _super);
     function MainTask() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MainTask.prototype.exec = function () {
-        ccf.gameRoot.isStand();
+        ccf.closeView.exec();
+        var isStand = ccf.gameRoot.isStand();
+        if (!isStand) {
+            Debug_1.Debug.loggerD("行走中...");
+            sleep(Const_1.sleepTime2000);
+            return;
+        }
+        Debug_1.Debug.loggerD("站立中...");
+        ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
     };
     return MainTask;
 }(BaseClass_1.BaseClass));
@@ -591,7 +759,7 @@ var CloseView = /** @class */ (function (_super) {
         for (var name in MiscConst_1.MiscImgData) {
             if (Object.prototype.hasOwnProperty.call(MiscConst_1.MiscImgData, name)) {
                 var data = MiscConst_1.MiscImgData[name];
-                var isClick = ccf.ecRoot.findImgRandClick("misc", data, true);
+                var isClick = ccf.ecRoot.findImgRandClick(data, true);
                 if (isClick) {
                     click = true;
                     ccf.ecRoot.freeScreenshot();
@@ -625,9 +793,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MiscImgData = void 0;
 /** 通用关闭按钮信息 */
 exports.MiscImgData = (_a = {},
-    _a["close1" /* CloseFileName.Close1 */] = { name: "close1" /* CloseFileName.Close1 */, x: 825, y: 116, width: 73, height: 64 },
-    _a["use1" /* CloseFileName.Use1 */] = { name: "use1" /* CloseFileName.Use1 */, x: 844, y: 554, width: 53, height: 30 },
-    _a["mian_fei_linqu1" /* CloseFileName.MianFeiLq */] = { name: "mian_fei_linqu1" /* CloseFileName.MianFeiLq */, x: 453, y: 522, width: 109, height: 21 },
+    _a["mian_fei_linqu2" /* CloseFileName.MianFeiLq2 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "mian_fei_linqu2" /* CloseFileName.MianFeiLq2 */, rect: [437, 482, 578, 520] },
+    _a["close1" /* CloseFileName.Close1 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "close1" /* CloseFileName.Close1 */, rect: [843, 129, 884, 160] },
+    _a["use1" /* CloseFileName.Use1 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "use1" /* CloseFileName.Use1 */, rect: [805, 548, 936, 587] },
+    _a["mian_fei_linqu1" /* CloseFileName.MianFeiLq */] = { moudleName: "misc" /* MoudleName.Misc */, name: "mian_fei_linqu1" /* CloseFileName.MianFeiLq */, rect: [433, 513, 578, 552] },
     _a);
 
 
@@ -672,6 +841,7 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Main = void 0;
 var CCFClass_1 = __webpack_require__(/*! ./_base/CCFClass */ "./_base/CCFClass.ts");
+var Const_1 = __webpack_require__(/*! ./_base/Const */ "./_base/Const.ts");
 var Debug_1 = __webpack_require__(/*! ./_base/Debug */ "./_base/Debug.ts");
 var Main = /** @class */ (function () {
     function Main() {
@@ -679,15 +849,17 @@ var Main = /** @class */ (function () {
         itself.exec();
     }
     Main.prototype.exec = function () {
-        if (!ccf.gameRoot.isCanJieTu) {
+        if (!ccf.ecInit.isScreenInit || !ccf.ecInit.isOpenCVInit) {
             return;
         }
         Debug_1.Debug.loggerD("开始运行");
         this.loopExec();
     };
     Main.prototype.loopExec = function () {
-        // ccf.closeView.exec();
-        ccf.mainTask.exec();
+        while (ccf.ecInit.isLoop) {
+            ccf.mainTask.exec();
+            sleep(Const_1.sleepTime2000);
+        }
     };
     return Main;
 }());

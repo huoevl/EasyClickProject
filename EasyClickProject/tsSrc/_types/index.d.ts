@@ -5947,7 +5947,7 @@ declare class ImageWrapper {
      * @param height 　　　读取的行数
      * @return number 颜色值数组
      */
-    getPixelsBitmap(bitmap: any, arraySize: any, offset: any, stride: any, x: any, y: any, width: any, height: any): any;
+    getPixelsBitmap(bitmap: any, arraySize: any, offset: any, stride: any, x: any, y: any, width: any, height: any): number[];
     /**
      * 是否被回收了
      * @param img 图片对象
