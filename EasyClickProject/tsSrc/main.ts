@@ -1,6 +1,6 @@
-import { CCF } from "./_base/CCFClass";
 import { sleepTime2000 } from "./_base/Const";
 import { Debug } from "./_base/Debug";
+import { CCF } from "./pkg/_base/CCFClass";
 
 export class Main {
     constructor() {

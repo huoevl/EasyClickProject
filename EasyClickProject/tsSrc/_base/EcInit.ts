@@ -1,6 +1,5 @@
-import { IOCRParam, OCRType } from "../pkg/_base/GameConst";
 import { BaseClass } from "./BaseClass";
-import { sleepTime1000, sleepTime2000 } from "./Const";
+import { IOCRParam, OCRType, sleepTime1000, sleepTime2000 } from "./Const";
 import { Debug } from "./Debug";
 declare global {
     interface IModuleMap {
@@ -20,6 +19,9 @@ export class EcInit extends BaseClass {
     ocrObj: OcrInst | undefined;
 
     init() {
+        setExceptionCallback((err: string) => {
+            this.onEcErr(err)
+        })
         this.isLoop = true;
         if (!isServiceOk()) {
             startEnv();
@@ -29,7 +31,7 @@ export class EcInit extends BaseClass {
             return;
         }
         this.initCapture();
-        // this.initOcr();
+        this.initOcr();
     }
 
     /** 初始化截图 */
@@ -56,12 +58,12 @@ export class EcInit extends BaseClass {
         }
         sleep(sleepTime2000);
     }
+    onStop() {
+        this.ocrObj?.releaseAll();
+    }
     /** 初始化OCR识别 */
     private initOcr() {
         this.ocrObj = ocr.newOcr();
-        setStopCallback(() => {
-            this.ocrObj?.releaseAll();
-        })
         if (!isServiceOk()) {
             startEnv();
         }
@@ -77,6 +79,9 @@ export class EcInit extends BaseClass {
         }
         sleep(sleepTime1000);
     }
-
+    onEcErr(err: string) {
+        Debug.loggerE("脚本异常停止：")
+        Debug.loggerE(err)
+    }
 
 }

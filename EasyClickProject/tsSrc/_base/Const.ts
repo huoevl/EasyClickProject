@@ -23,13 +23,44 @@ export interface IFindImgData {
     moudleName: MoudleName,
     /** 文件名 */
     name: string;
-    /** 寻图区域，要比截图区域大，用来做点击区域,x,y,x1,y1 */
-    rect: [number, number, number, number]
+    /** 是否二值化 */
+    isBin?: boolean;
+    /** 寻图区域，要比截图区域大，可用来做点击区域,x,y,x1,y1 */
+    rect: [number, number, number, number];
+    /** 点击区域，如果没有点击区域则用寻图区域点击 */
+    clickRect?: [number, number, number, number]
 }
-const numberMapping: { [key: number]: number } = {
-    35: 15,
-    34: 13
-};
+export interface IFindTxtData {
+    txt: string;
+    /** 文本识别区域，可用来做点击区域,x,y,x1,y1 */
+    rect: [number, number, number, number];
+    /** 点击区域，如果没有点击区域则用文本识别区域点击 */
+    clickRect?: [number, number, number, number]
+}
+
+/** ocr类型：目前的OCR包含了mlkit,ocrLite,百度AI的easyedge,paddleocr,Tesseract,paddleOcrOnline和百度在线识别
+ *  此处只列举两个
+ */
+export const enum OCRType {
+    Mlkit = "mlkit",
+    OcrLite = "ocrLite"
+}
+/**
+ * ocr初始化参数：
+ * tess：{"type":"tess","language":"chi_sim","debug":false,"ocrEngineMode":3}
+ * baiduOnline：{"type":"baiduOnline","ak":"xxx","sk":"xx"}
+ * ocrLite:{"type":"ocrLite","numThread":4,"padding":10,"maxSideLen":0}
+ */
+export interface IOCRParam {
+    type?: OCRType,
+    /** 线程数量 */
+    numThread?: number,
+    /** 图像预处理，在图片外周添加白边，用于提升识别率，文字框没有正确框住所有文字时，增加此值 */
+    padding?: number,
+    /** 按图片最长边的长度：Math.min(maxSideLen,图片长度)，此值为0代表不缩放，例：1024 */
+    maxSideLen?: number
+}
+
 /** 安卓sdk对应的安卓版本 */
 export const AndroidSdkToV: { [key: number]: number } = {
     [35]: 15,
