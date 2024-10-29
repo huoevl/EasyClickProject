@@ -27,11 +27,11 @@ export class MainTask extends BaseClass {
             return;
         }
         Debug.loggerD("站立中...")
-        Debug.loggerD("检查剧情...")
-        const result = ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
-        if (!result) {
-            ccf.story.exec();
-            ccf.closeView.exec();
+        if (ccf.fabao.isFabaoView() && ccf.fabao.isCanUp()) {
+            ccf.fabao.doUp();
         }
+        ccf.story.exec();
+        ccf.closeView.exec();
+        const result = ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
     }
 }

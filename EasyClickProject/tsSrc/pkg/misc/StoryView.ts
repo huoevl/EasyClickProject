@@ -36,20 +36,20 @@ export class StoryView extends BaseClass {
         for (const name in StroyColorData) {
             if (Object.prototype.hasOwnProperty.call(StroyColorData, name)) {
                 const data = StroyColorData[name];
-                let result = ccf.ecRoot.cmpColor(data)
+                let result = ccf.ecRoot.cmpColor(data, null, true)
                 Debug.loggerD("剧情比色结果：", result)
                 if (result) {
                     click = true;
                     ccf.ecRoot.clickRandRect(data);
+                    ccf.ecRoot.freeScreenshot();
                     sleep(sleepTime500);
                 }
             }
         }
+        ccf.ecRoot.freeScreenshot();
         if (click) {
-            sleep(sleepTime500);
             this.exec();
         } else {
-            ccf.ecRoot.freeScreenshot();
             sleep(sleepTime500);
         }
     }

@@ -34,6 +34,8 @@ export interface IFindImgData extends IFindData {
     name: string;
     /** 是否二值化 */
     isBin?: boolean;
+    /** 是否不点击 */
+    isNotClick?: boolean;
 }
 export interface IFindTxtData extends IFindData {
     txt: string;

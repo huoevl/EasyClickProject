@@ -39,14 +39,14 @@ export class GameRoot extends BaseClass {
             Debug.loggerE("没有头像")
             return true;
         }
-        let screenshot = image.captureFullScreen();
-        const isFind = ccf.ecRoot.isFindImg(screenshot, this.headImg, ...SomePoints.PlayerHeadFind);
+        let screenshot = ccf.ecRoot.getFullScreen();
+        const isFind = ccf.ecRoot.findImg(screenshot, this.headImg, ...SomePoints.PlayerHeadFind);
         if (!isFind) {
             Debug.loggerD("非主场景站立")
-            image.recycle(screenshot);
+            ccf.ecRoot.freeScreenshot();
             return true;
         }
-        image.recycle(screenshot);
+        ccf.ecRoot.freeScreenshot();
         const colors1 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 120);
         sleep(sleepTime500);
         const colors2 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 120);

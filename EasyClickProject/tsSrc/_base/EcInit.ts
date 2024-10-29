@@ -60,6 +60,8 @@ export class EcInit extends BaseClass {
     }
     onStop() {
         this.ocrObj?.releaseAll();
+        image.releaseScreenCapture();
+        Debug.loggerW("停止运行回调")
     }
     /** 初始化OCR识别 */
     private initOcr() {

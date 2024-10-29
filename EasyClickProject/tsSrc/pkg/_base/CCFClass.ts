@@ -3,6 +3,7 @@ import { BaseClass } from "../../_base/BaseClass";
 import { EcInit } from "../../_base/EcInit";
 import { EcRoot } from "../../_base/EcRoot";
 import { Temp } from "../../_base/Temp";
+import { FaBaoView } from "../daily/FaBaoView";
 import { MainTask } from "../daily/MainTask";
 import { CloseView } from "../misc/CloseView";
 import { StoryView } from "../misc/StoryView";
@@ -23,5 +24,6 @@ export class CCF extends BaseClass {
         ccf.mainTask = MainTask.getIns();
         ccf.closeView = CloseView.getIns();
         ccf.story = StoryView.getIns();
+        ccf.fabao = FaBaoView.getIns();
     }
 }

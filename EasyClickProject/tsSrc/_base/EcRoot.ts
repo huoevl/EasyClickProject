@@ -33,7 +33,7 @@ export class EcRoot extends BaseClass {
      * @param big 大图
      * @param min 小图
      */
-    isFindImg(big: AutoImage | null, min: AutoImage, x: number, y: number, x1: number, y1: number) {
+    findImg(big: AutoImage | null, min: AutoImage, x: number, y: number, x1: number, y1: number) {
         if (!big || !min) {
             return false;
         }
@@ -68,7 +68,7 @@ export class EcRoot extends BaseClass {
         logd(url);
         let img = readResAutoImage(url);
         let result = false;
-        this.screenshot = this.screenshot || image.captureFullScreen();
+        this.screenshot = this.screenshot || this.getFullScreen();
         if (data.isBin) {
             let temp = this.screenshot;
             this.screenshot = image.binaryzation(this.screenshot, 0, 100)
@@ -83,12 +83,16 @@ export class EcRoot extends BaseClass {
                 Debug.saveToDebug(img, "测试截图2")
             }
             if (rests && rests.length) {
-                sleep(sleepTime500);
                 let rect = Utils.getRectByArray(rests);
                 if (rect) {
                     Debug.loggerD("寻图成功！" + data.name + "点击");
-                    this.clickRandRect(data);
                     result = true;
+                    if (!data.isNotClick) {
+                        sleep(sleepTime500);
+                        this.clickRandRect(data);
+                    } else {
+                        sleep(sleepTime100)
+                    }
                 }
             } else {
                 Debug.loggerW(JSON.stringify(adpXy2))
@@ -247,15 +251,27 @@ export class EcRoot extends BaseClass {
         return same / colors1.length > ratio;
     }
     /** 截图比色 */
-    cmpColor(data: IFindColorData, img?: AutoImage | null) {
-        img = img || image.captureFullScreen();
+    cmpColor(data: IFindColorData, img?: AutoImage | null, isSaveImg?: boolean) {
+        img = img || this.getFullScreen();
         if (img != null) {
             let points = image.cmpColor(img, data.color, 0.9, ...data.rect);
             //图片要回收
-            image.recycle(img)
+            if (!isSaveImg) {
+                this.freeScreenshot();
+            }
             return points;
         }
         return false;
+    }
+    /**
+     * 获取全屏截图
+     * @returns 
+     */
+    getFullScreen() {
+        if (!this.screenshot) {
+            this.screenshot = image.captureFullScreen();
+        }
+        return this.screenshot;
     }
 }
 
