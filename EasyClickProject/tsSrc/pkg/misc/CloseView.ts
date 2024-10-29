@@ -1,5 +1,5 @@
 import { BaseClass } from "../../_base/BaseClass";
-import { sleepTime100 } from "../../_base/Const";
+import { sleepTime500 } from "../../_base/Const";
 import { MiscImgData } from "./MiscConst";
 declare global {
     interface IModuleMap {
@@ -10,22 +10,23 @@ declare global {
 export class CloseView extends BaseClass {
     exec() {
         let click = false;
-
+        sleep(sleepTime500);
+        let result = false;
         for (const name in MiscImgData) {
             if (Object.prototype.hasOwnProperty.call(MiscImgData, name)) {
                 const data = MiscImgData[name];
-                let isClick = ccf.ecRoot.findImgRandClick(data, true)
-                if (isClick) {
+                result = ccf.ecRoot.findImgRandClick(data, !result)
+                if (result) {
                     click = true;
-                    ccf.ecRoot.freeScreenshot();
                 }
             }
         }
         if (click) {
-            sleep(sleepTime100);
+            sleep(sleepTime500);
             this.exec();
         } else {
             ccf.ecRoot.freeScreenshot();
+            sleep(sleepTime500);
         }
     }
 }

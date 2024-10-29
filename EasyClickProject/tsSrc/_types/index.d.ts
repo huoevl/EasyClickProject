@@ -4720,7 +4720,7 @@ declare function scrollDownNodeInfo(nodeinfo: any): any;
  * @param fileName 文件名称，不要加res前缀
  * @return AutoImage 如果是null代表没内容
  */
-declare function readResAutoImage(fileName: any): false | AutoImage;
+declare function readResAutoImage(fileName: any): null | AutoImage;
 /**
  * 获取最近的节点事件处罚的时间，可通过时间判断节点服务是否可用
  *

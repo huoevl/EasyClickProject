@@ -1,3 +1,6 @@
+import { IFindColorData, IFindImgData } from "../../_base/Const"
+import { MoudleName } from "./PkgConst"
+
 /** 一些坐标 */
 export const SomePoints = {
     /** 人物头像截图 */
@@ -7,3 +10,20 @@ export const SomePoints = {
     /** 地图右上角坐标范围 */
     MapRightTop: [1150, 21, 1225, 36],
 } as const
+
+export const enum BaseFileName {
+    TxtAuto = "txt_auto",
+}
+/** 通用按钮信息 */
+export const BaseImgData: { [name: string]: IFindImgData } = {
+    [BaseFileName.TxtAuto]: { moudleName: MoudleName.Base, name: BaseFileName.TxtAuto, rect: [1150, 312, 1186, 331] },
+}
+
+export const enum BaseColorName {
+    /** 主界面左上角电量，判断是否在主界面 */
+    Home = "home",
+}
+/** 通用比色信息 */
+export const BaseColorData: { [name: string]: IFindColorData } = {
+    [BaseColorName.Home]: { rect: [189, 6, 305, 28], color: "217|11|#FFFFFF-#101010,217|24|#FFFFFF-#101010,221|15|#FFFFFF-#101010,219|15|#FFFFFF-#101010,219|19|#FFFFFF-#101010,221|19|#FFFFFF-#101010,290|14|#EADB90-#101010,294|19|#D7BC5E-#101010,299|14|#E6CF8A-#101010,295|14|#E4D58E-#101010,195|18|#F0F1F2-#101010" }
+}

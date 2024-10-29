@@ -1,5 +1,5 @@
 import { BaseClass } from "./BaseClass";
-import { IFindImgData, IPoint2, rectTemp, sleepTime100 } from "./Const";
+import { IFindColorData, IFindData, IFindImgData, IPoint2, rectTemp, sleepTime100, sleepTime500 } from "./Const";
 import { Debug } from "./Debug";
 import { Utils } from "./Utils";
 
@@ -40,7 +40,7 @@ export class EcRoot extends BaseClass {
         let adpXy2 = ccf.adpat.getAdaptXy2(x, y, x1, y1);
         let rests = image.findImage(big, min, adpXy2.x, adpXy2.y, adpXy2.x1, adpXy2.y1, 0.7, 0.9, 1, 5);
         if (rests && rests.length) {
-            sleep(sleepTime100);
+            sleep(sleepTime500);
             let rect = Utils.getRectByArray(rests);
             if (rect) {
                 return true
@@ -70,7 +70,9 @@ export class EcRoot extends BaseClass {
         let result = false;
         this.screenshot = this.screenshot || image.captureFullScreen();
         if (data.isBin) {
+            let temp = this.screenshot;
             this.screenshot = image.binaryzation(this.screenshot, 0, 100)
+            image.recycle(temp);
         }
         if (this.screenshot != null) {
             let adpXy2 = ccf.adpat.getAdaptXy2(...data.rect)
@@ -81,11 +83,11 @@ export class EcRoot extends BaseClass {
                 Debug.saveToDebug(img, "测试截图2")
             }
             if (rests && rests.length) {
-                sleep(sleepTime100);
+                sleep(sleepTime500);
                 let rect = Utils.getRectByArray(rests);
                 if (rect) {
                     Debug.loggerD("寻图成功！" + data.name + "点击");
-                    this.clickRand(data.clickRect ? ccf.adpat.getAdaptXy2(...data.clickRect) : adpXy2)
+                    this.clickRandRect(data);
                     result = true;
                 }
             } else {
@@ -99,6 +101,19 @@ export class EcRoot extends BaseClass {
         }
         image.recycle(img);
         return result;
+    }
+    /**
+     * 随机点击
+     * @param data 
+     */
+    clickRandRect(data: IFindData) {
+        let point: IPoint2;
+        if (data.clickRect) {
+            point = ccf.adpat.getAdaptXy2(...data.clickRect)
+        } else {
+            point = ccf.adpat.getAdaptXy2(...data.rect)
+        };
+        this.clickRand(point);
     }
     /**
      * 随机点击
@@ -155,6 +170,48 @@ export class EcRoot extends BaseClass {
         return label;
     }
     /**
+     * 获取图片autoimage颜色数组
+     * @param imgOrUrl 
+     * @param binaryNum 
+     */
+    getImageColors(imgOrUrl: AutoImage | string | null, binaryNum?: number): number[] {
+        if (!imgOrUrl) {
+            return [];
+        }
+        let img: AutoImage | null;
+        let bitMap: any;
+        if (typeof imgOrUrl == "string") {
+            img = readResAutoImage(imgOrUrl);
+        } else {
+            img = imgOrUrl;
+        }
+        if (!img) {
+            return []
+        }
+        bitMap = image.imageToBitmap(img);
+        const color = this.getBitmapColors(bitMap, binaryNum);
+        image.recycle(img);
+        image.recycle(bitMap);
+        return color;
+    }
+    /**
+     * 获取bitmap颜色数组
+     * @param bitmap 
+     * @param binaryNum 
+     * @returns 
+     */
+    getBitmapColors(bitmap: any, binaryNum?: number): number[] {
+        if (binaryNum) {
+            let temp = bitmap;
+            bitmap = image.binaryzationBitmap(temp, 1, binaryNum);
+            image.recycle(temp);
+        }
+        let w = bitmap.getWidth();
+        let h = bitmap.getHeight();
+        let mPixels = image.getPixelsBitmap(bitmap, w * h, 0, w, 0, 0, w, h);
+        return mPixels;
+    }
+    /**
      * 获取屏幕bitmap颜色数组
      * @param x 
      * @param y 
@@ -166,15 +223,39 @@ export class EcRoot extends BaseClass {
     getScreenBitMapColors(x: number, y: number, x1: number, y1: number, binaryNum?: number) {
         let adpXy2 = ccf.adpat.getAdaptXy2(x, y, x1, y1);
         let bitmap = image.captureScreenBitmap("png", adpXy2.x, adpXy2.y, adpXy2.x1, adpXy2.y1, 100);
-        if (binaryNum) {
-            bitmap = image.binaryzationBitmap(bitmap, 1, binaryNum);
-        }
-        let w = bitmap.getWidth();
-        let h = bitmap.getHeight();
-        let mPixels = image.getPixelsBitmap(bitmap, w * h, 0, w, 0, 0, w, h);
-        //图片要回收
+        const color = this.getBitmapColors(bitmap, binaryNum);
         image.recycle(bitmap);
-        return mPixels;
+        return color;
+    }
+    /**
+     * 比较两个图片颜色是否相等，比率大于ratio及相等
+     * @param colors1 
+     * @param colors2 
+     * @param ratio 
+     */
+    isColorSame(colors1: number[], colors2: number[], ratio: number) {
+        if (!colors1 || !colors2) {
+            return false;
+        }
+        let same = 0;
+        for (let index = 0, len = colors1.length; index < len; index++) {
+            if (colors1[index] === colors2[index]) {
+                same++;
+            }
+        }
+        Debug.loggerW("比率：", same / colors1.length, colors1.length, colors2.length, same, colors1.length - same)
+        return same / colors1.length > ratio;
+    }
+    /** 截图比色 */
+    cmpColor(data: IFindColorData, img?: AutoImage | null) {
+        img = img || image.captureFullScreen();
+        if (img != null) {
+            let points = image.cmpColor(img, data.color, 0.9, ...data.rect);
+            //图片要回收
+            image.recycle(img)
+            return points;
+        }
+        return false;
     }
 }
 

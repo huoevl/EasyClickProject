@@ -1,5 +1,5 @@
 import { BaseClass } from "../../_base/BaseClass";
-import { sleepTime2000 } from "../../_base/Const";
+import { sleepTime3000 } from "../../_base/Const";
 import { Debug } from "../../_base/Debug";
 import { DailyFileName, DailyImgData } from "./MainConst";
 declare global {
@@ -9,27 +9,29 @@ declare global {
     }
 }
 export class MainTask extends BaseClass {
-    private isStan = false;
-    private isInit = true;;
     exec(isBreak?: boolean) {
         if (!isBreak) {
-            ccf.closeView.exec();
+        }
+        const isFight = ccf.gameRoot.isFight();
+        if (isFight) {
+            Debug.loggerD("战斗中...")
+            sleep(sleepTime3000);
+            this.exec(true)
+            return;
         }
         const isStand = ccf.gameRoot.isStand();
         if (!isStand) {
             Debug.loggerD("行走中...")
-            this.isStan = false;
-            sleep(sleepTime2000);
+            sleep(sleepTime3000);
             this.exec(true)
             return;
         }
-        Debug.loggerD("站立中...", this.isStan, this.isInit)
-        if (!this.isStan || this.isInit) {
-            this.isInit = false;
-            Debug.loggerD("检查剧情...")
+        Debug.loggerD("站立中...")
+        Debug.loggerD("检查剧情...")
+        const result = ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
+        if (!result) {
             ccf.story.exec();
+            ccf.closeView.exec();
         }
-        this.isStan = true;
-        ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
     }
 }

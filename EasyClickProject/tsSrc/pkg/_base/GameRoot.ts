@@ -1,7 +1,7 @@
 import { BaseClass } from "../../_base/BaseClass";
-import { sleepTime100, sleepTime500 } from "../../_base/Const";
+import { sleepTime500 } from "../../_base/Const";
 import { Debug } from "../../_base/Debug";
-import { SomePoints } from "./GameConst";
+import { BaseColorData, BaseColorName, BaseFileName, BaseImgData, SomePoints } from "./GameConst";
 declare global {
     interface IModuleMap {
         /** 主入口类 */
@@ -15,13 +15,25 @@ export class GameRoot extends BaseClass {
             image.recycle(this.headImg);
         }
     }
+    isSameTxt() {
+
+    }
+    /** 是否在主界面 */
+    isHome() {
+        const result = ccf.ecRoot.cmpColor(BaseColorData[BaseColorName.Home]);
+        Debug.loggerD("是否在主界面：", result)
+        return result;
+    }
     /**
     * 是否站立
     */
     isStand() {
+        if (!this.isHome()) {
+            return true;
+        }
         if (!this.headImg) {
             this.headImg = ccf.ecRoot.captureScreen(...SomePoints.PlayerHead);
-            sleep(sleepTime100);
+            sleep(sleepTime500);
         }
         if (!this.headImg) {
             Debug.loggerE("没有头像")
@@ -38,14 +50,17 @@ export class GameRoot extends BaseClass {
         const colors1 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 120);
         sleep(sleepTime500);
         const colors2 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 120);
-        let same = 0;
-        for (let index = 0, len = colors1.length; index < len; index++) {
-            if (colors1[index] === colors2[index]) {
-                same++;
-            }
-        }
-        const ratio = same / colors1.length;
-        Debug.loggerW("比率：", ratio, colors1.length, colors2.length, same, colors1.length - same)
-        return ratio >= 0.97;
+        Debug.loggerD("判断是否站立")
+        return ccf.ecRoot.isColorSame(colors1, colors2, 0.97);
+    }
+    /** 是否战斗中 */
+    isFight() {
+        const data = BaseImgData[BaseFileName.TxtAuto];
+        let url = data.moudleName + "/" + data.name + ".png";
+        const colors1 = ccf.ecRoot.getImageColors(url, 100);
+        sleep(sleepTime500);
+        const colors2 = ccf.ecRoot.getScreenBitMapColors(...data.rect, 100);
+        Debug.loggerD("判断是否战斗")
+        return ccf.ecRoot.isColorSame(colors1, colors2, 0.96);
     }
 }

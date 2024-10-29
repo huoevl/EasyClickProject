@@ -10,6 +10,8 @@ export const sleepTime1000 = 1000;
 export const sleepTime2000 = 2000;
 export const sleepTime3000 = 3000;
 
+/** 坐标范围类型 */
+export type TRectPoint = [number, number, number, number]
 /**
  * 起始坐标和终点
  */
@@ -19,23 +21,25 @@ export interface IPoint2 {
     x1: number;
     y1: number;
 }
-export interface IFindImgData {
+
+export interface IFindData {
+    /** 寻找区域，可用来做点击区域,x,y,x1,y1 */
+    rect: TRectPoint;
+    /** 点击区域，如果没有点击区域则用寻图区域点击 */
+    clickRect?: TRectPoint
+}
+export interface IFindImgData extends IFindData {
     moudleName: MoudleName,
     /** 文件名 */
     name: string;
     /** 是否二值化 */
     isBin?: boolean;
-    /** 寻图区域，要比截图区域大，可用来做点击区域,x,y,x1,y1 */
-    rect: [number, number, number, number];
-    /** 点击区域，如果没有点击区域则用寻图区域点击 */
-    clickRect?: [number, number, number, number]
 }
-export interface IFindTxtData {
+export interface IFindTxtData extends IFindData {
     txt: string;
-    /** 文本识别区域，可用来做点击区域,x,y,x1,y1 */
-    rect: [number, number, number, number];
-    /** 点击区域，如果没有点击区域则用文本识别区域点击 */
-    clickRect?: [number, number, number, number]
+}
+export interface IFindColorData extends IFindData {
+    color: string;
 }
 
 /** ocr类型：目前的OCR包含了mlkit,ocrLite,百度AI的easyedge,paddleocr,Tesseract,paddleOcrOnline和百度在线识别

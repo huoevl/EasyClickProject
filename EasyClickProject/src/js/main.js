@@ -327,6 +327,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EcRoot = void 0;
 var BaseClass_1 = __webpack_require__(/*! ./BaseClass */ "./_base/BaseClass.ts");
@@ -361,7 +370,7 @@ var EcRoot = /** @class */ (function (_super) {
         var adpXy2 = ccf.adpat.getAdaptXy2(x, y, x1, y1);
         var rests = image.findImage(big, min, adpXy2.x, adpXy2.y, adpXy2.x1, adpXy2.y1, 0.7, 0.9, 1, 5);
         if (rests && rests.length) {
-            sleep(Const_1.sleepTime100);
+            sleep(Const_1.sleepTime500);
             var rect = Utils_1.Utils.getRectByArray(rests);
             if (rect) {
                 return true;
@@ -377,7 +386,7 @@ var EcRoot = /** @class */ (function (_super) {
      * @returns
      */
     EcRoot.prototype.findImgRandClick = function (data, isUseLast) {
-        var _a, _b;
+        var _a;
         if (data.moudleName != this.lastMdName) {
             this.lastMdName = data.moudleName;
             this.freeScreenshot();
@@ -392,7 +401,9 @@ var EcRoot = /** @class */ (function (_super) {
         var result = false;
         this.screenshot = this.screenshot || image.captureFullScreen();
         if (data.isBin) {
+            var temp = this.screenshot;
             this.screenshot = image.binaryzation(this.screenshot, 0, 100);
+            image.recycle(temp);
         }
         if (this.screenshot != null) {
             var adpXy2 = (_a = ccf.adpat).getAdaptXy2.apply(_a, data.rect);
@@ -403,11 +414,11 @@ var EcRoot = /** @class */ (function (_super) {
                 Debug_1.Debug.saveToDebug(img, "测试截图2");
             }
             if (rests && rests.length) {
-                sleep(Const_1.sleepTime100);
+                sleep(Const_1.sleepTime500);
                 var rect = Utils_1.Utils.getRectByArray(rests);
                 if (rect) {
                     Debug_1.Debug.loggerD("寻图成功！" + data.name + "点击");
-                    this.clickRand(data.clickRect ? (_b = ccf.adpat).getAdaptXy2.apply(_b, data.clickRect) : adpXy2);
+                    this.clickRandRect(data);
                     result = true;
                 }
             }
@@ -422,6 +433,22 @@ var EcRoot = /** @class */ (function (_super) {
         }
         image.recycle(img);
         return result;
+    };
+    /**
+     * 随机点击
+     * @param data
+     */
+    EcRoot.prototype.clickRandRect = function (data) {
+        var _a, _b;
+        var point;
+        if (data.clickRect) {
+            point = (_a = ccf.adpat).getAdaptXy2.apply(_a, data.clickRect);
+        }
+        else {
+            point = (_b = ccf.adpat).getAdaptXy2.apply(_b, data.rect);
+        }
+        ;
+        this.clickRand(point);
     };
     /**
      * 随机点击
@@ -447,7 +474,8 @@ var EcRoot = /** @class */ (function (_super) {
         }
     };
     /**
-     * 获取文字识别文本
+     * 获取文字识别文本（准确率不高，最好不用）
+     * @deprecated
      * @param x
      * @param y
      * @param width
@@ -467,7 +495,7 @@ var EcRoot = /** @class */ (function (_super) {
         Debug_1.Debug.loggerD("文字识别结果：", JSON.stringify(result));
         for (var i = 0; i < result.length; i++) {
             var value = result[i];
-            if (value.confidence > 50) {
+            if (value.confidence > 90) {
                 label = value.label || "";
                 break;
             }
@@ -475,6 +503,49 @@ var EcRoot = /** @class */ (function (_super) {
         image.recycle(tempbitmap);
         image.recycle(tempbitmapEZ);
         return label;
+    };
+    /**
+     * 获取图片autoimage颜色数组
+     * @param imgOrUrl
+     * @param binaryNum
+     */
+    EcRoot.prototype.getImageColors = function (imgOrUrl, binaryNum) {
+        if (!imgOrUrl) {
+            return [];
+        }
+        var img;
+        var bitMap;
+        if (typeof imgOrUrl == "string") {
+            img = readResAutoImage(imgOrUrl);
+        }
+        else {
+            img = imgOrUrl;
+        }
+        if (!img) {
+            return [];
+        }
+        bitMap = image.imageToBitmap(img);
+        var color = this.getBitmapColors(bitMap, binaryNum);
+        image.recycle(img);
+        image.recycle(bitMap);
+        return color;
+    };
+    /**
+     * 获取bitmap颜色数组
+     * @param bitmap
+     * @param binaryNum
+     * @returns
+     */
+    EcRoot.prototype.getBitmapColors = function (bitmap, binaryNum) {
+        if (binaryNum) {
+            var temp = bitmap;
+            bitmap = image.binaryzationBitmap(temp, 1, binaryNum);
+            image.recycle(temp);
+        }
+        var w = bitmap.getWidth();
+        var h = bitmap.getHeight();
+        var mPixels = image.getPixelsBitmap(bitmap, w * h, 0, w, 0, 0, w, h);
+        return mPixels;
     };
     /**
      * 获取屏幕bitmap颜色数组
@@ -488,15 +559,39 @@ var EcRoot = /** @class */ (function (_super) {
     EcRoot.prototype.getScreenBitMapColors = function (x, y, x1, y1, binaryNum) {
         var adpXy2 = ccf.adpat.getAdaptXy2(x, y, x1, y1);
         var bitmap = image.captureScreenBitmap("png", adpXy2.x, adpXy2.y, adpXy2.x1, adpXy2.y1, 100);
-        if (binaryNum) {
-            bitmap = image.binaryzationBitmap(bitmap, 1, binaryNum);
-        }
-        var w = bitmap.getWidth();
-        var h = bitmap.getHeight();
-        var mPixels = image.getPixelsBitmap(bitmap, w * h, 0, w, 0, 0, w, h);
-        //图片要回收
+        var color = this.getBitmapColors(bitmap, binaryNum);
         image.recycle(bitmap);
-        return mPixels;
+        return color;
+    };
+    /**
+     * 比较两个图片颜色是否相等，比率大于ratio及相等
+     * @param colors1
+     * @param colors2
+     * @param ratio
+     */
+    EcRoot.prototype.isColorSame = function (colors1, colors2, ratio) {
+        if (!colors1 || !colors2) {
+            return false;
+        }
+        var same = 0;
+        for (var index_1 = 0, len = colors1.length; index_1 < len; index_1++) {
+            if (colors1[index_1] === colors2[index_1]) {
+                same++;
+            }
+        }
+        Debug_1.Debug.loggerW("比率：", same / colors1.length, colors1.length, colors2.length, same, colors1.length - same);
+        return same / colors1.length > ratio;
+    };
+    /** 截图比色 */
+    EcRoot.prototype.cmpColor = function (data, img) {
+        img = img || image.captureFullScreen();
+        if (img != null) {
+            var points = image.cmpColor.apply(image, __spreadArray([img, data.color, 0.9], data.rect, false));
+            //图片要回收
+            image.recycle(img);
+            return points;
+        }
+        return false;
     };
     return EcRoot;
 }(BaseClass_1.BaseClass));
@@ -657,8 +752,9 @@ exports.CCF = CCF;
 /***/ ((__unused_webpack_module, exports) => {
 
 
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SomePoints = void 0;
+exports.BaseColorData = exports.BaseImgData = exports.SomePoints = void 0;
 /** 一些坐标 */
 exports.SomePoints = {
     /** 人物头像截图 */
@@ -668,6 +764,14 @@ exports.SomePoints = {
     /** 地图右上角坐标范围 */
     MapRightTop: [1150, 21, 1225, 36],
 };
+/** 通用按钮信息 */
+exports.BaseImgData = (_a = {},
+    _a["txt_auto" /* BaseFileName.TxtAuto */] = { moudleName: "base" /* MoudleName.Base */, name: "txt_auto" /* BaseFileName.TxtAuto */, rect: [1150, 312, 1186, 331] },
+    _a);
+/** 通用比色信息 */
+exports.BaseColorData = (_b = {},
+    _b["home" /* BaseColorName.Home */] = { rect: [189, 6, 305, 28], color: "217|11|#FFFFFF-#101010,217|24|#FFFFFF-#101010,221|15|#FFFFFF-#101010,219|15|#FFFFFF-#101010,219|19|#FFFFFF-#101010,221|19|#FFFFFF-#101010,290|14|#EADB90-#101010,294|19|#D7BC5E-#101010,299|14|#E6CF8A-#101010,295|14|#E4D58E-#101010,195|18|#F0F1F2-#101010" },
+    _b);
 
 
 /***/ }),
@@ -720,14 +824,25 @@ var GameRoot = /** @class */ (function (_super) {
             image.recycle(this.headImg);
         }
     };
+    GameRoot.prototype.isSameTxt = function () {
+    };
+    /** 是否在主界面 */
+    GameRoot.prototype.isHome = function () {
+        var result = ccf.ecRoot.cmpColor(GameConst_1.BaseColorData["home" /* BaseColorName.Home */]);
+        Debug_1.Debug.loggerD("是否在主界面：", result);
+        return result;
+    };
     /**
     * 是否站立
     */
     GameRoot.prototype.isStand = function () {
         var _a, _b, _c, _d;
+        if (!this.isHome()) {
+            return true;
+        }
         if (!this.headImg) {
             this.headImg = (_a = ccf.ecRoot).captureScreen.apply(_a, GameConst_1.SomePoints.PlayerHead);
-            sleep(Const_1.sleepTime100);
+            sleep(Const_1.sleepTime500);
         }
         if (!this.headImg) {
             Debug_1.Debug.loggerE("没有头像");
@@ -744,15 +859,19 @@ var GameRoot = /** @class */ (function (_super) {
         var colors1 = (_c = ccf.ecRoot).getScreenBitMapColors.apply(_c, __spreadArray(__spreadArray([], GameConst_1.SomePoints.MapRightTop, false), [120], false));
         sleep(Const_1.sleepTime500);
         var colors2 = (_d = ccf.ecRoot).getScreenBitMapColors.apply(_d, __spreadArray(__spreadArray([], GameConst_1.SomePoints.MapRightTop, false), [120], false));
-        var same = 0;
-        for (var index_1 = 0, len = colors1.length; index_1 < len; index_1++) {
-            if (colors1[index_1] === colors2[index_1]) {
-                same++;
-            }
-        }
-        var ratio = same / colors1.length;
-        Debug_1.Debug.loggerW("比率：", ratio, colors1.length, colors2.length, same, colors1.length - same);
-        return ratio >= 0.97;
+        Debug_1.Debug.loggerD("判断是否站立");
+        return ccf.ecRoot.isColorSame(colors1, colors2, 0.97);
+    };
+    /** 是否战斗中 */
+    GameRoot.prototype.isFight = function () {
+        var _a;
+        var data = GameConst_1.BaseImgData["txt_auto" /* BaseFileName.TxtAuto */];
+        var url = data.moudleName + "/" + data.name + ".png";
+        var colors1 = ccf.ecRoot.getImageColors(url, 100);
+        sleep(Const_1.sleepTime500);
+        var colors2 = (_a = ccf.ecRoot).getScreenBitMapColors.apply(_a, __spreadArray(__spreadArray([], data.rect, false), [100], false));
+        Debug_1.Debug.loggerD("判断是否战斗");
+        return ccf.ecRoot.isColorSame(colors1, colors2, 0.96);
     };
     return GameRoot;
 }(BaseClass_1.BaseClass));
@@ -771,7 +890,7 @@ exports.GameRoot = GameRoot;
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DailyImgData = void 0;
-/** 通用关闭按钮信息 */
+/** 通用主线按钮信息 */
 exports.DailyImgData = (_a = {},
     _a["main_task" /* DailyFileName.MainTask */] = { moudleName: "daily" /* MoudleName.Daily */, name: "main_task" /* DailyFileName.MainTask */, rect: [48, 173, 235, 201] },
     _a);
@@ -811,32 +930,32 @@ var MainConst_1 = __webpack_require__(/*! ./MainConst */ "./pkg/daily/MainConst.
 var MainTask = /** @class */ (function (_super) {
     __extends(MainTask, _super);
     function MainTask() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.isStan = false;
-        _this.isInit = true;
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    ;
     MainTask.prototype.exec = function (isBreak) {
         if (!isBreak) {
-            ccf.closeView.exec();
+        }
+        var isFight = ccf.gameRoot.isFight();
+        if (isFight) {
+            Debug_1.Debug.loggerD("战斗中...");
+            sleep(Const_1.sleepTime3000);
+            this.exec(true);
+            return;
         }
         var isStand = ccf.gameRoot.isStand();
         if (!isStand) {
             Debug_1.Debug.loggerD("行走中...");
-            this.isStan = false;
-            sleep(Const_1.sleepTime2000);
+            sleep(Const_1.sleepTime3000);
             this.exec(true);
             return;
         }
-        Debug_1.Debug.loggerD("站立中...", this.isStan, this.isInit);
-        if (!this.isStan || this.isInit) {
-            this.isInit = false;
-            Debug_1.Debug.loggerD("检查剧情...");
+        Debug_1.Debug.loggerD("站立中...");
+        Debug_1.Debug.loggerD("检查剧情...");
+        var result = ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
+        if (!result) {
             ccf.story.exec();
+            ccf.closeView.exec();
         }
-        this.isStan = true;
-        ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
     };
     return MainTask;
 }(BaseClass_1.BaseClass));
@@ -880,22 +999,24 @@ var CloseView = /** @class */ (function (_super) {
     }
     CloseView.prototype.exec = function () {
         var click = false;
+        sleep(Const_1.sleepTime500);
+        var result = false;
         for (var name in MiscConst_1.MiscImgData) {
             if (Object.prototype.hasOwnProperty.call(MiscConst_1.MiscImgData, name)) {
                 var data = MiscConst_1.MiscImgData[name];
-                var isClick = ccf.ecRoot.findImgRandClick(data, true);
-                if (isClick) {
+                result = ccf.ecRoot.findImgRandClick(data, !result);
+                if (result) {
                     click = true;
-                    ccf.ecRoot.freeScreenshot();
                 }
             }
         }
         if (click) {
-            sleep(Const_1.sleepTime100);
+            sleep(Const_1.sleepTime500);
             this.exec();
         }
         else {
             ccf.ecRoot.freeScreenshot();
+            sleep(Const_1.sleepTime500);
         }
     };
     return CloseView;
@@ -912,9 +1033,9 @@ exports.CloseView = CloseView;
 /***/ ((__unused_webpack_module, exports) => {
 
 
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StoryTxtData = exports.StoryImgData = exports.MiscImgData = void 0;
+exports.StroyColorData = exports.StoryTxtData = exports.StoryImgData = exports.MiscImgData = void 0;
 /** 通用关闭按钮信息 */
 exports.MiscImgData = (_a = {},
     _a["mian_fei_linqu2" /* CloseFileName.MianFeiLq2 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "mian_fei_linqu2" /* CloseFileName.MianFeiLq2 */, rect: [437, 482, 578, 520] },
@@ -925,12 +1046,16 @@ exports.MiscImgData = (_a = {},
     _a["equip_to" /* CloseFileName.EquipTo */] = { moudleName: "misc" /* MoudleName.Misc */, name: "equip_to" /* CloseFileName.EquipTo */, rect: [808, 551, 933, 587] },
     _a);
 /** 通用剧情按钮信息 */
-exports.StoryImgData = {
-// [StoryFileName.Story1]: { moudleName: MoudleName.Misc, name: StoryFileName.Story1, rect: [40, 42, 139, 70], isBin: true, clickRect: [490, 605, 861, 693] },
-};
+exports.StoryImgData = (_b = {},
+    _b["story2" /* StoryFileName.Story2 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "story2" /* StoryFileName.Story2 */, rect: [1152, 654, 1229, 711], isBin: true, clickRect: [490, 605, 861, 693] },
+    _b);
 /** 通用剧情文本信息 */
 exports.StoryTxtData = {
-    Stroy1: { txt: "对白回顾", rect: [40, 42, 139, 70], clickRect: [490, 605, 861, 693] }
+    Story1: { txt: "对白回顾", rect: [40, 42, 139, 70], clickRect: [490, 605, 861, 693] }
+};
+/** 剧情颜色数据 */
+exports.StroyColorData = {
+    Story1: { rect: [29, 26, 175, 76], clickRect: [490, 605, 861, 693], color: "57|40|#CCB995-#101010,79|40|#C2B290-#101010,100|40|#C2B290-#101010,158|40|#BCA98A-#101010,55|50|#E5D6B2-#101010,59|50|#DDCFAC-#101010,60|52|#DCCFAC-#101010,58|57|#F3E8C2-#101010,58|59|#FAEFC8-#101010,55|62|#DFCFAC-#101010,60|61|#DED2AE-#101010,64|57|#DACDAA-#101010,63|52|#DDD0AC-#101010,68|52|#F6EBC4-#101010,68|49|#D7C8A6-#101010,68|59|#DACDAA-#101010,66|64|#EADEB9-#101010,79|49|#E3D6B3-#101010,79|51|#ECE1BC-#101010,74|51|#EBDEB9-#101010,74|57|#F5E9C3-#101010,74|63|#F7EBC5-#101010,86|63|#EEE3BE-#101010,86|57|#E9DEBA-#101010,86|51|#E0D4B2-#101010,92|50|#D7CBAA-#101010,105|50|#DED2B0-#101010,105|63|#E8DDB9-#101010,91|63|#DBCEAC-#101010,95|59|#E0D3B1-#101010,101|59|#E5D9B6-#101010,101|54|#D9CDAB-#101010,95|54|#D5C8A8-#101010,110|50|#CFC2A2-#101010,109|58|#BFB095-#101010,109|62|#D2C6A6-#101010,112|63|#F6ECC5-#101010,112|58|#DED0AF-#101010,112|53|#DFD4B2-#101010,117|64|#E3D6B3-#101010,120|61|#F3E8C2-#101010,124|64|#C7B99A-#101010,124|58|#BEAF93-#101010,123|53|#D4C6A5-#101010,118|53|#D7CAAA-#101010,120|52|#E7DAB6-#101010,120|49|#D0C0A0-#101010,123|49|#D0C0A0-#101010,144|52|#F4DEBD-#101010,145|55|#F4DEBD-#101010,144|60|#BEA785-#101010,147|59|#C9B58D-#101010,149|58|#D4BF95-#101010,150|57|#E3CC9F-#101010,150|56|#E9D2A8-#101010,149|55|#EAD4B5-#101010,147|54|#F4DEBD-#101010,147|55|#EBD5B6-#101010" }
 };
 
 
@@ -963,6 +1088,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StoryView = void 0;
 var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
 var Const_1 = __webpack_require__(/*! ../../_base/Const */ "./_base/Const.ts");
+var Debug_1 = __webpack_require__(/*! ../../_base/Debug */ "./_base/Debug.ts");
 var MiscConst_1 = __webpack_require__(/*! ./MiscConst */ "./pkg/misc/MiscConst.ts");
 var StoryView = /** @class */ (function (_super) {
     __extends(StoryView, _super);
@@ -970,35 +1096,48 @@ var StoryView = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     StoryView.prototype.exec = function () {
-        var _a, _b, _c;
+        sleep(Const_1.sleepTime500);
         var click = false;
-        for (var name in MiscConst_1.StoryTxtData) {
-            if (Object.prototype.hasOwnProperty.call(MiscConst_1.StoryTxtData, name)) {
-                var data = MiscConst_1.StoryTxtData[name];
-                var txt = (_a = ccf.ecRoot).getOcrTxt.apply(_a, data.rect);
-                if (txt == data.txt) {
-                    ccf.ecRoot.clickRand(data.clickRect ? (_b = ccf.adpat).getAdaptXy2.apply(_b, data.clickRect) : (_c = ccf.adpat).getAdaptXy2.apply(_c, data.rect));
+        // for (const name in StoryTxtData) {
+        //     if (Object.prototype.hasOwnProperty.call(StoryTxtData, name)) {
+        //         const data = StoryTxtData[name];
+        //         let txt = ccf.ecRoot.getOcrTxt(...data.rect)
+        //         if (txt == data.txt) {
+        //             ccf.ecRoot.clickRandRect(data)
+        //             click = true;
+        //             sleep(sleepTime500);
+        //         }
+        //     }
+        // }
+        // for (const name in StoryImgData) {
+        //     if (Object.prototype.hasOwnProperty.call(StoryImgData, name)) {
+        //         const data = StoryImgData[name];
+        //         let isClick = ccf.ecRoot.findImgRandClick(data, true)
+        //         if (isClick) {
+        //             click = true;
+        //             ccf.ecRoot.freeScreenshot();
+        //         }
+        //     }
+        // }
+        for (var name in MiscConst_1.StroyColorData) {
+            if (Object.prototype.hasOwnProperty.call(MiscConst_1.StroyColorData, name)) {
+                var data = MiscConst_1.StroyColorData[name];
+                var result = ccf.ecRoot.cmpColor(data);
+                Debug_1.Debug.loggerD("剧情比色结果：", result);
+                if (result) {
                     click = true;
-                    sleep(Const_1.sleepTime100);
-                }
-            }
-        }
-        for (var name in MiscConst_1.StoryImgData) {
-            if (Object.prototype.hasOwnProperty.call(MiscConst_1.StoryImgData, name)) {
-                var data = MiscConst_1.StoryImgData[name];
-                var isClick = ccf.ecRoot.findImgRandClick(data, true);
-                if (isClick) {
-                    click = true;
-                    ccf.ecRoot.freeScreenshot();
+                    ccf.ecRoot.clickRandRect(data);
+                    sleep(Const_1.sleepTime500);
                 }
             }
         }
         if (click) {
-            sleep(Const_1.sleepTime100);
+            sleep(Const_1.sleepTime500);
             this.exec();
         }
         else {
             ccf.ecRoot.freeScreenshot();
+            sleep(Const_1.sleepTime500);
         }
     };
     return StoryView;
