@@ -32,6 +32,6 @@ export class MainTask extends BaseClass {
         }
         ccf.story.exec();
         ccf.closeView.exec();
-        const result = ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
+        ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
     }
 }

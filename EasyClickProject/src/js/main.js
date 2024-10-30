@@ -879,9 +879,9 @@ var GameRoot = /** @class */ (function (_super) {
             return true;
         }
         ccf.ecRoot.freeScreenshot();
-        var colors1 = (_c = ccf.ecRoot).getScreenBitMapColors.apply(_c, __spreadArray(__spreadArray([], GameConst_1.SomePoints.MapRightTop, false), [120], false));
+        var colors1 = (_c = ccf.ecRoot).getScreenBitMapColors.apply(_c, __spreadArray(__spreadArray([], GameConst_1.SomePoints.MapRightTop, false), [150], false));
         sleep(Const_1.sleepTime500);
-        var colors2 = (_d = ccf.ecRoot).getScreenBitMapColors.apply(_d, __spreadArray(__spreadArray([], GameConst_1.SomePoints.MapRightTop, false), [120], false));
+        var colors2 = (_d = ccf.ecRoot).getScreenBitMapColors.apply(_d, __spreadArray(__spreadArray([], GameConst_1.SomePoints.MapRightTop, false), [150], false));
         Debug_1.Debug.loggerD("判断是否站立");
         return ccf.ecRoot.isColorSame(colors1, colors2, 0.97);
     };
@@ -892,7 +892,7 @@ var GameRoot = /** @class */ (function (_super) {
         var url = data.moudleName + "/" + data.name + ".png";
         var colors1 = ccf.ecRoot.getImageColors(url, 100);
         sleep(Const_1.sleepTime500);
-        var colors2 = (_a = ccf.ecRoot).getScreenBitMapColors.apply(_a, __spreadArray(__spreadArray([], data.rect, false), [100], false));
+        var colors2 = (_a = ccf.ecRoot).getScreenBitMapColors.apply(_a, __spreadArray(__spreadArray([], data.rect, false), [120], false));
         Debug_1.Debug.loggerD("判断是否战斗");
         return ccf.ecRoot.isColorSame(colors1, colors2, 0.96);
     };
@@ -1069,7 +1069,7 @@ var MainTask = /** @class */ (function (_super) {
         }
         ccf.story.exec();
         ccf.closeView.exec();
-        var result = ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
+        ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
     };
     return MainTask;
 }(BaseClass_1.BaseClass));

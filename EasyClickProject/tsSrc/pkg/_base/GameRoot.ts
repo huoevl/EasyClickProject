@@ -47,9 +47,9 @@ export class GameRoot extends BaseClass {
             return true;
         }
         ccf.ecRoot.freeScreenshot();
-        const colors1 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 120);
+        const colors1 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 150);
         sleep(sleepTime500);
-        const colors2 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 120);
+        const colors2 = ccf.ecRoot.getScreenBitMapColors(...SomePoints.MapRightTop, 150);
         Debug.loggerD("判断是否站立")
         return ccf.ecRoot.isColorSame(colors1, colors2, 0.97);
     }
@@ -59,7 +59,7 @@ export class GameRoot extends BaseClass {
         let url = data.moudleName + "/" + data.name + ".png";
         const colors1 = ccf.ecRoot.getImageColors(url, 100);
         sleep(sleepTime500);
-        const colors2 = ccf.ecRoot.getScreenBitMapColors(...data.rect, 100);
+        const colors2 = ccf.ecRoot.getScreenBitMapColors(...data.rect, 120);
         Debug.loggerD("判断是否战斗")
         return ccf.ecRoot.isColorSame(colors1, colors2, 0.96);
     }
