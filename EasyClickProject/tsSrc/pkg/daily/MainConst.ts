@@ -2,10 +2,12 @@ import { IFindColorData, IFindImgData } from "../../_base/Const";
 import { MoudleName } from "../_base/PkgConst";
 export const enum DailyFileName {
     MainTask = "main_task",
+    BranchTask = "branch_task",
 }
 /** 通用主线按钮信息 */
 export const DailyImgData: { [name: string]: IFindImgData } = {
     [DailyFileName.MainTask]: { moudleName: MoudleName.Daily, name: DailyFileName.MainTask, rect: [48, 173, 235, 201] },
+    [DailyFileName.BranchTask]: { moudleName: MoudleName.Daily, name: DailyFileName.BranchTask, rect: [49, 257, 231, 286] },
 }
 
 //法宝

@@ -9,21 +9,24 @@ declare global {
     }
 }
 export class MainTask extends BaseClass {
-    exec(isBreak?: boolean) {
-        if (!isBreak) {
-        }
+    exec() {
+        Debug.loggerD("执行主线...")
+        this.checkState();
+        ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
+    }
+    checkState() {
         const isFight = ccf.gameRoot.isFight();
         if (isFight) {
             Debug.loggerD("战斗中...")
             sleep(sleepTime3000);
-            this.exec(true)
+            this.checkState()
             return;
         }
         const isStand = ccf.gameRoot.isStand();
         if (!isStand) {
             Debug.loggerD("行走中...")
             sleep(sleepTime3000);
-            this.exec(true)
+            this.checkState()
             return;
         }
         Debug.loggerD("站立中...")
@@ -32,6 +35,5 @@ export class MainTask extends BaseClass {
         }
         ccf.story.exec();
         ccf.closeView.exec();
-        ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
     }
 }
