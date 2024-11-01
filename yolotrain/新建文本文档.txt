@@ -1,20 +1,25 @@
 
-E:\workspace\project\EasyClickProject\yolotrain\train
+E:/workspace/project/EasyClickProject/yolotrain/train
 
 yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml model=E:/workspace/project/EasyClickProject/yolotrain/yolov8s.pt epochs=100 imgsz=640  // 0.358 hours.
 	
-yolo detect val data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml  model=E:/workspace/github/ultralytics/runs/detect/train21/weights/best.pt
+yolo detect val data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml  model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt
 
-yolo export model=E:/workspace/github/ultralytics/runs/detect/train21/weights/best.pt format=ncnn
+yolo export model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt format=ncnn
 
 
 //gpu
 yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml model=E:/workspace/project/EasyClickProject/yolotrain/yolov8s.pt epochs=100 imgsz=640 device=0 workers=0
 
-yolo detect val data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml  model=E:/workspace/github/ultralytics/runs/detect/train21/weights/best.pt workers=0
+yolo detect val data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml  model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt workers=0
 
 yolo export model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt format=ncnn
 
 二次
 
-yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml model=E:/workspace/github/ultralytics/runs/detect/train21/weights/best.pt epochs=100 imgsz=640 device=0 workers=0
+yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt epochs=100 imgsz=640 device=0 workers=0
+
+
+yolo detect predict  model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt source=E:/workspace/project/EasyClickProject/yolotrain/valid/images/ workers=0
+
+

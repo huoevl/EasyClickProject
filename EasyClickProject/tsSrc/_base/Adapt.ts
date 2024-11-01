@@ -1,5 +1,5 @@
 import { BaseClass } from "./BaseClass";
-import { IPoint2 } from "./Const";
+import { Environment, IPoint2 } from "./Const";
 declare global {
     interface IModuleMap {
         /** 适配类 */
@@ -7,6 +7,11 @@ declare global {
     }
 }
 class Adapt extends BaseClass {
+    /** 当前环境 */
+    currEnv: Environment | undefined;
+    init() {
+        this.currEnv = Environment.dev
+    }
     /**
      * 获取实际xy,x1y1坐标
      * @param x

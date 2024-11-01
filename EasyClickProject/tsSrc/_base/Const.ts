@@ -10,6 +10,12 @@ export const sleepTime1000 = 1000;
 export const sleepTime2000 = 2000;
 export const sleepTime3000 = 3000;
 
+export const enum Environment {
+    /** 开发 */
+    dev = 0,
+    /** 正式 */
+    formal = 1,
+}
 /** 坐标范围类型 */
 export type TRectPoint = [number, number, number, number]
 /**

@@ -1,5 +1,5 @@
 import { BaseClass } from "./BaseClass";
-import { IOCRParam, OCRType, sleepTime1000, sleepTime2000 } from "./Const";
+import { Environment, IOCRParam, OCRType, sleepTime1000, sleepTime2000 } from "./Const";
 import { Debug } from "./Debug";
 declare global {
     interface IModuleMap {
@@ -92,10 +92,10 @@ export class EcInit extends BaseClass {
     private initYolo() {
         const binPath = "/sdcard/model.ncnn.bin";
         const paramPath = "/sdcard/model.ncnn.param";
-        if (!file.exists(binPath)) {
+        if (ccf.adpat.currEnv == Environment.dev || !file.exists(binPath)) {
             saveResToFile("model.ncnn.bin", "/sdcard/model.ncnn.bin")
         }
-        if (!file.exists(paramPath)) {
+        if (ccf.adpat.currEnv == Environment.dev || !file.exists(paramPath)) {
             saveResToFile("model.ncnn.param", "/sdcard/model.ncnn.param")
         }
         sleep(sleepTime1000);

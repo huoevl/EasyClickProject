@@ -31,6 +31,9 @@ var Adapt = /** @class */ (function (_super) {
     function Adapt() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Adapt.prototype.init = function () {
+        this.currEnv = 0 /* Environment.dev */;
+    };
     /**
      * 获取实际xy,x1y1坐标
      * @param x
@@ -141,8 +144,9 @@ exports.AndroidSdkToV = (_a = {},
 /*!************************!*\
   !*** ./_base/Debug.ts ***!
   \************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Debug = void 0;
@@ -156,6 +160,9 @@ var Debug = /** @class */ (function () {
      * @param name
      */
     Debug.saveToDebug = function (img, name, isBitmap) {
+        if (ccf.adpat.currEnv !== 0 /* Environment.dev */) {
+            return;
+        }
         var url = DebugImgPath + name + ".png";
         var result = false;
         if (isBitmap) {
@@ -176,12 +183,18 @@ var Debug = /** @class */ (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             msg[_i] = arguments[_i];
         }
+        if (ccf.adpat.currEnv !== 0 /* Environment.dev */) {
+            return;
+        }
         logd(msg.join("，"));
     };
     Debug.loggerW = function () {
         var msg = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             msg[_i] = arguments[_i];
+        }
+        if (ccf.adpat.currEnv !== 0 /* Environment.dev */) {
+            return;
         }
         logw(msg.join("，"));
     };
@@ -205,6 +218,7 @@ exports.Debug = Debug;
   \*************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -300,10 +314,10 @@ var EcInit = /** @class */ (function (_super) {
     EcInit.prototype.initYolo = function () {
         var binPath = "/sdcard/model.ncnn.bin";
         var paramPath = "/sdcard/model.ncnn.param";
-        if (!file.exists(binPath)) {
+        if (ccf.adpat.currEnv == 0 /* Environment.dev */ || !file.exists(binPath)) {
             saveResToFile("model.ncnn.bin", "/sdcard/model.ncnn.bin");
         }
-        if (!file.exists(paramPath)) {
+        if (ccf.adpat.currEnv == 0 /* Environment.dev */ || !file.exists(paramPath)) {
             saveResToFile("model.ncnn.param", "/sdcard/model.ncnn.param");
         }
         sleep(Const_1.sleepTime1000);
@@ -765,6 +779,7 @@ var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/Base
 var EcInit_1 = __webpack_require__(/*! ../../_base/EcInit */ "./_base/EcInit.ts");
 var EcRoot_1 = __webpack_require__(/*! ../../_base/EcRoot */ "./_base/EcRoot.ts");
 var Temp_1 = __webpack_require__(/*! ../../_base/Temp */ "./_base/Temp.ts");
+var BranchTask_1 = __webpack_require__(/*! ../daily/BranchTask */ "./pkg/daily/BranchTask.ts");
 var FaBaoView_1 = __webpack_require__(/*! ../daily/FaBaoView */ "./pkg/daily/FaBaoView.ts");
 var MainTask_1 = __webpack_require__(/*! ../daily/MainTask */ "./pkg/daily/MainTask.ts");
 var CloseView_1 = __webpack_require__(/*! ../misc/CloseView */ "./pkg/misc/CloseView.ts");
@@ -782,6 +797,7 @@ var CCF = /** @class */ (function (_super) {
         ccf.ecRoot = EcRoot_1.EcRoot.getIns();
         ccf.gameRoot = GameRoot_1.GameRoot.getIns();
         ccf.mainTask = MainTask_1.MainTask.getIns();
+        ccf.branch = BranchTask_1.BranchTask.getIns();
         ccf.closeView = CloseView_1.CloseView.getIns();
         ccf.story = StoryView_1.StoryView.getIns();
         ccf.fabao = FaBaoView_1.FaBaoView.getIns();
@@ -926,6 +942,51 @@ var GameRoot = /** @class */ (function (_super) {
     return GameRoot;
 }(BaseClass_1.BaseClass));
 exports.GameRoot = GameRoot;
+
+
+/***/ }),
+
+/***/ "./pkg/daily/BranchTask.ts":
+/*!*********************************!*\
+  !*** ./pkg/daily/BranchTask.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BranchTask = void 0;
+var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var Debug_1 = __webpack_require__(/*! ../../_base/Debug */ "./_base/Debug.ts");
+var MainConst_1 = __webpack_require__(/*! ./MainConst */ "./pkg/daily/MainConst.ts");
+var BranchTask = /** @class */ (function (_super) {
+    __extends(BranchTask, _super);
+    function BranchTask() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    BranchTask.prototype.exec = function () {
+        Debug_1.Debug.loggerD("执行支线");
+        ccf.mainTask.checkState();
+        ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["branch_task" /* DailyFileName.BranchTask */]);
+    };
+    return BranchTask;
+}(BaseClass_1.BaseClass));
+exports.BranchTask = BranchTask;
 
 
 /***/ }),
@@ -1105,11 +1166,10 @@ var MainTask = /** @class */ (function (_super) {
         /** 主线是否不能继续 */
         get: function () {
             var _a;
+            Debug_1.Debug.loggerD("判断是否未完待续...");
             var bitmap = image.captureScreenBitmapEx();
             Debug_1.Debug.saveToDebug(bitmap, "yolov8", true);
             var result = (_a = ccf.ecInit.yoloObj) === null || _a === void 0 ? void 0 : _a.detectBitmap(bitmap);
-            console.log(ccf.ecInit.yoloObj);
-            Debug_1.Debug.loggerW("yoloV8识别结果111：", result);
             if (bitmap) {
                 image.recycle(bitmap);
             }
@@ -1119,7 +1179,7 @@ var MainTask = /** @class */ (function (_super) {
             Debug_1.Debug.loggerW("yoloV8识别结果：", result);
             var resultJson = JSON.parse(result);
             for (var index_1 = 0, len = resultJson.length; index_1 < len; index_1++) {
-                if (resultJson[index_1].name == "wwdx" && resultJson[index_1].confidence > 0.9) {
+                if (resultJson[index_1].name == "wwdx" && resultJson[index_1].confidence >= 0.7) {
                     return true;
                 }
             }
@@ -1227,6 +1287,7 @@ exports.MiscImgData = (_a = {},
     _a["close1" /* CloseFileName.Close1 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "close1" /* CloseFileName.Close1 */, rect: [843, 129, 884, 160] },
     _a["close2" /* CloseFileName.Close2 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "close1" /* CloseFileName.Close1 */, rect: [1215, 52, 1257, 85] },
     _a["close3" /* CloseFileName.Close3 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "close3" /* CloseFileName.Close3 */, rect: [858, 184, 890, 208] },
+    _a["close4" /* CloseFileName.Close4 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "close4" /* CloseFileName.Close4 */, rect: [1026, 128, 1060, 162] },
     _a["use1" /* CloseFileName.Use1 */] = { moudleName: "misc" /* MoudleName.Misc */, name: "use1" /* CloseFileName.Use1 */, rect: [805, 548, 936, 587] },
     _a["mian_fei_linqu1" /* CloseFileName.MianFeiLq */] = { moudleName: "misc" /* MoudleName.Misc */, name: "mian_fei_linqu1" /* CloseFileName.MianFeiLq */, rect: [433, 513, 578, 552] },
     _a["equip_to" /* CloseFileName.EquipTo */] = { moudleName: "misc" /* MoudleName.Misc */, name: "equip_to" /* CloseFileName.EquipTo */, rect: [808, 551, 933, 587] },

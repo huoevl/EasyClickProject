@@ -1,3 +1,5 @@
+import { Environment } from "./Const";
+
 const DebugImgPath = "/sdcard/001debug/";
 
 export class Debug {
@@ -7,6 +9,9 @@ export class Debug {
      * @param name 
      */
     static saveToDebug(img: any, name: string, isBitmap?: boolean) {
+        if (ccf.adpat.currEnv !== Environment.dev) {
+            return;
+        }
         let url = DebugImgPath + name + ".png";
         let result = false;
         if (isBitmap) {
@@ -23,9 +28,15 @@ export class Debug {
     }
 
     static loggerD(...msg: (string | number | boolean | undefined)[]) {
+        if (ccf.adpat.currEnv !== Environment.dev) {
+            return;
+        }
         logd(msg.join("，"));
     }
     static loggerW(...msg: (string | number | boolean | undefined)[]) {
+        if (ccf.adpat.currEnv !== Environment.dev) {
+            return;
+        }
         logw(msg.join("，"));
     }
     static loggerE(...msg: (string | number | boolean | undefined)[]) {

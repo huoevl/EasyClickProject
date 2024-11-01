@@ -4,7 +4,8 @@ import { MoudleName } from "../_base/PkgConst";
 const enum CloseFileName {
     Close1 = "close1",
     Close2 = "close2",//图片名字还是close1
-    Close3 = "close3",//图片名字还是close1
+    Close3 = "close3",
+    Close4 = "close4",
     Use1 = "use1",
     MianFeiLq = "mian_fei_linqu1",
     MianFeiLq2 = "mian_fei_linqu2",
@@ -18,6 +19,7 @@ export const MiscImgData: { [name: string]: IFindImgData } = {
     [CloseFileName.Close1]: { moudleName: MoudleName.Misc, name: CloseFileName.Close1, rect: [843, 129, 884, 160] },
     [CloseFileName.Close2]: { moudleName: MoudleName.Misc, name: CloseFileName.Close1, rect: [1215, 52, 1257, 85] },
     [CloseFileName.Close3]: { moudleName: MoudleName.Misc, name: CloseFileName.Close3, rect: [858, 184, 890, 208] },
+    [CloseFileName.Close4]: { moudleName: MoudleName.Misc, name: CloseFileName.Close4, rect: [1026, 128, 1060, 162] },
     [CloseFileName.Use1]: { moudleName: MoudleName.Misc, name: CloseFileName.Use1, rect: [805, 548, 936, 587] },
     [CloseFileName.MianFeiLq]: { moudleName: MoudleName.Misc, name: CloseFileName.MianFeiLq, rect: [433, 513, 578, 552] },
     [CloseFileName.EquipTo]: { moudleName: MoudleName.Misc, name: CloseFileName.EquipTo, rect: [808, 551, 933, 587] },
