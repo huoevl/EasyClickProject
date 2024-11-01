@@ -6346,7 +6346,7 @@ declare class Yolov8Util {
      * @param obj_names JSON数组，不写代表不过滤，写了代表只取填写的分类
      * @return string 字符串数据
      */
-    detectBitmap(bitmap: any, obj_names: any): any;
+    detectBitmap(bitmap: any, obj_names?: any): string;
     /**
      * 检测Image
      * 适配EC 10.16.0+

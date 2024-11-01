@@ -13,10 +13,16 @@ export class EcInit extends BaseClass {
     isOcrInit: boolean | undefined;
     /** openCV是否初始化 */
     isOpenCVInit: boolean | undefined;
+    /** yolo训练模型是否初始化 */
+    isYoloInit: boolean | undefined;
+
+
     /** 是否循环 */
     isLoop: boolean | undefined;
     /** ORC识别类对象 */
     ocrObj: OcrInst | undefined;
+    /** yolo对象 */
+    yoloObj: Yolov8Util | undefined
 
     init() {
         setExceptionCallback((err: string) => {
@@ -32,6 +38,7 @@ export class EcInit extends BaseClass {
         }
         this.initCapture();
         this.initOcr();
+        this.initYolo();
     }
 
     /** 初始化截图 */
@@ -56,10 +63,11 @@ export class EcInit extends BaseClass {
         } else {
             Debug.loggerE("初始化OpenCV失败");
         }
-        sleep(sleepTime2000);
+        sleep(sleepTime1000);
     }
     onStop() {
         this.ocrObj?.releaseAll();
+        this.yoloObj?.release();
         image.releaseScreenCapture();
         Debug.loggerW("停止运行回调")
     }
@@ -80,6 +88,30 @@ export class EcInit extends BaseClass {
             Debug.loggerE("初始化图文识别失败：", this.ocrObj.getErrorMsg())
         }
         sleep(sleepTime1000);
+    }
+    private initYolo() {
+        const binPath = "/sdcard/model.ncnn.bin";
+        const paramPath = "/sdcard/model.ncnn.param";
+        if (!file.exists(binPath)) {
+            saveResToFile("model.ncnn.bin", "/sdcard/model.ncnn.bin")
+        }
+        if (!file.exists(paramPath)) {
+            saveResToFile("model.ncnn.param", "/sdcard/model.ncnn.param")
+        }
+        sleep(sleepTime1000);
+        // 初始化YOLO实例
+        let yolov8s = this.yoloObj = yolov8Api.newYolov8();
+        let config = yolov8s.getDefaultConfig("yolov8s-640", 640, 0.25, 0.35, "ALL", 1, [
+            "wwdx",
+        ])
+        // 初始化 训练过的模型
+        let inted = yolov8s.initYoloModel(config, paramPath, binPath);
+        if (inted) {
+            logd("初始化yolov8s成功");
+            this.isYoloInit = true;
+        } else {
+            logd("初始化yolov8s失败: " + yolov8s.getErrorMsg());
+        }
     }
     onEcErr(err: string) {
         Debug.loggerE("脚本异常停止：")

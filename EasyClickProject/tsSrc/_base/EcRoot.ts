@@ -55,7 +55,7 @@ export class EcRoot extends BaseClass {
      * @param isUseLast 是否使用上一次截图
      * @returns 
      */
-    findImgRandClick(data: IFindImgData, isUseLast?: boolean): boolean {
+    findImgRandClick(data: IFindImgData, isUseLast?: boolean, isNotClick?: boolean): boolean {
         if (data.moudleName != this.lastMdName) {
             this.lastMdName = data.moudleName;
             this.freeScreenshot();
@@ -87,7 +87,7 @@ export class EcRoot extends BaseClass {
                 if (rect) {
                     Debug.loggerD("寻图成功！" + data.name + "点击");
                     result = true;
-                    if (!data.isNotClick) {
+                    if (!isNotClick) {
                         sleep(sleepTime500);
                         this.clickRandRect(data);
                     } else {

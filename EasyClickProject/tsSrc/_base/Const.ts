@@ -34,8 +34,6 @@ export interface IFindImgData extends IFindData {
     name: string;
     /** 是否二值化 */
     isBin?: boolean;
-    /** 是否不点击 */
-    isNotClick?: boolean;
 }
 export interface IFindTxtData extends IFindData {
     txt: string;
@@ -43,6 +41,7 @@ export interface IFindTxtData extends IFindData {
 export interface IFindColorData extends IFindData {
     color: string;
 }
+
 
 /** ocr类型：目前的OCR包含了mlkit,ocrLite,百度AI的easyedge,paddleocr,Tesseract,paddleOcrOnline和百度在线识别
  *  此处只列举两个

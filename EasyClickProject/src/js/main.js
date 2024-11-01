@@ -246,6 +246,7 @@ var EcInit = /** @class */ (function (_super) {
         }
         this.initCapture();
         this.initOcr();
+        this.initYolo();
     };
     /** 初始化截图 */
     EcInit.prototype.initCapture = function () {
@@ -269,11 +270,12 @@ var EcInit = /** @class */ (function (_super) {
         else {
             Debug_1.Debug.loggerE("初始化OpenCV失败");
         }
-        sleep(Const_1.sleepTime2000);
+        sleep(Const_1.sleepTime1000);
     };
     EcInit.prototype.onStop = function () {
-        var _a;
+        var _a, _b;
         (_a = this.ocrObj) === null || _a === void 0 ? void 0 : _a.releaseAll();
+        (_b = this.yoloObj) === null || _b === void 0 ? void 0 : _b.release();
         image.releaseScreenCapture();
         Debug_1.Debug.loggerW("停止运行回调");
     };
@@ -294,6 +296,31 @@ var EcInit = /** @class */ (function (_super) {
             Debug_1.Debug.loggerE("初始化图文识别失败：", this.ocrObj.getErrorMsg());
         }
         sleep(Const_1.sleepTime1000);
+    };
+    EcInit.prototype.initYolo = function () {
+        var binPath = "/sdcard/model.ncnn.bin";
+        var paramPath = "/sdcard/model.ncnn.param";
+        if (!file.exists(binPath)) {
+            saveResToFile("model.ncnn.bin", "/sdcard/model.ncnn.bin");
+        }
+        if (!file.exists(paramPath)) {
+            saveResToFile("model.ncnn.param", "/sdcard/model.ncnn.param");
+        }
+        sleep(Const_1.sleepTime1000);
+        // 初始化YOLO实例
+        var yolov8s = this.yoloObj = yolov8Api.newYolov8();
+        var config = yolov8s.getDefaultConfig("yolov8s-640", 640, 0.25, 0.35, "ALL", 1, [
+            "wwdx",
+        ]);
+        // 初始化 训练过的模型
+        var inted = yolov8s.initYoloModel(config, paramPath, binPath);
+        if (inted) {
+            logd("初始化yolov8s成功");
+            this.isYoloInit = true;
+        }
+        else {
+            logd("初始化yolov8s失败: " + yolov8s.getErrorMsg());
+        }
     };
     EcInit.prototype.onEcErr = function (err) {
         Debug_1.Debug.loggerE("脚本异常停止：");
@@ -387,7 +414,7 @@ var EcRoot = /** @class */ (function (_super) {
      * @param isUseLast 是否使用上一次截图
      * @returns
      */
-    EcRoot.prototype.findImgRandClick = function (data, isUseLast) {
+    EcRoot.prototype.findImgRandClick = function (data, isUseLast, isNotClick) {
         var _a;
         if (data.moudleName != this.lastMdName) {
             this.lastMdName = data.moudleName;
@@ -420,7 +447,7 @@ var EcRoot = /** @class */ (function (_super) {
                 if (rect) {
                     Debug_1.Debug.loggerD("寻图成功！" + data.name + "点击");
                     result = true;
-                    if (!data.isNotClick) {
+                    if (!isNotClick) {
                         sleep(Const_1.sleepTime500);
                         this.clickRandRect(data);
                     }
@@ -996,6 +1023,7 @@ exports.FabaoPointData = exports.FabaoColorData = exports.FabaoImgData = exports
 /** 通用主线按钮信息 */
 exports.DailyImgData = (_a = {},
     _a["main_task" /* DailyFileName.MainTask */] = { moudleName: "daily" /* MoudleName.Daily */, name: "main_task" /* DailyFileName.MainTask */, rect: [48, 173, 235, 201] },
+    _a["branch_task" /* DailyFileName.BranchTask */] = { moudleName: "daily" /* MoudleName.Daily */, name: "branch_task" /* DailyFileName.BranchTask */, rect: [49, 257, 231, 286] },
     _a);
 exports.FabaoImgData = (_b = {},
     _b["fabao_home" /* FabaoFileName.FabaoHome */] = { moudleName: "daily" /* MoudleName.Daily */, name: "fabao_home" /* FabaoFileName.FabaoHome */, rect: [71, 27, 159, 71] },
@@ -1046,21 +1074,24 @@ var MainTask = /** @class */ (function (_super) {
     function MainTask() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    MainTask.prototype.exec = function (isBreak) {
-        if (!isBreak) {
-        }
+    MainTask.prototype.exec = function () {
+        Debug_1.Debug.loggerD("执行主线...");
+        this.checkState();
+        ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
+    };
+    MainTask.prototype.checkState = function () {
         var isFight = ccf.gameRoot.isFight();
         if (isFight) {
             Debug_1.Debug.loggerD("战斗中...");
             sleep(Const_1.sleepTime3000);
-            this.exec(true);
+            this.checkState();
             return;
         }
         var isStand = ccf.gameRoot.isStand();
         if (!isStand) {
             Debug_1.Debug.loggerD("行走中...");
             sleep(Const_1.sleepTime3000);
-            this.exec(true);
+            this.checkState();
             return;
         }
         Debug_1.Debug.loggerD("站立中...");
@@ -1069,8 +1100,34 @@ var MainTask = /** @class */ (function (_super) {
         }
         ccf.story.exec();
         ccf.closeView.exec();
-        ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
     };
+    Object.defineProperty(MainTask.prototype, "isMainStop", {
+        /** 主线是否不能继续 */
+        get: function () {
+            var _a;
+            var bitmap = image.captureScreenBitmapEx();
+            Debug_1.Debug.saveToDebug(bitmap, "yolov8", true);
+            var result = (_a = ccf.ecInit.yoloObj) === null || _a === void 0 ? void 0 : _a.detectBitmap(bitmap);
+            console.log(ccf.ecInit.yoloObj);
+            Debug_1.Debug.loggerW("yoloV8识别结果111：", result);
+            if (bitmap) {
+                image.recycle(bitmap);
+            }
+            if (!result) {
+                return false;
+            }
+            Debug_1.Debug.loggerW("yoloV8识别结果：", result);
+            var resultJson = JSON.parse(result);
+            for (var index_1 = 0, len = resultJson.length; index_1 < len; index_1++) {
+                if (resultJson[index_1].name == "wwdx" && resultJson[index_1].confidence > 0.9) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return MainTask;
 }(BaseClass_1.BaseClass));
 exports.MainTask = MainTask;
@@ -1327,7 +1384,7 @@ var Main = /** @class */ (function () {
         itself.exec();
     }
     Main.prototype.exec = function () {
-        if (!ccf.ecInit.isScreenInit || !ccf.ecInit.isOpenCVInit) {
+        if (!ccf.ecInit.isScreenInit || !ccf.ecInit.isOpenCVInit || !ccf.ecInit.isYoloInit) {
             return;
         }
         Debug_1.Debug.loggerD("开始运行");
@@ -1335,7 +1392,12 @@ var Main = /** @class */ (function () {
     };
     Main.prototype.loopExec = function () {
         while (ccf.ecInit.isLoop) {
-            ccf.mainTask.exec();
+            if (!ccf.mainTask.isMainStop) {
+                ccf.mainTask.exec();
+            }
+            else {
+                ccf.branch.exec();
+            }
             sleep(Const_1.sleepTime2000);
         }
     };

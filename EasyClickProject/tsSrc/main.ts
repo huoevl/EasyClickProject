@@ -8,7 +8,7 @@ export class Main {
         itself.exec();
     }
     exec() {
-        if (!ccf.ecInit.isScreenInit || !ccf.ecInit.isOpenCVInit) {
+        if (!ccf.ecInit.isScreenInit || !ccf.ecInit.isOpenCVInit || !ccf.ecInit.isYoloInit) {
             return;
         }
         Debug.loggerD("开始运行")
@@ -16,7 +16,11 @@ export class Main {
     }
     loopExec() {
         while (ccf.ecInit.isLoop) {
-            ccf.mainTask.exec();
+            if (!ccf.mainTask.isMainStop) {
+                ccf.mainTask.exec();
+            } else {
+                ccf.branch.exec();
+            }
             sleep(sleepTime2000);
         }
     }

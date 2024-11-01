@@ -8,3 +8,14 @@ declare interface IOcrBitMap {
     width?: number,
     height?: number
 }
+
+/** yolov8识别结果 */
+declare interface IYoloV8Result {
+    name: string;
+    /** 相似度：0-1 */
+    confidence: number;
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+}

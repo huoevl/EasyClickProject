@@ -9,6 +9,7 @@ declare global {
     }
 }
 export class MainTask extends BaseClass {
+
     exec() {
         Debug.loggerD("执行主线...")
         this.checkState();
@@ -35,5 +36,28 @@ export class MainTask extends BaseClass {
         }
         ccf.story.exec();
         ccf.closeView.exec();
+    }
+
+    /** 主线是否不能继续 */
+    get isMainStop() {
+        let bitmap = image.captureScreenBitmapEx();
+        Debug.saveToDebug(bitmap, "yolov8", true);
+        let result = ccf.ecInit.yoloObj?.detectBitmap(bitmap);
+        console.log(ccf.ecInit.yoloObj);
+        Debug.loggerW("yoloV8识别结果111：", result);
+        if (bitmap) {
+            image.recycle(bitmap);
+        }
+        if (!result) {
+            return false;
+        }
+        Debug.loggerW("yoloV8识别结果：", result);
+        let resultJson: IYoloV8Result[] = JSON.parse(result);
+        for (let index = 0, len = resultJson.length; index < len; index++) {
+            if (resultJson[index].name == "wwdx" && resultJson[index].confidence > 0.9) {
+                return true;
+            }
+        }
+        return false;
     }
 }
