@@ -981,7 +981,6 @@ var BranchTask = /** @class */ (function (_super) {
     }
     BranchTask.prototype.exec = function () {
         Debug_1.Debug.loggerD("执行支线");
-        ccf.mainTask.checkState();
         ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["branch_task" /* DailyFileName.BranchTask */]);
     };
     return BranchTask;
@@ -1137,7 +1136,6 @@ var MainTask = /** @class */ (function (_super) {
     }
     MainTask.prototype.exec = function () {
         Debug_1.Debug.loggerD("执行主线...");
-        this.checkState();
         ccf.ecRoot.findImgRandClick(MainConst_1.DailyImgData["main_task" /* DailyFileName.MainTask */]);
     };
     MainTask.prototype.checkState = function () {
@@ -1453,6 +1451,7 @@ var Main = /** @class */ (function () {
     };
     Main.prototype.loopExec = function () {
         while (ccf.ecInit.isLoop) {
+            ccf.mainTask.checkState();
             if (!ccf.mainTask.isMainStop) {
                 ccf.mainTask.exec();
             }

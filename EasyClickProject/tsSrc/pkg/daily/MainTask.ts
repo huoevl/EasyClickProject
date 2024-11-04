@@ -12,7 +12,6 @@ export class MainTask extends BaseClass {
 
     exec() {
         Debug.loggerD("执行主线...")
-        this.checkState();
         ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.MainTask]);
     }
     checkState() {

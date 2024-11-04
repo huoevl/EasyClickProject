@@ -12,7 +12,6 @@ declare global {
 export class BranchTask extends BaseClass {
     exec() {
         Debug.loggerD("执行支线")
-        ccf.mainTask.checkState();
         ccf.ecRoot.findImgRandClick(DailyImgData[DailyFileName.BranchTask]);
     }
 }

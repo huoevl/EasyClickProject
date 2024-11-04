@@ -16,6 +16,7 @@ export class Main {
     }
     loopExec() {
         while (ccf.ecInit.isLoop) {
+            ccf.mainTask.checkState();
             if (!ccf.mainTask.isMainStop) {
                 ccf.mainTask.exec();
             } else {
