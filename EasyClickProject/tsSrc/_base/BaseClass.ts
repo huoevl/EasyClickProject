@@ -23,4 +23,8 @@ export class BaseClass {
     exec() {
 
     }
+    /** 执行红点，子类重写 */
+    execRed() {
+
+    }
 }

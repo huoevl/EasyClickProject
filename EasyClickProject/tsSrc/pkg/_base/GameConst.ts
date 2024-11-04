@@ -1,5 +1,10 @@
-import { IFindColorData, IFindImgData } from "../../_base/Const";
+import { IFindColorData, IFindImgData, TRectPoint } from "../../_base/Const";
 import { MoudleName } from "./PkgConst";
+
+export const enum YoloV8Txt {
+    未完待续 = "wwdx",
+    红点 = "red",
+}
 
 /** 一些坐标 */
 export const SomePoints = {
@@ -10,6 +15,12 @@ export const SomePoints = {
     /** 地图右上角坐标范围 */
     MapRightTop: [1150, 21, 1225, 36],
 } as const
+
+/** 红点坐标 */
+export const RedPoints: { [name: string]: TRectPoint } = {
+    /** 邮件 */
+    Mail: [352, 574, 384, 606],
+}
 
 export const enum BaseFileName {
     TxtAuto = "txt_auto",

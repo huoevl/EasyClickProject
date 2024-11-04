@@ -5,9 +5,11 @@ import { EcRoot } from "../../_base/EcRoot";
 import { Temp } from "../../_base/Temp";
 import { BranchTask } from "../daily/BranchTask";
 import { FaBaoView } from "../daily/FaBaoView";
+import { HomeView } from "../daily/HomeView";
 import { MainTask } from "../daily/MainTask";
 import { CloseView } from "../misc/CloseView";
 import { StoryView } from "../misc/StoryView";
+import { GameConfig } from "./GameConfig";
 import { GameRoot } from "./GameRoot";
 declare global {
     interface IModuleMap {
@@ -20,8 +22,10 @@ export class CCF extends BaseClass {
         ccf.adpat = Adapt.getIns();
         ccf.ecInit = EcInit.getIns();
         ccf.ecRoot = EcRoot.getIns();
+        ccf.confg = GameConfig.getIns();
 
         ccf.gameRoot = GameRoot.getIns();
+        ccf.home = HomeView.getIns();
         ccf.mainTask = MainTask.getIns();
         ccf.branch = BranchTask.getIns();
         ccf.closeView = CloseView.getIns();

@@ -16,13 +16,19 @@ export class Main {
     }
     loopExec() {
         while (ccf.ecInit.isLoop) {
-            ccf.mainTask.checkState();
-            if (!ccf.mainTask.isMainStop) {
-                ccf.mainTask.exec();
-            } else {
-                ccf.branch.exec();
+            if (ccf.confg.mainTask) {
+                ccf.mainTask.checkState();
+                if (!ccf.mainTask.isMainStop) {
+                    ccf.mainTask.exec();
+                } else {
+                    ccf.branch.exec();
+                }
+                sleep(sleepTime2000);
             }
-            sleep(sleepTime2000);
+            if (ccf.confg.clearRed) {
+
+                sleep(sleepTime2000);
+            }
         }
     }
 }

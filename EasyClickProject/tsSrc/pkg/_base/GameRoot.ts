@@ -1,5 +1,5 @@
 import { BaseClass } from "../../_base/BaseClass";
-import { sleepTime500 } from "../../_base/Const";
+import { TRectPoint, sleepTime500 } from "../../_base/Const";
 import { Debug } from "../../_base/Debug";
 import { BaseColorData, BaseColorName, BaseFileName, BaseImgData, SomePoints } from "./GameConst";
 declare global {
@@ -62,5 +62,30 @@ export class GameRoot extends BaseClass {
         const colors2 = ccf.ecRoot.getScreenBitMapColors(...data.rect, 120);
         Debug.loggerD("判断是否战斗")
         return ccf.ecRoot.isColorSame(colors1, colors2, 0.96);
+    }
+    /**
+     * yolov8识别结果
+     * @param name 需要识别的内容
+     * @param rect 
+     * @returns 
+     */
+    isYoloV8Result(name: string, rect?: TRectPoint) {
+        let bitmap = rect ? image.captureScreenBitmap("png", ...rect, 100) : image.captureScreenBitmapEx();
+        Debug.saveToDebug(bitmap, "yolov8", true);
+        let result = ccf.ecInit.yoloObj?.detectBitmap(bitmap);
+        if (bitmap) {
+            image.recycle(bitmap);
+        }
+        if (!result) {
+            return false;
+        }
+        Debug.loggerW("yoloV8识别结果：", result);
+        let resultJson: IYoloV8Result[] = JSON.parse(result);
+        for (let index = 0, len = resultJson.length; index < len; index++) {
+            if (resultJson[index].name == name && resultJson[index].confidence >= 0.7) {
+                return true;
+            }
+        }
+        return false;
     }
 }

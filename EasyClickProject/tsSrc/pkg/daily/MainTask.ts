@@ -1,6 +1,7 @@
 import { BaseClass } from "../../_base/BaseClass";
 import { sleepTime3000 } from "../../_base/Const";
 import { Debug } from "../../_base/Debug";
+import { YoloV8Txt } from "../_base/GameConst";
 import { DailyFileName, DailyImgData } from "./MainConst";
 declare global {
     interface IModuleMap {
@@ -40,22 +41,6 @@ export class MainTask extends BaseClass {
     /** 主线是否不能继续 */
     get isMainStop() {
         Debug.loggerD("判断是否未完待续...")
-        let bitmap = image.captureScreenBitmapEx();
-        Debug.saveToDebug(bitmap, "yolov8", true);
-        let result = ccf.ecInit.yoloObj?.detectBitmap(bitmap);
-        if (bitmap) {
-            image.recycle(bitmap);
-        }
-        if (!result) {
-            return false;
-        }
-        Debug.loggerW("yoloV8识别结果：", result);
-        let resultJson: IYoloV8Result[] = JSON.parse(result);
-        for (let index = 0, len = resultJson.length; index < len; index++) {
-            if (resultJson[index].name == "wwdx" && resultJson[index].confidence >= 0.7) {
-                return true;
-            }
-        }
-        return false;
+        return ccf.gameRoot.isYoloV8Result(YoloV8Txt.未完待续);
     }
 }
