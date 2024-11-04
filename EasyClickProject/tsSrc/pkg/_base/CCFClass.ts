@@ -6,6 +6,7 @@ import { Temp } from "../../_base/Temp";
 import { BranchTask } from "../daily/BranchTask";
 import { FaBaoView } from "../daily/FaBaoView";
 import { HomeView } from "../daily/HomeView";
+import { MailView } from "../daily/MailView";
 import { MainTask } from "../daily/MainTask";
 import { CloseView } from "../misc/CloseView";
 import { StoryView } from "../misc/StoryView";
@@ -31,5 +32,8 @@ export class CCF extends BaseClass {
         ccf.closeView = CloseView.getIns();
         ccf.story = StoryView.getIns();
         ccf.fabao = FaBaoView.getIns();
+        ccf.mail = MailView.getIns();
+
+        ccf.confg.doInit();
     }
 }

@@ -25,8 +25,8 @@ export class Main {
                 }
                 sleep(sleepTime2000);
             }
-            if (ccf.confg.clearRed) {
-
+            if (ccf.confg.isExecRed) {
+                ccf.home.execRed();
                 sleep(sleepTime2000);
             }
         }

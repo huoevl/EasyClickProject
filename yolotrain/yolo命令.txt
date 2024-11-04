@@ -13,7 +13,7 @@ yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yam
 
 yolo detect val data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml  model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt workers=0
 
-yolo export model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt format=ncnn
+yolo export model=E:/workspace/project/EasyClickProject/yolotrain/best.pt format=ncnn
 
 二次
 

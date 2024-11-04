@@ -80,6 +80,9 @@ var BaseClass = /** @class */ (function () {
     /** 执行，子类重写 */
     BaseClass.prototype.exec = function () {
     };
+    /** 执行红点，子类重写 */
+    BaseClass.prototype.execRed = function () {
+    };
     return BaseClass;
 }());
 exports.BaseClass = BaseClass;
@@ -781,9 +784,12 @@ var EcRoot_1 = __webpack_require__(/*! ../../_base/EcRoot */ "./_base/EcRoot.ts"
 var Temp_1 = __webpack_require__(/*! ../../_base/Temp */ "./_base/Temp.ts");
 var BranchTask_1 = __webpack_require__(/*! ../daily/BranchTask */ "./pkg/daily/BranchTask.ts");
 var FaBaoView_1 = __webpack_require__(/*! ../daily/FaBaoView */ "./pkg/daily/FaBaoView.ts");
+var HomeView_1 = __webpack_require__(/*! ../daily/HomeView */ "./pkg/daily/HomeView.ts");
+var MailView_1 = __webpack_require__(/*! ../daily/MailView */ "./pkg/daily/MailView.ts");
 var MainTask_1 = __webpack_require__(/*! ../daily/MainTask */ "./pkg/daily/MainTask.ts");
 var CloseView_1 = __webpack_require__(/*! ../misc/CloseView */ "./pkg/misc/CloseView.ts");
 var StoryView_1 = __webpack_require__(/*! ../misc/StoryView */ "./pkg/misc/StoryView.ts");
+var GameConfig_1 = __webpack_require__(/*! ./GameConfig */ "./pkg/_base/GameConfig.ts");
 var GameRoot_1 = __webpack_require__(/*! ./GameRoot */ "./pkg/_base/GameRoot.ts");
 var CCF = /** @class */ (function (_super) {
     __extends(CCF, _super);
@@ -795,16 +801,71 @@ var CCF = /** @class */ (function (_super) {
         ccf.adpat = Adapt_1.default.getIns();
         ccf.ecInit = EcInit_1.EcInit.getIns();
         ccf.ecRoot = EcRoot_1.EcRoot.getIns();
+        ccf.confg = GameConfig_1.GameConfig.getIns();
         ccf.gameRoot = GameRoot_1.GameRoot.getIns();
+        ccf.home = HomeView_1.HomeView.getIns();
         ccf.mainTask = MainTask_1.MainTask.getIns();
         ccf.branch = BranchTask_1.BranchTask.getIns();
         ccf.closeView = CloseView_1.CloseView.getIns();
         ccf.story = StoryView_1.StoryView.getIns();
         ccf.fabao = FaBaoView_1.FaBaoView.getIns();
+        ccf.mail = MailView_1.MailView.getIns();
+        ccf.confg.doInit();
     };
     return CCF;
 }(BaseClass_1.BaseClass));
 exports.CCF = CCF;
+
+
+/***/ }),
+
+/***/ "./pkg/_base/GameConfig.ts":
+/*!*********************************!*\
+  !*** ./pkg/_base/GameConfig.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GameConfig = void 0;
+var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var GameConfig = /** @class */ (function (_super) {
+    __extends(GameConfig, _super);
+    function GameConfig() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /** 主线任务 */
+        _this.mainTask = false;
+        _this.isExecRed = true;
+        return _this;
+    }
+    GameConfig.prototype.doInit = function () {
+        for (var key in ccf) {
+            var clazz = ccf[key];
+            if (clazz === this) {
+                continue;
+            }
+            clazz.isExecRed = this.isExecRed;
+        }
+    };
+    return GameConfig;
+}(BaseClass_1.BaseClass));
+exports.GameConfig = GameConfig;
 
 
 /***/ }),
@@ -818,7 +879,7 @@ exports.CCF = CCF;
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.BaseColorData = exports.RedColorStr = exports.BaseImgData = exports.SomePoints = void 0;
+exports.BaseColorData = exports.RedColorStr = exports.BaseImgData = exports.RedPoints = exports.SomePoints = void 0;
 /** 一些坐标 */
 exports.SomePoints = {
     /** 人物头像截图 */
@@ -827,6 +888,11 @@ exports.SomePoints = {
     PlayerHeadFind: [28, 21, 100, 85],
     /** 地图右上角坐标范围 */
     MapRightTop: [1150, 21, 1225, 36],
+};
+/** 红点坐标 */
+exports.RedPoints = {
+    /** 邮件 */
+    Mail: [352, 574, 384, 606],
 };
 /** 通用按钮信息 */
 exports.BaseImgData = (_a = {},
@@ -938,6 +1004,32 @@ var GameRoot = /** @class */ (function (_super) {
         var colors2 = (_a = ccf.ecRoot).getScreenBitMapColors.apply(_a, __spreadArray(__spreadArray([], data.rect, false), [120], false));
         Debug_1.Debug.loggerD("判断是否战斗");
         return ccf.ecRoot.isColorSame(colors1, colors2, 0.96);
+    };
+    /**
+     * yolov8识别结果
+     * @param name 需要识别的内容
+     * @param rect
+     * @returns
+     */
+    GameRoot.prototype.isYoloV8Result = function (name, rect) {
+        var _a;
+        var bitmap = rect ? image.captureScreenBitmap.apply(image, __spreadArray(__spreadArray(["png"], rect, false), [100], false)) : image.captureScreenBitmapEx();
+        Debug_1.Debug.saveToDebug(bitmap, "yolov8", true);
+        var result = (_a = ccf.ecInit.yoloObj) === null || _a === void 0 ? void 0 : _a.detectBitmap(bitmap);
+        if (bitmap) {
+            image.recycle(bitmap);
+        }
+        if (!result) {
+            return false;
+        }
+        Debug_1.Debug.loggerW("yoloV8识别结果：", result);
+        var resultJson = JSON.parse(result);
+        for (var index_1 = 0, len = resultJson.length; index_1 < len; index_1++) {
+            if (resultJson[index_1].name == name && resultJson[index_1].confidence >= 0.7) {
+                return true;
+            }
+        }
+        return false;
     };
     return GameRoot;
 }(BaseClass_1.BaseClass));
@@ -1070,6 +1162,104 @@ exports.FaBaoView = FaBaoView;
 
 /***/ }),
 
+/***/ "./pkg/daily/HomeView.ts":
+/*!*******************************!*\
+  !*** ./pkg/daily/HomeView.ts ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HomeView = void 0;
+var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var HomeView = /** @class */ (function (_super) {
+    __extends(HomeView, _super);
+    function HomeView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    HomeView.prototype.execRed = function () {
+        if (!ccf.gameRoot.isHome()) {
+            return;
+        }
+        ccf.mail.execRed();
+    };
+    return HomeView;
+}(BaseClass_1.BaseClass));
+exports.HomeView = HomeView;
+
+
+/***/ }),
+
+/***/ "./pkg/daily/MailView.ts":
+/*!*******************************!*\
+  !*** ./pkg/daily/MailView.ts ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var ccf = __webpack_require__(/*! ./_base/CCF.ts */ "./_base/CCF.ts");
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MailView = void 0;
+var BaseClass_1 = __webpack_require__(/*! ../../_base/BaseClass */ "./_base/BaseClass.ts");
+var Const_1 = __webpack_require__(/*! ../../_base/Const */ "./_base/Const.ts");
+var Debug_1 = __webpack_require__(/*! ../../_base/Debug */ "./_base/Debug.ts");
+var GameConst_1 = __webpack_require__(/*! ../_base/GameConst */ "./pkg/_base/GameConst.ts");
+var MailView = /** @class */ (function (_super) {
+    __extends(MailView, _super);
+    function MailView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MailView.prototype.execRed = function () {
+        Debug_1.Debug.loggerD("执行邮件红点..");
+        if (!this.isExecRed) {
+            Debug_1.Debug.loggerD("执行邮件红点..1");
+            return;
+        }
+        if (!ccf.gameRoot.isYoloV8Result("red" /* YoloV8Txt.红点 */, GameConst_1.RedPoints.Mail)) {
+            Debug_1.Debug.loggerD("执行邮件红点..2");
+            return;
+        }
+        ccf.ecRoot.clickRandRect({ rect: [59, 655, 180, 689] }); //领取邮件
+        sleep(Const_1.sleepTime500);
+    };
+    return MailView;
+}(BaseClass_1.BaseClass));
+exports.MailView = MailView;
+
+
+/***/ }),
+
 /***/ "./pkg/daily/MainConst.ts":
 /*!********************************!*\
   !*** ./pkg/daily/MainConst.ts ***!
@@ -1163,25 +1353,8 @@ var MainTask = /** @class */ (function (_super) {
     Object.defineProperty(MainTask.prototype, "isMainStop", {
         /** 主线是否不能继续 */
         get: function () {
-            var _a;
             Debug_1.Debug.loggerD("判断是否未完待续...");
-            var bitmap = image.captureScreenBitmapEx();
-            Debug_1.Debug.saveToDebug(bitmap, "yolov8", true);
-            var result = (_a = ccf.ecInit.yoloObj) === null || _a === void 0 ? void 0 : _a.detectBitmap(bitmap);
-            if (bitmap) {
-                image.recycle(bitmap);
-            }
-            if (!result) {
-                return false;
-            }
-            Debug_1.Debug.loggerW("yoloV8识别结果：", result);
-            var resultJson = JSON.parse(result);
-            for (var index_1 = 0, len = resultJson.length; index_1 < len; index_1++) {
-                if (resultJson[index_1].name == "wwdx" && resultJson[index_1].confidence >= 0.7) {
-                    return true;
-                }
-            }
-            return false;
+            return ccf.gameRoot.isYoloV8Result("wwdx" /* YoloV8Txt.未完待续 */);
         },
         enumerable: false,
         configurable: true
@@ -1451,14 +1624,20 @@ var Main = /** @class */ (function () {
     };
     Main.prototype.loopExec = function () {
         while (ccf.ecInit.isLoop) {
-            ccf.mainTask.checkState();
-            if (!ccf.mainTask.isMainStop) {
-                ccf.mainTask.exec();
+            if (ccf.confg.mainTask) {
+                ccf.mainTask.checkState();
+                if (!ccf.mainTask.isMainStop) {
+                    ccf.mainTask.exec();
+                }
+                else {
+                    ccf.branch.exec();
+                }
+                sleep(Const_1.sleepTime2000);
             }
-            else {
-                ccf.branch.exec();
+            if (ccf.confg.isExecRed) {
+                ccf.home.execRed();
+                sleep(Const_1.sleepTime2000);
             }
-            sleep(Const_1.sleepTime2000);
         }
     };
     return Main;

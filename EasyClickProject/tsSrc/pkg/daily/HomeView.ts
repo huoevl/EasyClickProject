@@ -1,5 +1,4 @@
 import { BaseClass } from "../../_base/BaseClass";
-import { RedPoints, YoloV8Txt } from "../_base/GameConst";
 
 declare global {
     interface IModuleMap {
@@ -8,8 +7,10 @@ declare global {
     }
 }
 export class HomeView extends BaseClass {
-    /** 邮件红点 */
-    isRedMail() {
-        return ccf.gameRoot.isYoloV8Result(YoloV8Txt.红点, RedPoints.Mail);
+    execRed() {
+        if (!ccf.gameRoot.isHome()) {
+            return;
+        }
+        ccf.mail.execRed();
     }
 }

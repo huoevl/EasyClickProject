@@ -1,4 +1,6 @@
 export class BaseClass {
+    /** 是否执行红点 */
+    isExecRed: boolean | undefined;
     private static instance: any;
     static getIns<T extends BaseClass>(data?: any): T {
         return this.instance ||= new this(data);

@@ -9,6 +9,15 @@ declare global {
 export class GameConfig extends BaseClass {
     /** 主线任务 */
     mainTask = false;
-    /** 清理红点 */
-    clearRed = true;
+    isExecRed = true;
+
+    doInit() {
+        for (let key in ccf) {
+            const clazz = ccf[key as keyof IModuleMap];
+            if (clazz === this) {
+                continue;
+            }
+            clazz.isExecRed = this.isExecRed;
+        }
+    }
 }

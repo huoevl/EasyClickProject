@@ -5,8 +5,3 @@ export const enum MoudleName {
     FuBen = "fuben",
     Base = "base",
 }
-/** 功能名字 */
-export const enum FuncName {
-    /** 邮件 */
-    Mail = 0,
-}
