@@ -70,7 +70,7 @@ export class GameRoot extends BaseClass {
      * @returns 
      */
     isYoloV8Result(name: string, rect?: TRectPoint) {
-        let bitmap = rect ? image.captureScreenBitmap("png", ...rect, 100) : image.captureScreenBitmapEx();
+        let bitmap = rect ? image.captureScreenBitmap("jpg", ...rect, 100) : image.captureScreenBitmapEx();
         Debug.saveToDebug(bitmap, "yolov8", true);
         let result = ccf.ecInit.yoloObj?.detectBitmap(bitmap);
         if (bitmap) {
@@ -80,7 +80,8 @@ export class GameRoot extends BaseClass {
             return false;
         }
         Debug.loggerW("yoloV8识别结果：", result);
-        let resultJson: IYoloV8Result[] = JSON.parse(result);
+        let resultJson: IYoloV8Result[] = JSON.parse(result); 3
+
         for (let index = 0, len = resultJson.length; index < len; index++) {
             if (resultJson[index].name == name && resultJson[index].confidence >= 0.7) {
                 return true;
