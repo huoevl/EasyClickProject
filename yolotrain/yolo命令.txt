@@ -20,7 +20,7 @@ yolo export model=E:/workspace/project/EasyClickProject/yolotrain/best.pt format
 yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/aixin.yaml model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt epochs=100 imgsz=640 device=0 workers=0
 
 //预测
-yolo detect predict  model=E:/workspace/github/ultralytics/runs/detect/train22/weights/best.pt source=E:/workspace/project/EasyClickProject/yolotrain/valid/images/ workers=0
+yolo detect predict  model=E:/workspace/project/EasyClickProject/yolotrain/best.pt source=E:/workspace/project/EasyClickProject/colorimage/ workers=0
 
 //导出onnx pip install onnx
 yolo export model=E:/workspace/project/EasyClickProject/yolotrain/best.pt format=onnx
