@@ -1,0 +1,39 @@
+{
+  "version": "2.4.4",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "red",
+      "score": null,
+      "points": [
+        [
+          54.4364406779661,
+          24.03601694915254
+        ],
+        [
+          71.91525423728814,
+          24.03601694915254
+        ],
+        [
+          71.91525423728814,
+          41.62076271186441
+        ],
+        [
+          54.4364406779661,
+          41.62076271186441
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "difficult": false,
+      "shape_type": "rectangle",
+      "flags": {},
+      "attributes": {},
+      "kie_linking": []
+    }
+  ],
+  "imagePath": "Snipaste_2024-11-06_14-59-53.png",
+  "imageData": null,
+  "imageHeight": 95,
+  "imageWidth": 79
+}

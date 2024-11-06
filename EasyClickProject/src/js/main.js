@@ -1013,7 +1013,7 @@ var GameRoot = /** @class */ (function (_super) {
      */
     GameRoot.prototype.isYoloV8Result = function (name, rect) {
         var _a;
-        var bitmap = rect ? image.captureScreenBitmap.apply(image, __spreadArray(__spreadArray(["png"], rect, false), [100], false)) : image.captureScreenBitmapEx();
+        var bitmap = rect ? image.captureScreenBitmap.apply(image, __spreadArray(__spreadArray(["jpg"], rect, false), [100], false)) : image.captureScreenBitmapEx();
         Debug_1.Debug.saveToDebug(bitmap, "yolov8", true);
         var result = (_a = ccf.ecInit.yoloObj) === null || _a === void 0 ? void 0 : _a.detectBitmap(bitmap);
         if (bitmap) {
@@ -1024,6 +1024,7 @@ var GameRoot = /** @class */ (function (_super) {
         }
         Debug_1.Debug.loggerW("yoloV8识别结果：", result);
         var resultJson = JSON.parse(result);
+        3;
         for (var index_1 = 0, len = resultJson.length; index_1 < len; index_1++) {
             if (resultJson[index_1].name == name && resultJson[index_1].confidence >= 0.7) {
                 return true;
