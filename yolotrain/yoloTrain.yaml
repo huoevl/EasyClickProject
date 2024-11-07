@@ -4,4 +4,4 @@ val: valid/images
 test: test/images
 
 nc: 2
-names: ["wwdx","red"]
+names: ["red","wwdx"]

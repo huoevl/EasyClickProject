@@ -3,6 +3,7 @@
   "flags": {},
   "shapes": [
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.954291045665741,
       "points": [
@@ -28,10 +29,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9379971027374268,
       "points": [
@@ -57,10 +58,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "wwdx",
       "score": 0.9345613718032837,
       "points": [
@@ -86,10 +87,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9309042096138,
       "points": [
@@ -115,10 +116,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9299393892288208,
       "points": [
@@ -144,10 +145,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.929069459438324,
       "points": [
@@ -173,10 +174,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9287409782409668,
       "points": [
@@ -202,10 +203,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9215049743652344,
       "points": [
@@ -231,10 +232,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.91566002368927,
       "points": [
@@ -260,10 +261,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9133633971214294,
       "points": [
@@ -289,10 +290,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.7203623056411743,
       "points": [
@@ -318,10 +319,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.6457059383392334,
       "points": [
@@ -347,39 +348,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
-      "label": "red",
-      "score": 0.4545406103134155,
-      "points": [
-        [
-          497.788818359375,
-          156.029296875
-        ],
-        [
-          505.2034912109375,
-          156.029296875
-        ],
-        [
-          505.2034912109375,
-          164.0496826171875
-        ],
-        [
-          497.788818359375,
-          164.0496826171875
-        ]
-      ],
-      "group_id": null,
-      "description": null,
-      "difficult": false,
-      "shape_type": "rectangle",
-      "flags": {},
-      "attributes": {},
-      "kie_linking": []
-    },
-    {
+      "kie_linking": [],
       "label": "red",
       "score": 0.4163241684436798,
       "points": [
@@ -405,12 +377,12 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     }
   ],
   "imagePath": "20241031175935.png",
   "imageData": null,
   "imageHeight": 720,
-  "imageWidth": 1280
+  "imageWidth": 1280,
+  "description": ""
 }

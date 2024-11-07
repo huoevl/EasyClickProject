@@ -3,6 +3,7 @@
   "flags": {},
   "shapes": [
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9552520513534546,
       "points": [
@@ -28,10 +29,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9421594738960266,
       "points": [
@@ -57,10 +58,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9378049373626709,
       "points": [
@@ -86,10 +87,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9348187446594238,
       "points": [
@@ -115,10 +116,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9345735311508179,
       "points": [
@@ -144,10 +145,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "wwdx",
       "score": 0.9336788654327393,
       "points": [
@@ -173,10 +174,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9275243878364563,
       "points": [
@@ -202,10 +203,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9268929958343506,
       "points": [
@@ -231,10 +232,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9187349081039429,
       "points": [
@@ -260,10 +261,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.9180583953857422,
       "points": [
@@ -289,10 +290,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.865861177444458,
       "points": [
@@ -318,10 +319,10 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     },
     {
+      "kie_linking": [],
       "label": "red",
       "score": 0.7648586630821228,
       "points": [
@@ -347,41 +348,12 @@
       "difficult": false,
       "shape_type": "rectangle",
       "flags": {},
-      "attributes": {},
-      "kie_linking": []
-    },
-    {
-      "label": "red",
-      "score": 0.3501273989677429,
-      "points": [
-        [
-          161.07546997070312,
-          476.757080078125
-        ],
-        [
-          170.10983276367188,
-          476.757080078125
-        ],
-        [
-          170.10983276367188,
-          484.0909423828125
-        ],
-        [
-          161.07546997070312,
-          484.0909423828125
-        ]
-      ],
-      "group_id": null,
-      "description": null,
-      "difficult": false,
-      "shape_type": "rectangle",
-      "flags": {},
-      "attributes": {},
-      "kie_linking": []
+      "attributes": {}
     }
   ],
   "imagePath": "20241031175929.png",
   "imageData": null,
   "imageHeight": 720,
-  "imageWidth": 1280
+  "imageWidth": 1280,
+  "description": ""
 }

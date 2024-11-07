@@ -1,9 +1,9 @@
 type: yolov8
 name: yolov8s-r20230520
-display_name: autoLabel
+display_name: anyLabel
 model_path: best.onnx
 nms_threshold: 0.45
 confidence_threshold: 0.25
 classes:
-  - wwdx
   - red
+  - wwdx
