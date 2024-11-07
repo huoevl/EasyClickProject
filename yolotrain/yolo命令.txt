@@ -1,6 +1,5 @@
 
 E:/workspace/project/EasyClickProject/yolotrain
-C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain
 
 //训练 cpu
 yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/yoloTrain.yaml model=E:/workspace/project/EasyClickProject/yolotrain/yolov8s.pt epochs=100 imgsz=640 device=cpu
@@ -18,5 +17,24 @@ yolo detect train data=E:/workspace/project/EasyClickProject/yolotrain/yoloTrain
 
 //导出onnx自动标注模型 pip install onnx
 yolo export model=E:/workspace/project/EasyClickProject/yolotrain/best.pt format=onnx
+
+
+C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain
+//训练 cpu
+yolo detect train data=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yoloTrain.yaml model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yolov8s.pt epochs=100 imgsz=640 device=cpu
+//训练 gpu
+yolo detect train data=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yoloTrain.yaml model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yolov8s.pt epochs=100 imgsz=640 device=0 workers=0
+//验证
+yolo detect val data=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yoloTrain.yaml  model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/best.pt
+//预测
+yolo detect predict  model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/best.pt source=E:/workspace/project/EasyClickProject/colorimage/ workers=0
+//导出
+yolo export model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/best.pt format=ncnn
+//在原来基础上二次训练
+yolo detect train data=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yoloTrain.yaml model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/best.pt epochs=100 imgsz=640 device=cpu
+yolo detect train data=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/yoloTrain.yaml model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/best.pt epochs=100 imgsz=640 device=0 workers=0
+
+//导出onnx自动标注模型 pip install onnx
+yolo export model=C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain/best.pt format=onnx
 
 
