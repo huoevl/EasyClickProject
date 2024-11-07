@@ -1,4 +1,4 @@
-path: E:/workspace/project/EasyClickProject/yolotrain
+path: C:/Users/upday/Desktop/project/scripts/EasyClickProject/yolotrain
 train: train/images
 val: valid/images
 test: test/images
